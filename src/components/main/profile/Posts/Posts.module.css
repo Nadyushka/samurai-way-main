@@ -1,0 +1,23 @@
+.posts {
+    margin-top: 30px;
+}
+
+.posts div {
+
+}
+
+.postReaction {
+    display: flex;
+    margin-top: 5px;
+}
+
+.postLikes {
+    font-size: 12px;
+    width: 60px;
+}
+
+.postComments {
+    font-size: 12px;
+    width: 100px;
+    display: inline;
+}
