@@ -4,11 +4,12 @@ import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
 import {BrowserRouter} from "react-router-dom";
-import {contactDataType, messageDataType} from './index'
+import {contactDataType, messageDataType, postsDataType} from './index'
 
 type AppPropsType = {
     contactData: Array<contactDataType>
     messageData:messageDataType[]
+    postsData:postsDataType[]
 }
 
 function App(props: AppPropsType) {
@@ -16,7 +17,7 @@ function App(props: AppPropsType) {
             <div className={s.App}>
                 <Header/>
                 <Aside/>
-                <Main contactData={props.contactData} messageData={props.messageData}/>
+                <Main contactData={props.contactData} messageData={props.messageData} postsData={props.postsData}/>
             </div>
         </BrowserRouter>
     );

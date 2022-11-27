@@ -25,9 +25,17 @@ let messageData:messageDataType[] = [
     {id: 2, message: 'How are you?'},
     {id: 3, message: 'Enjoy your day'}]
 
+export type postsDataType = {
+    id: number
+    post: string
+    likesCount: number
+    commentsCount: number
+}
 
+let postsData: postsDataType[] = [{id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
+    {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}]
 
 ReactDOM.render(
-    <App contactData={contactData} messageData={messageData}/>,
+    <App contactData={contactData} messageData={messageData} postsData={postsData}/>,
     document.getElementById('root')
 );
