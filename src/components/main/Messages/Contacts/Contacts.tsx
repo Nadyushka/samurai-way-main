@@ -1,18 +1,13 @@
 import React from 'react';
 import s from './contacts.module.css'
-import {NavLink} from "react-router-dom";
 import Contact from "./Contact/Contact";
-import {contactDataType} from './../../../../index'
+import {state} from "../../../../redux/state";
 
-type ContactsPropsType = {
-    contactData: contactDataType[]
-}
-
-const Contacts = (props:ContactsPropsType) => {
+const Contacts = () => {
 
     return (
         <div className={s.contacts}>
-            {props.contactData.map(contact => <Contact name={contact.name} id={contact.id}/>)}
+            {state.messagePages.contacts.map(contact => <Contact name={contact.name} id={contact.id}/>)}
         </div>
     );
 };

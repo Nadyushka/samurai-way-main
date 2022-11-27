@@ -1,17 +1,13 @@
 import React from 'react';
 import s from "./Posts.module.css"
-import {postsDataType} from "../../../../index";
+import {state} from './../../../../redux/state'
 
-type postsPropsType = {
-    postsData: postsDataType[]
-}
-
-const Posts = (props:postsPropsType) => {
+const Posts = () => {
 
         return (
             <div className={s.posts}>
                 <div className={s.post}>
-                    {props.postsData.map(post => {
+                    {state.profilePages.posts.map(post => {
                         return <div key={post.id}>
                             <div className={s.postText}>{post.post}</div>
                             <div className={s.postReaction}>
