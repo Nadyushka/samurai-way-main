@@ -4,15 +4,6 @@ import Message from "./Messege/Message";
 
 const Dialogs = () => {
 
-    type messageDataType = {
-        id:number
-        message:string
-    }
-
-    let messageData:messageDataType[] = [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'How are you?'},
-        {id: 1, message: 'Enjoy your day'}]
 
     return (
         <div className={s.dialogs}>
