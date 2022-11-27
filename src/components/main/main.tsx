@@ -7,16 +7,16 @@ import {BrowserRouter, Route, Switch} from "react-router-dom"
 
 const Main = () => {
     return (
-            <div className={s.main}>
-                <Switch>
-                <Route path="/main/profile" component={Profile}/>
-                <Route path="/main/messages" component={Messages}/>
-                {/* <News/> */}
+        <div className={s.main}>
+            <Switch>
+                <Route exact path="/main/profile" render={() => <Profile/>}/>
+                <Route exact path="/main/messages" render={() => <Messages/>}/>
+                {/* Route exact path="/main/news" render={() => <News/>} */}
                 {/* <Music/> */}
                 {/* <Messages/> */}
                 {/* <Settings/> */}
-                </Switch>
-            </div>
+            </Switch>
+        </div>
 
     );
 }

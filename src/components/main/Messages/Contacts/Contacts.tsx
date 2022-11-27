@@ -20,8 +20,6 @@ const Contacts = () => {
     return (
         <div className={s.contacts}>
             {contactData.map(contact => <Contact name={contact.name} id={contact.id}/>)}
-
-
         </div>
     );
 };
