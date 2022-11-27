@@ -4,13 +4,23 @@ import {NavLink} from "react-router-dom";
 import Contact from "./Contact/Contact";
 
 const Contacts = () => {
+
+    type contactDataType = {
+        id: number
+        name: string
+    }
+
+    let contactData: Array<contactDataType> = [
+        {id: 1, name: 'Bison'},
+        {id: 2, name: 'John'},
+        {id: 3, name: 'Alexa'},
+        {id: 4, name: 'Peter'},
+        {id: 5, name: 'Sandra'}]
+
     return (
         <div className={s.contacts}>
-            <Contact name={'Bison'} id={1}/>
-            <Contact name={'John'} id={2}/>
-            <Contact name={'Alexa'} id={3}/>
-            <Contact name={'Peter'} id={4}/>
-            <Contact name={'Sandra'} id={5}/>
+            {contactData.map(contact => <Contact name={contact.name} id={contact.id}/>)}
+
 
         </div>
     );
