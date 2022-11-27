@@ -23,11 +23,11 @@ export type messageDataType = {
 let messageData:messageDataType[] = [
     {id: 1, message: 'Hi'},
     {id: 2, message: 'How are you?'},
-    {id: 1, message: 'Enjoy your day'}]
+    {id: 3, message: 'Enjoy your day'}]
 
 
 
 ReactDOM.render(
-    <App contactData={contactData}/>,
+    <App contactData={contactData} messageData={messageData}/>,
     document.getElementById('root')
 );

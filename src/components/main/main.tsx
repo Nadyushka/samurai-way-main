@@ -3,10 +3,11 @@ import s from "./main.module.css"
 import Profile from "./profile/profile";
 import Messages from "./Messages/messages";
 import {BrowserRouter, Route, Switch} from "react-router-dom"
-import {contactDataType} from './../../index'
+import {contactDataType, messageDataType} from './../../index'
 
 type mainPropsType = {
     contactData: contactDataType[]
+    messageData: messageDataType[]
 }
 
 const Main = (props: mainPropsType) => {
@@ -14,7 +15,7 @@ const Main = (props: mainPropsType) => {
         <div className={s.main}>
             <Switch>
                 <Route exact path="/main/profile" render={() => <Profile/>}/>
-                <Route exact path="/main/messages" render={() => <Messages contactData={props.contactData}/>}/>
+                <Route exact path="/main/messages" render={() => <Messages contactData={props.contactData} messageData={props.messageData}/>}/>
                 {/* Route exact path="/main/news" render={() => <News/>} */}
                 {/* <Music/> */}
                 {/* <Messages/> */}
