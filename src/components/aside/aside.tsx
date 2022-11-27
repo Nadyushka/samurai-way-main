@@ -1,11 +1,13 @@
 import React from 'react';
 import s from './aside.module.css';
+import {NavLink} from "react-router-dom";
+
 
 const Aside = () => {
     return (
         <div className={s.aside}>
-            <div><a href='/main/profile'> Profile </a></div>
-            <div><a href='/main/messages'> Messages </a></div>
+            <div><NavLink to='/main/profile'> Profile </NavLink></div>
+            <div><NavLink to='/main/messages'> Messages </NavLink></div>
             <div>News</div>
             <div>Music</div>
             <br/>
