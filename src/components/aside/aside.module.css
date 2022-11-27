@@ -1,6 +1,17 @@
-.aside{
+.aside {
     grid-area: aside;
     background-color: yellow;
     padding-left: 20px;
     padding-top: 20px;
+}
+
+.aside a {
+    text-decoration: none;
+    color: black;
+}
+
+.aside a:focus {
+    color: green;
+    font-size: 18px;
+    font-weight: 500;
 }
