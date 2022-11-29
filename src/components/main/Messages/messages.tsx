@@ -2,13 +2,17 @@ import React from 'react';
 import s from "./messages.module.css"
 import Contacts from "./Contacts/Contacts";
 import Dialogs from "./Dialogs/Dialogs";
+import {allStateTypes, messagePagesType} from "../../../redux/state";
 
+type PropsType = {
+    messagePages: messagePagesType
+}
 
-const Messages = () => {
+const Messages = (props:PropsType) => {
     return (
         <div className={s.messages}>
-            <Contacts />
-            <Dialogs />
+            <Contacts contacts={props.messagePages.contacts}/>
+            <Dialogs dialogs={props.messagePages.dialogs}/>
         </div>
     );
 };
