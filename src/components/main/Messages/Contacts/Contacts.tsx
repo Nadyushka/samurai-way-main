@@ -1,13 +1,18 @@
 import React from 'react';
 import s from './contacts.module.css'
 import Contact from "./Contact/Contact";
-import {state} from "../../../../redux/state";
+import { contactDataType} from "../../../../redux/state";
 
-const Contacts = () => {
+
+type PropsType = {
+    contacts: contactDataType[]
+}
+
+const Contacts = (props:PropsType) => {
 
     return (
         <div className={s.contacts}>
-            {state.messagePages.contacts.map(contact => <Contact name={contact.name} id={contact.id}/>)}
+            {props.contacts.map(contact => <Contact name={contact.name} id={contact.id}/>)}
         </div>
     );
 };

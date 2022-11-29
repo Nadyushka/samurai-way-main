@@ -1,14 +1,17 @@
 import React from 'react';
 import s from './dialogs.module.css'
 import Message from "./Messege/Message";
-import {state} from "../../../../redux/state";
+import {allStateTypes, messageDataType} from "../../../../redux/state";
 
+type PropsType = {
+    dialogs: messageDataType[]
+}
 
-const Dialogs = () => {
+const Dialogs = (props:PropsType) => {
 
     return (
         <div className={s.dialogs}>
-            {state.messagePages.dialogs.map((message) => <Message id={message.id} message={message.message}/>)}
+            {props.dialogs.map((message) => <Message id={message.id} message={message.message}/>)}
         </div>
     );
 };
