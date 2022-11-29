@@ -1,0 +1,20 @@
+.contacts {
+    width: 30%;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.contact {
+    margin-top: 5px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: black;
+}
+
+.contacts .active a {
+    color: green ;
+    font-size: 17px;
+    font-weight: 500;
+}

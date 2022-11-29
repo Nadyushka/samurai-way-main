@@ -22,7 +22,6 @@ const PersonalInformation = () => {
                 <input placeholder='Share your news'/>
                 <button> Add posts </button>
             </div>
-            <Posts/>
         </div>
     )
         ;
