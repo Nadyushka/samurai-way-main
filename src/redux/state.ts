@@ -34,7 +34,6 @@ export type allStateTypes = {
     stateAll: pagesTypes;
 }
 
-
 export let state:allStateTypes = {
     stateAll:   {
         profilePages: {
