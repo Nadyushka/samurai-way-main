@@ -3,15 +3,30 @@ import s from "./Posts.module.css"
 import {profilePagesType} from "../../../../redux/state";
 
 type PropsType = {
-    posts:profilePagesType
+    posts: profilePagesType
+    newPost: string
+    addPost: (newPost: string) => void
+    changeNewPost: (newPost: string) => void
 }
 
-const Posts = (props: profilePagesType) => {
+const Posts = (props: PropsType) => {
+
+        const addNewPost = () => {
+            props.addPost(props.newPost)
+        }
+
 
         return (
             <div className={s.posts}>
+                <div className={s.addInfoInput}>
+                    <input placeholder='Share your news'
+                           value={props.newPost}
+                           onChange={(e) => props.changeNewPost(e.currentTarget.value)                           }
+                           />
+                    <button onClick={addNewPost}> Add posts</button>
+                </div>
                 <div className={s.post}>
-                    {props.posts.map((p) => {
+                    {props.posts.posts.map((p) => {
                         return <div key={p.id}>
                             <div className={s.postText}>{p.post}</div>
                             <div className={s.postReaction}>

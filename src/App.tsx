@@ -4,16 +4,19 @@ import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
 import {BrowserRouter} from "react-router-dom";
-import {state} from "./redux/state";
+import {addPost, changeNewPost, allStateTypes} from "./redux/state";
 
-const App = () => {
-    const stateMe = state.stateAll;
+type PropsType = {
+    state: allStateTypes
+}
+
+const App = (props: PropsType) => {
 
     return (<BrowserRouter>
             <div className={s.App}>
                 <Header/>
                 <Aside/>
-                <Main state={stateMe} />
+                <Main state={props.state.stateAll} addPost={addPost} changeNewPost={changeNewPost}/>
             </div>
         </BrowserRouter>
     );
