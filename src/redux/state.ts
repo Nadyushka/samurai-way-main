@@ -1,3 +1,10 @@
+let onChange = () => {
+}
+
+export let subscriber = (callback: () => void) => {
+    onChange = callback
+}
+
 export type contactDataType = {
     id: number
     name: string
@@ -17,6 +24,7 @@ export type postsDataType = {
 
 export type profilePagesType = {
     posts: postsDataType[]
+    newPost: string
 }
 
 export type messagePagesType = {
@@ -34,11 +42,12 @@ export type allStateTypes = {
     stateAll: pagesTypes;
 }
 
-export let state:allStateTypes = {
-    stateAll:   {
+export let state: allStateTypes = {
+    stateAll: {
         profilePages: {
             posts: [{id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
-                {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}]
+                {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}],
+            newPost: '',
         },
         messagePages: {
             contacts: [
@@ -55,4 +64,21 @@ export let state:allStateTypes = {
             ]
         }
     }
+}
+
+export const addPost = (post: string) => {
+    let newPost: postsDataType = {
+        id: new Date().getSeconds(),
+        post: post,
+        likesCount: 0,
+        commentsCount: 0
+    }
+    state.stateAll.profilePages.posts.push(newPost)
+    onChange()
+    state.stateAll.profilePages.newPost = ''
+}
+
+export const changeNewPost = (newPostValue: string) => {
+    state.stateAll.profilePages.newPost = newPostValue;
+    onChange()
 }
