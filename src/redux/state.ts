@@ -1,4 +1,9 @@
-import {renderTree} from "../render";
+let onChange = () => {
+}
+
+export let subscriber = (callback: () => void) => {
+    onChange = callback
+}
 
 export type contactDataType = {
     id: number
@@ -19,7 +24,7 @@ export type postsDataType = {
 
 export type profilePagesType = {
     posts: postsDataType[]
-    newPost:string
+    newPost: string
 }
 
 export type messagePagesType = {
@@ -66,14 +71,14 @@ export const addPost = (post: string) => {
         id: new Date().getSeconds(),
         post: post,
         likesCount: 0,
-        commentsCount:0
+        commentsCount: 0
     }
     state.stateAll.profilePages.posts.push(newPost)
-    renderTree(state)
+    onChange()
     state.stateAll.profilePages.newPost = ''
 }
 
-export const changeNewPost = (newPostValue:string) => {
+export const changeNewPost = (newPostValue: string) => {
     state.stateAll.profilePages.newPost = newPostValue;
-    renderTree(state)
+    onChange()
 }
