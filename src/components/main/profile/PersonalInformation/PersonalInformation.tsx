@@ -18,10 +18,7 @@ const PersonalInformation = () => {
                 </div>
             </div>
 
-            <div className={s.addInfoInput}>
-                <input placeholder='Share your news'/>
-                <button> Add posts </button>
-            </div>
+
         </div>
     )
         ;

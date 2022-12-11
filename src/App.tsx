@@ -4,7 +4,7 @@ import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
 import {BrowserRouter} from "react-router-dom";
-import {state} from "./redux/state";
+import {state,addPost,changeNewPost} from "./redux/state";
 
 const App = () => {
     const stateMe = state.stateAll;
@@ -13,7 +13,7 @@ const App = () => {
             <div className={s.App}>
                 <Header/>
                 <Aside/>
-                <Main state={stateMe} />
+                <Main state={stateMe} addPost={addPost} changeNewPost={changeNewPost}/>
             </div>
         </BrowserRouter>
     );
