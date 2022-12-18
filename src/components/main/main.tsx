@@ -3,7 +3,7 @@ import s from "./main.module.css"
 import Profile from "./profile/profile";
 import Messages from "./Messages/messages";
 import {Route, Switch} from "react-router-dom"
-import {changeNewPost, pagesTypes} from "../../redux/state";
+import {pagesTypes} from "../../redux/state";
 
 type PropsType = {
     state: pagesTypes

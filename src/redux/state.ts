@@ -34,16 +34,16 @@ export type allStateTypes = {
     stateAll: pagesTypes;
 }
 
-type storeType = {
+export type storeType = {
     _state: allStateTypes
-    _getState:()=>void
+    _getState:()=>allStateTypes
     _onChange: ()=>void
     subscriber: (callback: () => void)=>void
     addPost:(post: string)=>void
     changeNewPost: (newPostValue: string) =>void
 }
 
-let store:storeType = {
+export const store:storeType = {
     _state: {
         stateAll: {
             profilePages: {
@@ -68,9 +68,10 @@ let store:storeType = {
         }
     },
     _getState() {
-        this._state
+        return this._state
     },
     _onChange(){
+        console.log('change state')
     },
     subscriber(callback){
         this._onChange = callback
@@ -93,4 +94,3 @@ let store:storeType = {
 
 }
 
-export default store
