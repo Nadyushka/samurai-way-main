@@ -1,9 +1,3 @@
-let onChange = () => {
-}
-
-export let subscriber = (callback: () => void) => {
-    onChange = callback
-}
 
 export type contactDataType = {
     id: number
@@ -42,29 +36,6 @@ export type allStateTypes = {
     stateAll: pagesTypes;
 }
 
-export let state: allStateTypes = {
-    stateAll: {
-        profilePages: {
-            posts: [{id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
-                {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}],
-            newPost: '',
-        },
-        messagePages: {
-            contacts: [
-                {id: 1, name: 'Bison'},
-                {id: 2, name: 'John'},
-                {id: 3, name: 'Alexa'},
-                {id: 4, name: 'Peter'},
-                {id: 5, name: 'Sandra'}]
-            ,
-            dialogs: [
-                {id: 1, message: 'Hi'},
-                {id: 2, message: 'How are you?'},
-                {id: 3, message: 'Enjoy your day'}
-            ]
-        }
-    }
-}
 
 export const addPost = (post: string) => {
     let newPost: postsDataType = {
@@ -82,3 +53,46 @@ export const changeNewPost = (newPostValue: string) => {
     state.stateAll.profilePages.newPost = newPostValue;
     onChange()
 }
+
+type storeType = {
+    _state: allStateTypes
+    _getState:()=>void
+    _onChange: ()=>void
+    subscriber: (callback: () => void)=>void
+}
+
+let store:storeType = {
+    _state: {
+        stateAll: {
+            profilePages: {
+                posts: [{id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
+                    {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}],
+                newPost: '',
+            },
+            messagePages: {
+                contacts: [
+                    {id: 1, name: 'Bison'},
+                    {id: 2, name: 'John'},
+                    {id: 3, name: 'Alexa'},
+                    {id: 4, name: 'Peter'},
+                    {id: 5, name: 'Sandra'}]
+                ,
+                dialogs: [
+                    {id: 1, message: 'Hi'},
+                    {id: 2, message: 'How are you?'},
+                    {id: 3, message: 'Enjoy your day'}
+                ]
+            }
+        }
+    },
+    _getState() {
+        this._state
+    },
+    _onChange(){
+    },
+    subscriber(callback){
+        this._onChange = callback
+    }
+}
+
+export default store
