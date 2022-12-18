@@ -10,7 +10,8 @@ const renderTree = () => {
         document.getElementById('root')
     );
 }
+renderTree()
 
 store.subscriber(renderTree)
-renderTree()
+
 
