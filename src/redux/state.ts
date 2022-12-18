@@ -122,6 +122,5 @@ export const store: storeType = {
         messagePageReducer(store._state.stateAll, action)
         this._onChange()
     }
-
 }
 
