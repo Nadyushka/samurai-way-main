@@ -6,8 +6,6 @@ import {dispatchTypes, profilePagesType} from "../../../redux/state";
 
 type PropsType = {
     profilePages: profilePagesType
-  //  addPost: (newPost: string) => void
-  //  changeNewPost: (newPost: string) => void
     dispatch: (action: dispatchTypes)=> void
 
 }

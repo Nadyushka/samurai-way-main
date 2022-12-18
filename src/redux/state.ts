@@ -1,6 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
 const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'
+const CHANGE_NEW_MESSAGE = 'CHANGE_NEW_MESSAGE'
 
 export type contactDataType = {
     id: number
@@ -41,22 +42,27 @@ export type allStateTypes = {
 
 export type storeType = {
     _state: allStateTypes
-    _getState:()=>allStateTypes
-    _onChange: ()=>void
-    subscriber: (callback: () => void)=>void
-    addPost:(post: string)=>void
-    changeNewPost: (newPostValue: string) =>void
+    _getState: () => allStateTypes
+    _onChange: () => void
+    subscriber: (callback: () => void) => void
+    addPost: (post: string) => void
+    changeNewPost: (newPostValue: string) => void
     dispatch: (action: dispatchTypes) => void
 }
 
 
 type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
 type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
+type changeNewMessageActionCreatorType = ReturnType<typeof changeNewMessageActionCreator>
 type addNewMessageActionCreatorType = ReturnType<typeof addNewMessageActionCreator>
 
-export type dispatchTypes = dispatchAddPostType | dispatchChangeNewPostType | addNewMessageActionCreatorType
+export type dispatchTypes =
+    dispatchAddPostType
+    | dispatchChangeNewPostType
+    | addNewMessageActionCreatorType
+    | changeNewMessageActionCreatorType
 
-export const store:storeType = {
+export const store: storeType = {
     _state: {
         stateAll: {
             profilePages: {
@@ -84,13 +90,13 @@ export const store:storeType = {
     _getState() {
         return this._state
     },
-    _onChange(){
+    _onChange() {
         console.log('change state')
     },
-    subscriber(callback){
+    subscriber(callback) {
         this._onChange = callback
     },
-    addPost (post) {
+    addPost(post) {
         let newPost: postsDataType = {
             id: new Date().getSeconds(),
             post: post,
@@ -101,11 +107,11 @@ export const store:storeType = {
         this._onChange()
         this._state.stateAll.profilePages.newPost = ''
     },
-    changeNewPost (newPostValue)  {
+    changeNewPost(newPostValue) {
         this._state.stateAll.profilePages.newPost = newPostValue;
         this._onChange()
     },
-    dispatch (action) {
+    dispatch(action) {
         if (action.type === ADD_POST) {
             let newPost: postsDataType = {
                 id: new Date().getSeconds(),
@@ -120,15 +126,30 @@ export const store:storeType = {
             this._state.stateAll.profilePages.newPost = action.newPostValue;
             this._onChange()
         } else if (action.type === ADD_NEW_MESSAGE) {
-            this._state.stateAll.messagePages.newMessageText = action.newMessageText;
-            this._onChange
+            let newMessage: messageDataType = {
+                id: new Date().getSeconds(),
+                message: action.newMessageText,
+            }
+            this._state.stateAll.messagePages.dialogs.push(newMessage)
+            this._onChange()
             this._state.stateAll.messagePages.newMessageText = ''
+        } else if (action.type === CHANGE_NEW_MESSAGE) {
+            this._state.stateAll.messagePages.newMessageText = action.newMessageText
+            this._onChange()
         }
     }
 
 }
 
 
-export const addNewPostActionCreator = (newPost: string) => ( {type:ADD_POST, post: newPost}) as const
-export const changeNewPostPostActionCreator = (post:string)=> ( {type:CHANGE_NEW_POST, newPostValue: post}) as const
-export const addNewMessageActionCreator = (newMessage:string) => ({type:ADD_NEW_MESSAGE, newMessageText: newMessage}) as const
+export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
+export const changeNewPostPostActionCreator = (post: string) => ({type: CHANGE_NEW_POST, newPostValue: post}) as const
+
+export const addNewMessageActionCreator = (newMessage: string) => ({
+    type: ADD_NEW_MESSAGE,
+    newMessageText: newMessage
+}) as const
+export const changeNewMessageActionCreator = (newMessageText: string) => ({
+    type: CHANGE_NEW_MESSAGE,
+    newMessageText: newMessageText
+}) as const

@@ -12,7 +12,7 @@ const Contacts = (props:PropsType) => {
 
     return (
         <div className={s.contacts}>
-            {props.contacts.map(contact => <Contact name={contact.name} id={contact.id}/>)}
+            {props.contacts.map(contact => <Contact key={contact.id} name={contact.name} id={contact.id}/>)}
         </div>
     );
 };

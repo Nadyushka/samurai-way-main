@@ -7,9 +7,9 @@ import {dispatchTypes, pagesTypes} from "../../redux/state";
 
 type PropsType = {
     state: pagesTypes
-    dispatch: (action: dispatchTypes)=> void
-   // addPost: (newPost: string) => void
-   // changeNewPost: (newPost: string) => void
+    dispatch: (action: dispatchTypes) => void
+    // addPost: (newPost: string) => void
+    // changeNewPost: (newPost: string) => void
 }
 
 const Main: React.FC<PropsType> = ({state, dispatch}) => {
@@ -18,12 +18,14 @@ const Main: React.FC<PropsType> = ({state, dispatch}) => {
             <Switch>
                 <Route exact path="/main/profile" render={() => <Profile
                     profilePages={state.profilePages}
-       //             addPost={addPost}
-       //             changeNewPost={changeNewPost}
-                    dispatch = {dispatch}
+                    dispatch={dispatch}
                 />}
                 />
-                <Route exact path="/main/messages" render={() => <Messages messagePages={state.messagePages}/>}/>
+                <Route exact path="/main/messages"
+                       render={() => <Messages messagePages={state.messagePages}
+                                               dispatch={dispatch}
+                       />}
+                />
                 {/* Route exact path="/main/news" render={() => <News/>} */}
                 {/* <Music/> */}
                 {/* <Messages/> */}
