@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
+const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'
 
 export type contactDataType = {
     id: number
@@ -26,6 +27,7 @@ export type profilePagesType = {
 export type messagePagesType = {
     contacts: contactDataType[]
     dialogs: messageDataType[]
+    newMessageText: string
 }
 
 export type pagesTypes = {
@@ -48,11 +50,11 @@ export type storeType = {
 }
 
 
-type dispatchAddPostTypes = ReturnType<typeof addNewPostActionCreator>
+type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
+type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
+type addNewMessageActionCreatorType = ReturnType<typeof addNewMessageActionCreator>
 
-type dispatchChangeNewPostTypes = ReturnType<typeof changeNewPostPostActionCreator>
-
-export type dispatchTypes = dispatchAddPostTypes | dispatchChangeNewPostTypes
+export type dispatchTypes = dispatchAddPostType | dispatchChangeNewPostType | addNewMessageActionCreatorType
 
 export const store:storeType = {
     _state: {
@@ -74,7 +76,8 @@ export const store:storeType = {
                     {id: 1, message: 'Hi'},
                     {id: 2, message: 'How are you?'},
                     {id: 3, message: 'Enjoy your day'}
-                ]
+                ],
+                newMessageText: '',
             }
         }
     },
@@ -116,6 +119,10 @@ export const store:storeType = {
         } else if (action.type === CHANGE_NEW_POST) {
             this._state.stateAll.profilePages.newPost = action.newPostValue;
             this._onChange()
+        } else if (action.type === ADD_NEW_MESSAGE) {
+            this._state.stateAll.messagePages.newMessageText = action.newMessageText;
+            this._onChange
+            this._state.stateAll.messagePages.newMessageText = ''
         }
     }
 
@@ -124,3 +131,4 @@ export const store:storeType = {
 
 export const addNewPostActionCreator = (newPost: string) => ( {type:ADD_POST, post: newPost}) as const
 export const changeNewPostPostActionCreator = (post:string)=> ( {type:CHANGE_NEW_POST, newPostValue: post}) as const
+export const addNewMessageActionCreator = (newMessage:string) => ({type:ADD_NEW_MESSAGE, newMessageText: newMessage}) as const
