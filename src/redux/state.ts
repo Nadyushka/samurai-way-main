@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST'
+const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
+
 export type contactDataType = {
     id: number
     name: string
@@ -105,7 +108,7 @@ export const store:storeType = {
         this._onChange()
     },
     dispatch (action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost: postsDataType = {
                 id: new Date().getSeconds(),
                 post: action.post,
@@ -115,7 +118,7 @@ export const store:storeType = {
             this._state.stateAll.profilePages.posts.push(newPost)
             this._onChange()
             this._state.stateAll.profilePages.newPost = ''
-        } else if (action.type === 'CHANGE-NEW-POST') {
+        } else if (action.type === CHANGE_NEW_POST) {
             this._state.stateAll.profilePages.newPost = action.newPostValue;
             this._onChange()
         }
@@ -123,3 +126,6 @@ export const store:storeType = {
 
 }
 
+
+export const addNewPostActionCreator = (newPost: string):dispatchAddPostTypes => ( {type:ADD_POST, post: newPost})
+export const changeNewPostPostActionCreator = (post:string):dispatchChangeNewPostTypes=> ( {type:CHANGE_NEW_POST, newPostValue: post})
