@@ -1,4 +1,3 @@
-
 export type contactDataType = {
     id: number
     name: string
@@ -31,27 +30,8 @@ export type pagesTypes = {
     messagePages: messagePagesType
 }
 
-
 export type allStateTypes = {
     stateAll: pagesTypes;
-}
-
-
-export const addPost = (post: string) => {
-    let newPost: postsDataType = {
-        id: new Date().getSeconds(),
-        post: post,
-        likesCount: 0,
-        commentsCount: 0
-    }
-    state.stateAll.profilePages.posts.push(newPost)
-    onChange()
-    state.stateAll.profilePages.newPost = ''
-}
-
-export const changeNewPost = (newPostValue: string) => {
-    state.stateAll.profilePages.newPost = newPostValue;
-    onChange()
 }
 
 type storeType = {
@@ -59,6 +39,8 @@ type storeType = {
     _getState:()=>void
     _onChange: ()=>void
     subscriber: (callback: () => void)=>void
+    addPost:(post: string)=>void
+    changeNewPost: (newPostValue: string) =>void
 }
 
 let store:storeType = {
@@ -92,7 +74,23 @@ let store:storeType = {
     },
     subscriber(callback){
         this._onChange = callback
+    },
+    addPost (post) {
+        let newPost: postsDataType = {
+            id: new Date().getSeconds(),
+            post: post,
+            likesCount: 0,
+            commentsCount: 0
+        }
+        this._state.stateAll.profilePages.posts.push(newPost)
+        this._onChange()
+        this._state.stateAll.profilePages.newPost = ''
+    },
+    changeNewPost (newPostValue)  {
+        this._state.stateAll.profilePages.newPost = newPostValue;
+        this._onChange()
     }
+
 }
 
 export default store
