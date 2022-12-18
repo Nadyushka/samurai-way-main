@@ -1,7 +1,15 @@
-const ADD_POST = 'ADD-POST'
-const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
-const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'
-const CHANGE_NEW_MESSAGE = 'CHANGE_NEW_MESSAGE'
+import {
+    addNewPostActionCreator,
+    changeNewPostPostActionCreator,
+    dispatchAddPostType, dispatchChangeNewPostType,
+    profilePageReducer
+} from "./profile-pages-reducer";
+import {
+    addNewMessageActionCreator,
+    addNewMessageActionCreatorType,
+    changeNewMessageActionCreator, changeNewMessageActionCreatorType,
+    messagePageReducer
+} from "./message-page-reducer";
 
 export type contactDataType = {
     id: number
@@ -51,10 +59,8 @@ export type storeType = {
 }
 
 
-type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
-type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
-type changeNewMessageActionCreatorType = ReturnType<typeof changeNewMessageActionCreator>
-type addNewMessageActionCreatorType = ReturnType<typeof addNewMessageActionCreator>
+
+
 
 export type dispatchTypes =
     dispatchAddPostType
@@ -112,44 +118,10 @@ export const store: storeType = {
         this._onChange()
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost: postsDataType = {
-                id: new Date().getSeconds(),
-                post: action.post,
-                likesCount: 0,
-                commentsCount: 0
-            }
-            this._state.stateAll.profilePages.posts.push(newPost)
-            this._onChange()
-            this._state.stateAll.profilePages.newPost = ''
-        } else if (action.type === CHANGE_NEW_POST) {
-            this._state.stateAll.profilePages.newPost = action.newPostValue;
-            this._onChange()
-        } else if (action.type === ADD_NEW_MESSAGE) {
-            let newMessage: messageDataType = {
-                id: new Date().getSeconds(),
-                message: action.newMessageText,
-            }
-            this._state.stateAll.messagePages.dialogs.push(newMessage)
-            this._onChange()
-            this._state.stateAll.messagePages.newMessageText = ''
-        } else if (action.type === CHANGE_NEW_MESSAGE) {
-            this._state.stateAll.messagePages.newMessageText = action.newMessageText
-            this._onChange()
-        }
+        profilePageReducer(store._state.stateAll, action)
+        messagePageReducer(store._state.stateAll, action)
+        this._onChange()
     }
 
 }
 
-
-export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
-export const changeNewPostPostActionCreator = (post: string) => ({type: CHANGE_NEW_POST, newPostValue: post}) as const
-
-export const addNewMessageActionCreator = (newMessage: string) => ({
-    type: ADD_NEW_MESSAGE,
-    newMessageText: newMessage
-}) as const
-export const changeNewMessageActionCreator = (newMessageText: string) => ({
-    type: CHANGE_NEW_MESSAGE,
-    newMessageText: newMessageText
-}) as const

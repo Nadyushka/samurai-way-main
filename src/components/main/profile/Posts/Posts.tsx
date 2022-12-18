@@ -1,27 +1,18 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
-import {
-    addNewPostActionCreator,
-    changeNewPostPostActionCreator,
-    dispatchTypes,
-    profilePagesType
-} from "../../../../redux/state";
-import {stringify} from "uuid/index";
+import {    dispatchTypes, profilePagesType} from "../../../../redux/state";
+import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../../redux/profile-pages-reducer";
 
 type PropsType = {
     posts: profilePagesType
     newPost: string
-  //  addPost: (newPost: string) => void
-  //  changeNewPost: (newPost: string) => void
     dispatch: (action: dispatchTypes)=> void
 }
-
 
 
 const Posts = (props: PropsType) => {
 
         const addNewPost = () => {
-  //          props.addPost(props.newPost)
             let action = addNewPostActionCreator(props.newPost)
             props.dispatch(action)
         }
