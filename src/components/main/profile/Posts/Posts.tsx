@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
 import {dispatchTypes, profilePagesType} from "../../../../redux/state";
+import {stringify} from "uuid/index";
 
 type PropsType = {
     posts: profilePagesType
@@ -10,11 +11,13 @@ type PropsType = {
     dispatch: (action: dispatchTypes)=> void
 }
 
+const addNewPostActionCreator = (newPost: string) => ({type:'ADD-POST', post: newPost})
+
 const Posts = (props: PropsType) => {
 
         const addNewPost = () => {
   //          props.addPost(props.newPost)
-            props.dispatch({type:'ADD-POST', post: props.newPost})
+            props.dispatch(addNewPostActionCreator(props.newPost))
         }
 
         const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
