@@ -4,10 +4,11 @@ import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
 import {BrowserRouter} from "react-router-dom";
-import {addPost, changeNewPost, allStateTypes} from "./redux/state";
+import {storeType} from "./redux/state";
+
 
 type PropsType = {
-    state: allStateTypes
+    store: storeType
 }
 
 const App = (props: PropsType) => {
@@ -16,7 +17,11 @@ const App = (props: PropsType) => {
             <div className={s.App}>
                 <Header/>
                 <Aside/>
-                <Main state={props.state.stateAll} addPost={addPost} changeNewPost={changeNewPost}/>
+                <Main state={props.store._getState().stateAll}
+     //                 addPost={props.store.addPost.bind(props.store)}
+     //                 changeNewPost={props.store.changeNewPost.bind(props.store)}
+                      dispatch={props.store.dispatch.bind(props.store)}
+                                />
             </div>
         </BrowserRouter>
     );

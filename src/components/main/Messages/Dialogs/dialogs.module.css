@@ -1,7 +1,31 @@
-.dialogs{
+.dialogs {
     background-color: whitesmoke;
     width: 70%;
     padding-top: 20px;
     padding-left: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
+.dialogsInput {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.dialogsInput input {
+    width: 80%;
+    margin-right: 10px;
+    height: 30px;
+    padding-left: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.dialogsInput button {
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: navajowhite;
+}

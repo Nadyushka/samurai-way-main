@@ -1,4 +1,4 @@
-import {state, subscriber} from "./redux/state";
+import {store} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 import React from "react";
@@ -6,12 +6,12 @@ import './index.css';
 
 const renderTree = () => {
     ReactDOM.render(
-        <App state={state}/>,
+        <App store={store}/>,
         document.getElementById('root')
     );
 }
-
 renderTree()
-subscriber(renderTree)
+
+store.subscriber(renderTree)
 
 
