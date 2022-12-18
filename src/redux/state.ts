@@ -47,15 +47,10 @@ export type storeType = {
     dispatch: (action: dispatchTypes) => void
 }
 
-type dispatchAddPostTypes = {
-    type: 'ADD-POST'
-    post: string
-}
 
-type dispatchChangeNewPostTypes = {
-    type: 'CHANGE-NEW-POST'
-    newPostValue: string
-}
+type dispatchAddPostTypes = ReturnType<typeof addNewPostActionCreator>
+
+type dispatchChangeNewPostTypes = ReturnType<typeof changeNewPostPostActionCreator>
 
 export type dispatchTypes = dispatchAddPostTypes | dispatchChangeNewPostTypes
 
@@ -127,5 +122,5 @@ export const store:storeType = {
 }
 
 
-export const addNewPostActionCreator = (newPost: string):dispatchAddPostTypes => ( {type:ADD_POST, post: newPost})
-export const changeNewPostPostActionCreator = (post:string):dispatchChangeNewPostTypes=> ( {type:CHANGE_NEW_POST, newPostValue: post})
+export const addNewPostActionCreator = (newPost: string) => ( {type:ADD_POST, post: newPost}) as const
+export const changeNewPostPostActionCreator = (post:string)=> ( {type:CHANGE_NEW_POST, newPostValue: post}) as const
