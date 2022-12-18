@@ -41,7 +41,20 @@ export type storeType = {
     subscriber: (callback: () => void)=>void
     addPost:(post: string)=>void
     changeNewPost: (newPostValue: string) =>void
+    dispatch: (action: dispatchTypes) => void
 }
+
+type dispatchAddPostTypes = {
+    type: 'ADD-POST'
+    post: string
+}
+
+type dispatchChangeNewPostTypes = {
+    type: 'CHANGE-NEW-POST'
+    newPostValue: string
+}
+
+export type dispatchTypes = dispatchAddPostTypes | dispatchChangeNewPostTypes
 
 export const store:storeType = {
     _state: {
@@ -90,6 +103,22 @@ export const store:storeType = {
     changeNewPost (newPostValue)  {
         this._state.stateAll.profilePages.newPost = newPostValue;
         this._onChange()
+    },
+    dispatch (action) {
+        if (action.type === 'ADD-POST') {
+            let newPost: postsDataType = {
+                id: new Date().getSeconds(),
+                post: action.post,
+                likesCount: 0,
+                commentsCount: 0
+            }
+            this._state.stateAll.profilePages.posts.push(newPost)
+            this._onChange()
+            this._state.stateAll.profilePages.newPost = ''
+        } else if (action.type === 'CHANGE-NEW-POST') {
+            this._state.stateAll.profilePages.newPost = action.newPostValue;
+            this._onChange()
+        }
     }
 
 }

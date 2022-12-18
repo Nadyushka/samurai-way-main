@@ -1,18 +1,24 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
-import {profilePagesType} from "../../../../redux/state";
+import {dispatchTypes, profilePagesType} from "../../../../redux/state";
 
 type PropsType = {
     posts: profilePagesType
     newPost: string
-    addPost: (newPost: string) => void
-    changeNewPost: (newPost: string) => void
+  //  addPost: (newPost: string) => void
+  //  changeNewPost: (newPost: string) => void
+    dispatch: (action: dispatchTypes)=> void
 }
 
 const Posts = (props: PropsType) => {
 
         const addNewPost = () => {
-            props.addPost(props.newPost)
+  //          props.addPost(props.newPost)
+            props.dispatch({type:'ADD-POST', post: props.newPost})
+        }
+
+        const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+            props.dispatch({type: 'CHANGE-NEW-POST', newPostValue: e.currentTarget.value})
         }
 
 
@@ -21,7 +27,7 @@ const Posts = (props: PropsType) => {
                 <div className={s.addInfoInput}>
                     <input placeholder='Share your news'
                            value={props.newPost}
-                           onChange={(e) => props.changeNewPost(e.currentTarget.value)                           }
+                           onChange={onChangeHandler}
                            />
                     <button onClick={addNewPost}> Add posts</button>
                 </div>
