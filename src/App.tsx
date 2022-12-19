@@ -18,10 +18,8 @@ const App = (props: PropsType) => {
                 <Header/>
                 <Aside/>
                 <Main state={props.store._getState().stateAll}
-     //                 addPost={props.store.addPost.bind(props.store)}
-     //                 changeNewPost={props.store.changeNewPost.bind(props.store)}
                       dispatch={props.store.dispatch.bind(props.store)}
-                                />
+                />
             </div>
         </BrowserRouter>
     );
