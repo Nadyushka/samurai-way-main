@@ -1,13 +1,10 @@
 import {
-    addNewPostActionCreator,
-    changeNewPostPostActionCreator,
     dispatchAddPostType, dispatchChangeNewPostType,
     profilePageReducer
 } from "./profile-pages-reducer";
 import {
-    addNewMessageActionCreator,
     addNewMessageActionCreatorType,
-    changeNewMessageActionCreator, changeNewMessageActionCreatorType,
+    changeNewMessageActionCreatorType,
     messagePageReducer
 } from "./message-page-reducer";
 
@@ -57,10 +54,6 @@ export type storeType = {
     changeNewPost: (newPostValue: string) => void
     dispatch: (action: dispatchTypes) => void
 }
-
-
-
-
 
 export type dispatchTypes =
     dispatchAddPostType
