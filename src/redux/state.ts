@@ -50,8 +50,6 @@ export type storeType = {
     _getState: () => allStateTypes
     _onChange: () => void
     subscriber: (callback: () => void) => void
-    addPost: (post: string) => void
-    changeNewPost: (newPostValue: string) => void
     dispatch: (action: dispatchTypes) => void
 }
 
@@ -94,21 +92,6 @@ export const store: storeType = {
     },
     subscriber(callback) {
         this._onChange = callback
-    },
-    addPost(post) {
-        let newPost: postsDataType = {
-            id: new Date().getSeconds(),
-            post: post,
-            likesCount: 0,
-            commentsCount: 0
-        }
-        this._state.stateAll.profilePages.posts.push(newPost)
-        this._onChange()
-        this._state.stateAll.profilePages.newPost = ''
-    },
-    changeNewPost(newPostValue) {
-        this._state.stateAll.profilePages.newPost = newPostValue;
-        this._onChange()
     },
     dispatch(action) {
         profilePageReducer(store._state.stateAll, action)
