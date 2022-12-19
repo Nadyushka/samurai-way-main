@@ -8,8 +8,6 @@ import {dispatchTypes, pagesTypes} from "../../redux/state";
 type PropsType = {
     state: pagesTypes
     dispatch: (action: dispatchTypes) => void
-    // addPost: (newPost: string) => void
-    // changeNewPost: (newPost: string) => void
 }
 
 const Main: React.FC<PropsType> = ({state, dispatch}) => {
