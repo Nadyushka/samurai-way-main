@@ -4,11 +4,12 @@ import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
 import {BrowserRouter} from "react-router-dom";
-import {storeType} from "./redux/state";
+import {store} from "./redux/state";
 
 
 type PropsType = {
     store: any
+    dispatch: any
 }
 
 const App = (props: PropsType) => {
@@ -17,8 +18,8 @@ const App = (props: PropsType) => {
             <div className={s.App}>
                 <Header/>
                 <Aside/>
-                <Main state={props.store._getState().stateAll}
-                      dispatch={props.store.dispatch.bind(props.store)}
+                <Main state={props.store}
+                      dispatch={props.dispatch}
                 />
             </div>
         </BrowserRouter>

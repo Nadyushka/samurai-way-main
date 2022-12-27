@@ -17,7 +17,7 @@ let initialState:profilePagesType = {
     newPost: '',
 }
 
-export const profilePageReducer = (state:profilePagesType = initialState,action:dispatchTypes) => {
+export const profilePageReducer = (state = initialState,action:dispatchTypes) => {
     if (action.type === ADD_POST) {
         let newPost: postsDataType = {
             id: new Date().getSeconds(),
@@ -30,5 +30,7 @@ export const profilePageReducer = (state:profilePagesType = initialState,action:
     } else if (action.type === CHANGE_NEW_POST) {
         state.newPost = action.newPostValue
     }
+
+    return state;
 }
 

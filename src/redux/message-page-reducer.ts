@@ -43,5 +43,8 @@ export const messagePageReducer = (state:messagePagesType = initialState,action:
     } else if (action.type === CHANGE_NEW_MESSAGE) {
         state.newMessageText = action.newMessageText
     }
+
+    return state;
+
 }
 
