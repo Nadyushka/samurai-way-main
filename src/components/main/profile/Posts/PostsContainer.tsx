@@ -23,7 +23,6 @@ const PostsContainer = (props: PropsType) => {
             props.dispatch(action)
         }
 
-
         return (
            <Posts addNewPost={addNewPost}
                   onChangeHandler={onChangeHandler}

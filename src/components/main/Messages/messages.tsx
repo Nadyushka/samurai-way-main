@@ -1,8 +1,8 @@
 import React from 'react';
 import s from "./messages.module.css"
 import Contacts from "./Contacts/Contacts";
-import Dialogs from "./Dialogs/Dialogs";
 import {dispatchTypes, messagePagesType} from "../../../redux/state";
+import DialogsContainer from "./Dialogs/DialogsContainer";
 
 type PropsType = {
     messagePages: messagePagesType
@@ -13,9 +13,10 @@ const Messages = (props: PropsType) => {
     return (
         <div className={s.messages}>
             <Contacts contacts={props.messagePages.contacts}/>
-            <Dialogs dialogs={props.messagePages.dialogs}
+            <DialogsContainer dialogs={props.messagePages.dialogs}
                      newMessageText={props.messagePages.newMessageText}
                      dispatch = {props.dispatch}
+
             />
         </div>
     );
