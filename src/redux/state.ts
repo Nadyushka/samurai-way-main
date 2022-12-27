@@ -1,5 +1,6 @@
 import {
-    dispatchAddPostType, dispatchChangeNewPostType,
+    dispatchAddPostType,
+    dispatchChangeNewPostType,
     profilePageReducer
 } from "./profile-pages-reducer";
 
