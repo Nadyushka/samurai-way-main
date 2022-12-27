@@ -3,8 +3,9 @@ import App from "./App";
 import React from "react";
 import './index.css';
 import {store} from './redux/redux-store'
+import {pagesTypes} from "./redux/state";
 
-const renderTree = (state:any) => {
+const renderTree = (state:pagesTypes) => {
     ReactDOM.render(
         <App store={state}
              dispatch={store.dispatch.bind(state)}

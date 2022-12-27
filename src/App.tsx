@@ -4,12 +4,12 @@ import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./redux/state";
+import {dispatchTypes, pagesTypes, store} from "./redux/state";
 
 
 type PropsType = {
-    store: any
-    dispatch: any
+    store: pagesTypes
+    dispatch: (action: dispatchTypes) => void
 }
 
 const App = (props: PropsType) => {
