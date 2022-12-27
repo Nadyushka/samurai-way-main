@@ -1,23 +1,26 @@
 import React, {ChangeEvent} from 'react';
 import s from './dialogs.module.css'
-import Message from "./Messege/Message";
-import {   dispatchTypes, messageDataType} from "../../../../redux/state";
-import {addNewMessageActionCreator, changeNewMessageActionCreator} from "../../../../redux/message-page-reducer";
+import Message from "./Message/Message";
+import {messageDataType} from "../../../../redux/state";
+
+
 
 type PropsType = {
+    onClickButtonSendHandler: ()=> void
+    onChangeInputHandler: (text:string)=> void
     dialogs: messageDataType[]
-    newMessageText: string
-    dispatch: (action: dispatchTypes) => void
+    newMessageText:string
 }
 
 const Dialogs = (props: PropsType) => {
 
     const onClickButtonSendHandler = () => {
-        props.dispatch(addNewMessageActionCreator(props.newMessageText))
+        props.onClickButtonSendHandler()
     }
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(changeNewMessageActionCreator(e.currentTarget.value))
+        let text = e.currentTarget.value
+        props.onChangeInputHandler(text)
     }
 
     return (
