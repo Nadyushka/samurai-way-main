@@ -3,25 +3,26 @@ import s from './App.module.css';
 import Header from "./components/header/header";
 import Aside from "./components/aside/aside";
 import Main from "./components/main/main";
-import {BrowserRouter} from "react-router-dom";
-import {storeType} from "./redux/state";
+import {dispatchTypes, pagesTypes, store} from "./redux/state";
+
 
 
 type PropsType = {
-    store: storeType
+    store: pagesTypes
+    dispatch: (action: dispatchTypes) => void
 }
 
 const App = (props: PropsType) => {
 
-    return (<BrowserRouter>
-            <div className={s.App}>
-                <Header/>
-                <Aside/>
-                <Main state={props.store._getState().stateAll}
-                      dispatch={props.store.dispatch.bind(props.store)}
-                />
-            </div>
-        </BrowserRouter>
+    return (
+        <div className={s.App}>
+            <Header/>
+            <Aside/>
+            <Main state={props.store}
+                  dispatch={props.dispatch}
+            />
+        </div>
+
     );
 }
 

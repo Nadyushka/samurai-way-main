@@ -4,22 +4,22 @@ import {    dispatchTypes, profilePagesType} from "../../../../redux/state";
 import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../../redux/profile-pages-reducer";
 
 type PropsType = {
-    posts: profilePagesType
+    addNewPost:()=> void
+    onChangeHandler:(text:string)=> void
     newPost: string
-    dispatch: (action: dispatchTypes)=> void
+    posts:profilePagesType
 }
 
 
 const Posts = (props: PropsType) => {
 
         const addNewPost = () => {
-            let action = addNewPostActionCreator(props.newPost)
-            props.dispatch(action)
+            props.addNewPost()
         }
 
         const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-            let action = changeNewPostPostActionCreator(e.currentTarget.value)
-            props.dispatch(action)
+            let text = e.currentTarget.value
+            props.onChangeHandler(text)
         }
 
 
