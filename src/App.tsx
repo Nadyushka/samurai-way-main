@@ -8,7 +8,7 @@ import {storeType} from "./redux/state";
 
 
 type PropsType = {
-    store: storeType
+    store: any
 }
 
 const App = (props: PropsType) => {

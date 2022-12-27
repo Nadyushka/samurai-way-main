@@ -1,17 +1,20 @@
-import {store} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 import React from "react";
 import './index.css';
+import {store} from './redux/redux-store'
 
-const renderTree = () => {
+const renderTree = (state:any) => {
     ReactDOM.render(
-        <App store={store}/>,
+        <App store={state}/>,
         document.getElementById('root')
     );
 }
-renderTree()
+renderTree(store.getState())
 
-store.subscriber(renderTree)
+store.subscribe( () => {
+    let state = store.getState()
+    renderTree(state)
+})
 
 

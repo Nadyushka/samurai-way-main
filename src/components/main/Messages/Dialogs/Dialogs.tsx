@@ -3,6 +3,7 @@ import s from './dialogs.module.css'
 import Message from "./Messege/Message";
 import {   dispatchTypes, messageDataType} from "../../../../redux/state";
 import {addNewMessageActionCreator, changeNewMessageActionCreator} from "../../../../redux/message-page-reducer";
+import {useDispatch} from "react-redux";
 
 type PropsType = {
     dialogs: messageDataType[]

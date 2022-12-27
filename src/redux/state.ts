@@ -96,8 +96,8 @@ export const store: storeType = {
         this._onChange = callback
     },
     dispatch(action) {
-        profilePageReducer(store._state.stateAll, action)
-        messagePageReducer(store._state.stateAll, action)
+        profilePageReducer(store._state.stateAll.profilePages, action)
+        messagePageReducer(store._state.stateAll.messagePages, action)
         this._onChange()
     }
 }
