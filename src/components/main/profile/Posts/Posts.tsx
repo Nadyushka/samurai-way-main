@@ -1,27 +1,18 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
-import {    dispatchTypes, profilePagesType} from "../../../../redux/state";
-import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../../redux/profile-pages-reducer";
-
-type PropsType = {
-    addNewPost:()=> void
-    onChangeHandler:(text:string)=> void
-    newPost: string
-    posts:profilePagesType
-}
+import {PostsPropsType} from "./PostsContainer";
 
 
-const Posts = (props: PropsType) => {
+const Posts = (props: PostsPropsType) => {
 
         const addNewPost = () => {
-            props.addNewPost()
+            props.addNewPost(props.newPost)
         }
 
         const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
             let text = e.currentTarget.value
             props.onChangeHandler(text)
         }
-
 
         return (
             <div className={s.posts}>
@@ -33,7 +24,7 @@ const Posts = (props: PropsType) => {
                     <button onClick={addNewPost}> Add posts</button>
                 </div>
                 <div className={s.post}>
-                    {props.posts.posts.map((p) => {
+                    {props.posts.map((p) => {
                         return <div key={p.id}>
                             <div className={s.postText}>{p.post}</div>
                             <div className={s.postReaction}>
