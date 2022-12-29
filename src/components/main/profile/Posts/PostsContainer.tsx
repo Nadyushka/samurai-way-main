@@ -1,14 +1,11 @@
 import React from 'react';
-import {dispatchTypes, profilePagesType} from "../../../../redux/state";
 import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../../redux/profile-pages-reducer";
 import Posts from "./Posts";
 import {connect} from "react-redux";
+import {AppStateType} from "../../../../redux/redux-store";
+import {profilePagesType} from "../../../../redux/state";
 
-type PropsType = {
-    posts: profilePagesType
-    newPost: string
-    dispatch: (action: dispatchTypes) => void
-}
+
 
 
 // const PostsContainer1 = (props: PropsType) => {
@@ -40,10 +37,10 @@ type PropsType = {
 //         )
 //     }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppStateType):profilePagesType => {
     return {
         posts: state.profilePages.posts,
-        newPost: state.profilePages.newPost
+        newPost: state.profilePages.newPost,
     }
 }
 

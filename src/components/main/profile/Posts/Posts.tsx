@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
-import {profilePagesType} from "../../../../redux/state";
+import {postsDataType} from "../../../../redux/state";
 
 
 type PropsType = {
     addNewPost:(newPost:string)=> void
     onChangeHandler:(text:string)=> void
     newPost: string
-    posts:profilePagesType
+    posts:postsDataType[]
 }
 
 
@@ -32,7 +32,7 @@ const Posts = (props: PropsType) => {
                     <button onClick={addNewPost}> Add posts</button>
                 </div>
                 <div className={s.post}>
-                    {props.posts.posts.map((p) => {
+                    {props.posts.map((p) => {
                         return <div key={p.id}>
                             <div className={s.postText}>{p.post}</div>
                             <div className={s.postReaction}>

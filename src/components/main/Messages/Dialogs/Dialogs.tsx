@@ -6,7 +6,7 @@ import {messageDataType} from "../../../../redux/state";
 
 
 type PropsType = {
-    onClickButtonSendHandler: ()=> void
+    onClickButtonSendHandler: (newMessageText:string)=> void
     onChangeInputHandler: (text:string)=> void
     dialogs: messageDataType[]
     newMessageText:string
@@ -15,7 +15,7 @@ type PropsType = {
 const Dialogs = (props: PropsType) => {
 
     const onClickButtonSendHandler = () => {
-        props.onClickButtonSendHandler()
+        props.onClickButtonSendHandler(props.newMessageText)
     }
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {

@@ -11,9 +11,7 @@ const renderTree = (state:pagesTypes) => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-        <App store={state}
-             dispatch={store.dispatch.bind(state)}
-        />
+        <App/>
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
