@@ -5,16 +5,16 @@ import './index.css';
 import {store} from './redux/redux-store'
 import {pagesTypes} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
-import StoreContext from "./StoreContext";
+import {Provider} from "react-redux";
 
 const renderTree = (state:pagesTypes) => {
     ReactDOM.render(
         <BrowserRouter>
-            <StoreContext.Provider value={store.getState()}>
+            <Provider store={store}>
         <App store={state}
              dispatch={store.dispatch.bind(state)}
         />
-            </StoreContext.Provider>
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );

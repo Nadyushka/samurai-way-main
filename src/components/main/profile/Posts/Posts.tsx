@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
-import {    dispatchTypes, profilePagesType} from "../../../../redux/state";
-import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../../redux/profile-pages-reducer";
+import {profilePagesType} from "../../../../redux/state";
+
 
 type PropsType = {
-    addNewPost:()=> void
+    addNewPost:(newPost:string)=> void
     onChangeHandler:(text:string)=> void
     newPost: string
     posts:profilePagesType
@@ -14,14 +14,13 @@ type PropsType = {
 const Posts = (props: PropsType) => {
 
         const addNewPost = () => {
-            props.addNewPost()
+            props.addNewPost(props.newPost)
         }
 
         const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
             let text = e.currentTarget.value
             props.onChangeHandler(text)
         }
-
 
         return (
             <div className={s.posts}>
