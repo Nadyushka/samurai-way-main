@@ -51,10 +51,15 @@ export const messagePageReducer = (state: initialStateType = initialState, actio
             id: new Date().getSeconds(),
             message: action.newMessageText,
         }
-        state.dialogs.push(newMessage)
-        state.newMessageText = ''
+        let newState = {...state, dialogs: [...state.dialogs,newMessage]}
+        newState.newMessageText = ''
+        return newState
+       // state.dialogs.push(newMessage)
+       // state.newMessageText = ''
     } else if (action.type === CHANGE_NEW_MESSAGE) {
-        state.newMessageText = action.newMessageText
+       // state.newMessageText = action.newMessageText
+        return {...state,newMessageText: action.newMessageText }
+
     }
 
     return state;

@@ -36,10 +36,13 @@ export const profilePageReducer = (state:initialStateType = initialState,action:
             likesCount: 0,
             commentsCount: 0
         }
-        state.posts.push(newPost)
-        state.newPost = ''
+       // state.posts.push(newPost)
+       // state.newPost = ''
+        return {...state, posts: [...state.posts, newPost], newPost:""}
+
     } else if (action.type === CHANGE_NEW_POST) {
-        state.newPost = action.newPostValue
+        // state.newPost = action.newPostValue
+        return {...state, newPost: action.newPostValue}
     }
 
     return state;
