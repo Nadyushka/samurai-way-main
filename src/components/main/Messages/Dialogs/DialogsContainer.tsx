@@ -4,7 +4,8 @@ import {addNewMessageActionCreator, changeNewMessageActionCreator} from "../../.
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../redux/redux-store";
-import {contactDataType, messageDataType} from "../../../../redux/state";
+import { messageDataType} from "../../../../redux/state";
+import {Dispatch} from "redux";
 
 
 //
@@ -34,6 +35,11 @@ export type mapStateToPropsType = {
     newMessageText: string
 }
 
+export type mapDispatchToPropsType = {
+    onClickButtonSendHandler: (newMessage: string)=>void
+    onChangeInputHandler: (newMessageText: string)=>void
+}
+
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         dialogs: state.messagePages.dialogs,
@@ -41,7 +47,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
     return {
         onClickButtonSendHandler:
             (newMessage: string) => {

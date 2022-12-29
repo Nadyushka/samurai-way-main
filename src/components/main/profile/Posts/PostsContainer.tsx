@@ -3,7 +3,8 @@ import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../
 import Posts from "./Posts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../redux/redux-store";
-import {profilePagesType} from "../../../../redux/state";
+import {postsDataType} from "../../../../redux/state";
+import {Dispatch} from "redux";
 
 
 
@@ -37,6 +38,19 @@ import {profilePagesType} from "../../../../redux/state";
 //         )
 //     }
 
+
+type profilePagesType = {
+    posts: postsDataType[]
+    newPost: string
+}
+
+type mapDispatchToPropsType = {
+    addNewPost: (newPost: string) => void
+    onChangeHandler:(text: string) => void
+}
+
+export type PostsPropsType = profilePagesType & mapDispatchToPropsType
+
 const mapStateToProps = (state: AppStateType):profilePagesType => {
     return {
         posts: state.profilePages.posts,
@@ -44,7 +58,8 @@ const mapStateToProps = (state: AppStateType):profilePagesType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+
+const mapDispatchToProps = (dispatch:Dispatch ):mapDispatchToPropsType => {
     return {
         addNewPost: (newPost: string) => {
             dispatch(addNewPostActionCreator(newPost))
