@@ -5,26 +5,18 @@ import './index.css';
 import {store} from './redux/redux-store'
 import {pagesTypes} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
-import StoreContext from "./StoreContext";
+import {Provider} from "react-redux";
 
-const renderTree = (state:pagesTypes) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <StoreContext.Provider value={store.getState()}>
-        <App store={state}
-             dispatch={store.dispatch.bind(state)}
-        />
-            </StoreContext.Provider>
-        </BrowserRouter>,
-        document.getElementById('root')
-    );
-}
-renderTree(store.getState())
 
-store.subscribe( () => {
-    let state = store.getState()
-    renderTree(state)
-})
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+);
+
 
 
 
