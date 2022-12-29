@@ -1,4 +1,5 @@
-import {dispatchTypes, pagesTypes, postsDataType, profilePagesType} from "./state";
+import {dispatchTypes} from "./state";
+
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
@@ -9,15 +10,25 @@ export const changeNewPostPostActionCreator = (post: string) => ({type: CHANGE_N
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
 export type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
 
-let initialState:profilePagesType = {
+
+export type postsDataType = {
+    id: number
+    post: string
+    likesCount: number
+    commentsCount: number
+}
+
+let initialState = {
     posts: [
         {id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
         {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}
-    ],
+    ] as postsDataType[],
     newPost: '',
 }
 
-export const profilePageReducer = (state = initialState,action:dispatchTypes):profilePagesType => {
+type initialStateType = typeof initialState
+
+export const profilePageReducer = (state:initialStateType = initialState,action:dispatchTypes):initialStateType => {
     if (action.type === ADD_POST) {
         let newPost: postsDataType = {
             id: new Date().getSeconds(),

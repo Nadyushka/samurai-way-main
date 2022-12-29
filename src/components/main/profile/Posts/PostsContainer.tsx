@@ -1,9 +1,8 @@
 import React from 'react';
-import {addNewPostActionCreator, changeNewPostPostActionCreator} from "../../../../redux/profile-pages-reducer";
+import {addNewPostActionCreator, changeNewPostPostActionCreator, postsDataType} from "../../../../redux/profile-pages-reducer";
 import Posts from "./Posts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../redux/redux-store";
-import {postsDataType} from "../../../../redux/state";
 import {Dispatch} from "redux";
 
 
@@ -39,19 +38,19 @@ import {Dispatch} from "redux";
 //     }
 
 
-type profilePagesType = {
+export type mapStateToProps = {
     posts: postsDataType[]
     newPost: string
 }
 
-type mapDispatchToPropsType = {
+export type mapDispatchToPropsType = {
     addNewPost: (newPost: string) => void
     onChangeHandler:(text: string) => void
 }
 
-export type PostsPropsType = profilePagesType & mapDispatchToPropsType
+export type PostsPropsType = mapStateToProps & mapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateType):profilePagesType => {
+const mapStateToProps = (state: AppStateType):mapStateToProps => {
     return {
         posts: state.profilePages.posts,
         newPost: state.profilePages.newPost,

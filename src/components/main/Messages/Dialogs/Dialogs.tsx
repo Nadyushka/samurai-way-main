@@ -1,18 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import s from './dialogs.module.css'
 import Message from "./Message/Message";
-import {messageDataType} from "../../../../redux/state";
+import {DialogsPropsType} from "./DialogsContainer";
 
 
-
-type PropsType = {
-    onClickButtonSendHandler: (newMessageText:string)=> void
-    onChangeInputHandler: (text:string)=> void
-    dialogs: messageDataType[]
-    newMessageText:string
-}
-
-const Dialogs = (props: PropsType) => {
+const Dialogs = (props: DialogsPropsType) => {
 
     const onClickButtonSendHandler = () => {
         props.onClickButtonSendHandler(props.newMessageText)

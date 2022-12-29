@@ -40,6 +40,8 @@ export type mapDispatchToPropsType = {
     onChangeInputHandler: (newMessageText: string)=>void
 }
 
+export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
+
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         dialogs: state.messagePages.dialogs,
