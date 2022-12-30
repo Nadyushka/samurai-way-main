@@ -1,19 +1,20 @@
-
-
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
-export const FollowAC = () => ({
-    type: FOLLOW
+export const FollowAC = (id:number) => ({
+    type: FOLLOW,
+    id: id
 }) as const
 
-export const UnfollowAC = () => ({
-    type: UNFOLLOW
+export const UnfollowAC = (id:number) => ({
+    type: UNFOLLOW,
+    id: id
 }) as const
 
-export const SetUsersAC = () => ({
-    type: SET_USERS
+export const SetUsersAC = (newUsers:UserType[]) => ({
+    type: SET_USERS,
+    newUsers: newUsers
 }) as const
 
 export type FollowACType = ReturnType<typeof FollowAC>
@@ -49,17 +50,29 @@ let initialState:UsersType = {
    ]
 }
 
-
-
 export const UserPageReducer = (state: UsersType = initialState, action: UsersACTypes): any => {
     switch (action.type) {
         case FOLLOW:
-            return []
-
+            return state.users.map(u => {
+                if (u.id === action.id) {
+                    return {...u,follow:true}
+                } else {
+                    return u
+                }
+            })
+        case UNFOLLOW:
+            return state.users.map(u => {
+                if (u.id === action.id) {
+                    return {...u,follow:false}
+                } else {
+                    return u
+                }
+            })
+        case SET_USERS:
+            return [...state.users, ...action.newUsers]
+        default:
+            return state
     }
-
-
-    return state;
 
 }
 
