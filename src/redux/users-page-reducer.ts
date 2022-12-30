@@ -2,17 +2,17 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
-export const FollowAC = (id:number) => ({
+export const FollowAC = (id: number) => ({
     type: FOLLOW,
     id: id
 }) as const
 
-export const UnfollowAC = (id:number) => ({
+export const UnfollowAC = (id: number) => ({
     type: UNFOLLOW,
     id: id
 }) as const
 
-export const SetUsersAC = (newUsers:UserType[]) => ({
+export const SetUsersAC = (newUsers: UserType[]) => ({
     type: SET_USERS,
     newUsers: newUsers
 }) as const
@@ -26,7 +26,7 @@ type UsersACTypes = FollowACType | UnFollowACType | SetUsers
 export type UserType = {
     id: number
     fullName: {
-        name:string
+        name: string
         surname: string
     }
     photo: string
@@ -39,15 +39,36 @@ export type UserType = {
 }
 
 type UsersType = {
-    users:UserType[]
+    users: UserType[]
 }
 
-let initialState:UsersType = {
-   users: [
-       {id: 1, fullName: {name: 'Bizon', surname:'Biz'}, photo: ' ',address:{city:'Minsk', country:'Belarus'}, follow: false, status:"I am happy"},
-       {id: 2, fullName: {name: 'Rick', surname:'R'}, photo: ' ',address:{city:'Minsk', country:'Belarus'}, follow: true, status:"I am a boss"},
-       {id: 3, fullName: {name: 'Panda', surname:'Junior'}, photo: ' ',address:{city:'Minsk', country:'Belarus'}, follow: true, status:"I am panda"}
-   ]
+let initialState: UsersType = {
+    users: [
+        {
+            id: 1,
+            fullName: {name: 'Bizon', surname: 'Biz'},
+            photo: ' ',
+            address: {city: 'Minsk', country: 'Belarus'},
+            follow: false,
+            status: "I am happy"
+        },
+        {
+            id: 2,
+            fullName: {name: 'Rick', surname: 'R'},
+            photo: ' ',
+            address: {city: 'Minsk', country: 'Belarus'},
+            follow: true,
+            status: "I am a boss"
+        },
+        {
+            id: 3,
+            fullName: {name: 'Panda', surname: 'Junior'},
+            photo: ' ',
+            address: {city: 'Minsk', country: 'Belarus'},
+            follow: true,
+            status: "I am a panda"
+        }
+    ]
 }
 
 export const UserPageReducer = (state: UsersType = initialState, action: UsersACTypes): any => {
@@ -55,7 +76,7 @@ export const UserPageReducer = (state: UsersType = initialState, action: UsersAC
         case FOLLOW:
             return state.users.map(u => {
                 if (u.id === action.id) {
-                    return {...u,follow:true}
+                    return {...u, follow: true}
                 } else {
                     return u
                 }
@@ -63,7 +84,7 @@ export const UserPageReducer = (state: UsersType = initialState, action: UsersAC
         case UNFOLLOW:
             return state.users.map(u => {
                 if (u.id === action.id) {
-                    return {...u,follow:false}
+                    return {...u, follow: false}
                 } else {
                     return u
                 }
