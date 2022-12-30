@@ -11,6 +11,9 @@ const Aside = () => {
             <div>News</div>
             <div>Music</div>
             <br/>
+            <br/>
+            <div><NavLink to='/main/users' > Users </NavLink></div>
+            <br/>
             <div>Settings</div>
         </div>
     );
