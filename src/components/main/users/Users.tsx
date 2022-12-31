@@ -1,9 +1,12 @@
 import React from 'react';
+import {PropsUsersType} from "./UsersContainer";
 
-const Users = () => {
+
+
+const Users = (props: PropsUsersType) => {
     return (
         <div>
-            Users
+
         </div>
     );
 };

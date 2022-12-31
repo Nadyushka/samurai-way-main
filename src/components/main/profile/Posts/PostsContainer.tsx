@@ -57,7 +57,6 @@ const mapStateToProps = (state: AppStateType):mapStateToProps => {
     }
 }
 
-
 const mapDispatchToProps = (dispatch:Dispatch ):mapDispatchToPropsType => {
     return {
         addNewPost: (newPost: string) => {
