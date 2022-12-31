@@ -3,6 +3,7 @@ import s from "./main.module.css"
 import Profile from "./profile/profile";
 import Messages from "./Messages/messages";
 import {Route, Switch} from "react-router-dom"
+import UsersContainer from "./users/UsersContainer";
 import Users from "./users/Users";
 
 
@@ -16,7 +17,7 @@ const Main = () => {
                 {/* <Music/> */}
                 {/* <Messages/> */}
 
-                <Route exact path="/main/users" render={() => <Users/>}/>
+                <Route exact path="/main/users" render={() => <UsersContainer/>}/>
 
                 {/* <Settings/> */}
             </Switch>

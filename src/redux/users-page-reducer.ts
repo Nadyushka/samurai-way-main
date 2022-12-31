@@ -71,7 +71,7 @@ let initialState: UsersType = {
     ]
 }
 
-export const UserPageReducer = (state: UsersType = initialState, action: UsersACTypes): any => {
+export const UserPageReducer = (state: UsersType = initialState, action: UsersACTypes): UserType[] => {
     switch (action.type) {
         case FOLLOW:
             return state.users.map(u => {
@@ -92,7 +92,7 @@ export const UserPageReducer = (state: UsersType = initialState, action: UsersAC
         case SET_USERS:
             return [...state.users, ...action.newUsers]
         default:
-            return state
+            return state.users
     }
 
 }
