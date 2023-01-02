@@ -4,6 +4,7 @@ import {FollowAC, SetUsersAC, UnfollowAC, UserType} from "../../../redux/users-p
 import {Dispatch} from "redux";
 import Users from "./Users";
 
+
 type mapStateToPropsType = {
     users: UserType[]
 }
@@ -14,11 +15,9 @@ type mapDispatchToPropsType = {
     setUsers:(newUsers: UserType[]) => void
 }
 
-export type PropsUsersType = mapStateToPropsType| mapDispatchToPropsType
-
 const mapStateToProps = (state: AppStateType):mapStateToPropsType => {
     return {
-        users: state.users
+        users: state.usersPages
     }
 }
 

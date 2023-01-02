@@ -38,12 +38,7 @@ export type UserType = {
     follow: boolean
 }
 
-type UsersType = {
-    users: UserType[]
-}
-
-let initialState: UsersType = {
-    users: [
+let initialState: UserType[] = [
         {
             id: 1,
             fullName: {name: 'Bizon', surname: 'Biz'},
@@ -68,13 +63,12 @@ let initialState: UsersType = {
             follow: true,
             status: "I am a panda"
         }
-    ]
-}
+]
 
-export const UserPageReducer = (state: UsersType = initialState, action: UsersACTypes): UserType[] => {
+export const UserPageReducer = (state: UserType[] = initialState, action: UsersACTypes): UserType[] => {
     switch (action.type) {
         case FOLLOW:
-            return state.users.map(u => {
+            return state.map(u => {
                 if (u.id === action.id) {
                     return {...u, follow: true}
                 } else {
@@ -82,7 +76,7 @@ export const UserPageReducer = (state: UsersType = initialState, action: UsersAC
                 }
             })
         case UNFOLLOW:
-            return state.users.map(u => {
+            return state.map(u => {
                 if (u.id === action.id) {
                     return {...u, follow: false}
                 } else {
@@ -90,9 +84,9 @@ export const UserPageReducer = (state: UsersType = initialState, action: UsersAC
                 }
             })
         case SET_USERS:
-            return [...state.users, ...action.newUsers]
+            return [...state, ...action.newUsers]
         default:
-            return state.users
+            return state
     }
 
 }

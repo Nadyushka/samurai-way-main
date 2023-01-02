@@ -9,7 +9,7 @@ import {UserPageReducer} from "./users-page-reducer";
 let reducer = combineReducers({
         profilePages: profilePageReducer,
         messagePages: messagePageReducer,
-        users: UserPageReducer
+        usersPages: UserPageReducer
 })
 
 export type AppStateType = ReturnType<typeof reducer>
