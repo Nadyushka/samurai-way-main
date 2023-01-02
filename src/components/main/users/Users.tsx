@@ -21,6 +21,8 @@ const Users = (props: PropsType) => {
                               address={el.address}
                               status={el.status}
                               follow={el.follow}
+                              followF={props.follow}
+                              unFollowF={props.unFollow}
                 />) })}
         </div>
     );

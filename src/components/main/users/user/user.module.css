@@ -31,11 +31,13 @@
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-left: 10px;
     border-radius: 5px;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .user_info {
