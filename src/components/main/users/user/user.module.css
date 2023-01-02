@@ -1,0 +1,19 @@
+.user img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.user {
+    margin-top: 20px;
+    display: flex;
+}
+
+.user_photo {
+    width: 25%;
+}
+
+.user_info {
+    width: 75%;
+}

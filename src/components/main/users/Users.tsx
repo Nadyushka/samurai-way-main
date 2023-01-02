@@ -17,14 +17,10 @@ const Users = (props: PropsType) => {
                 return (<User key={el.id}
                               fullName={el.fullName}
                               id={el.id}
-                              photo={el.id}
-                              photo: string
-                              address: {
-                                  city: string
-                                  country: string
-                              }
-                              status: string
-                              follow: boolean
+                              photo={el.photo}
+                              address={el.address}
+                              status={el.status}
+                              follow={el.follow}
                 />) })}
         </div>
     );

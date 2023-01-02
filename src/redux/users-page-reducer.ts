@@ -42,7 +42,7 @@ let initialState: UserType[] = [
         {
             id: 1,
             fullName: {name: 'Bizon', surname: 'Biz'},
-            photo: ' ',
+            photo: 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg',
             address: {city: 'Minsk', country: 'Belarus'},
             follow: false,
             status: "I am happy"
