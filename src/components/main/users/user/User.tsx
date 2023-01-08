@@ -10,7 +10,7 @@ type PropsType = UserType & {
 const User = (props: PropsType) => {
 
     const ButtonOnClickHandler = () => {
-        if (props.follow === true) {
+        if (props.followed === true) {
             props.unFollowF(props.id)
         } else {
             props.followF(props.id)
@@ -20,19 +20,19 @@ const User = (props: PropsType) => {
        return (
         <div className={s.user}>
             <div className={s.user_photo}>
-                <img src='https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg' alt='photo'/>
-                <button onClick={ButtonOnClickHandler}>{props.follow === false ? 'Follow' : 'Unfollow'}</button>
+                <img src={props.photos.small ? props.photos.small : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'} alt='photo'/>
+                <button onClick={ButtonOnClickHandler}>{props.followed === false ? 'Follow' : 'Unfollow'}</button>
             </div>
             <div className={s.user_info}>
                 <div className={s.user_personalData}>
                     <div className={s.user_fullName}>
-                        <span>{props.fullName.name}</span>
+                        <span>{props.name}</span>
                         <span>{' '}</span>
-                        <span>{props.fullName.surname}</span>
+                        {/*<span>{props.fullName.surname}</span>*/}
                     </div>
                     <div className={s.user_location}>
-                        <div>{props.address.city}</div>
-                        <div>{props.address.country}</div>
+                        {/*<div>{props.address.city}</div>*/}
+                        {/*<div>{props.address.country}</div>*/}
                     </div>
                 </div>
                 <div className={s.user_status}>

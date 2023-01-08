@@ -25,17 +25,14 @@ type UsersACTypes = FollowACType | UnFollowACType | SetUsers
 
 export type UserType = {
     id: number
-    fullName: {
-        name: string
-        surname: string
-    }
-    photo: string
-    address: {
-        city: string
-        country: string
+    name: string
+    uniqueUrlName?: string
+    photos: {
+        small?:string
+        large?:string
     }
     status: string
-    follow: boolean
+    followed: boolean
 }
 
 let initialState: UserType[] = []
@@ -45,7 +42,7 @@ export const UserPageReducer = (state: UserType[] = initialState, action: UsersA
         case FOLLOW:
             return state.map(u => {
                 if (u.id === action.id) {
-                    return {...u, follow: true}
+                    return {...u, followed: true}
                 } else {
                     return u
                 }
@@ -53,7 +50,7 @@ export const UserPageReducer = (state: UserType[] = initialState, action: UsersA
         case UNFOLLOW:
             return state.map(u => {
                 if (u.id === action.id) {
-                    return {...u, follow: false}
+                    return {...u, followed: false}
                 } else {
                     return u
                 }
