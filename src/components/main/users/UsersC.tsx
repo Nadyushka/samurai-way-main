@@ -12,8 +12,8 @@ type PropsType = {
 
 class Users extends React.Component<PropsType, any> {
 
-    constructor(props: PropsType) {
-        super(props);
+      
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response =>
             this.props.setUsers(response.data.items)
         )
@@ -23,7 +23,7 @@ class Users extends React.Component<PropsType, any> {
     render() {
         return (
             <div>
-                
+
                 {this.props.users.map(el => {
                     return (<User key={el.id}
                                   name={el.name}
