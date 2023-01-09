@@ -25,52 +25,24 @@ type UsersACTypes = FollowACType | UnFollowACType | SetUsers
 
 export type UserType = {
     id: number
-    fullName: {
-        name: string
-        surname: string
-    }
-    photo: string
-    address: {
-        city: string
-        country: string
+    name: string
+    uniqueUrlName?: string
+    photos: {
+        small?:string
+        large?:string
     }
     status: string
-    follow: boolean
+    followed: boolean
 }
 
-let initialState: UserType[] = [
-        {
-            id: 1,
-            fullName: {name: 'Bizon', surname: 'Biz'},
-            photo: 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg',
-            address: {city: 'Minsk', country: 'Belarus'},
-            follow: false,
-            status: "I am happy"
-        },
-        {
-            id: 2,
-            fullName: {name: 'Rick', surname: 'R'},
-            photo: ' ',
-            address: {city: 'Minsk', country: 'Belarus'},
-            follow: true,
-            status: "I am a boss"
-        },
-        {
-            id: 3,
-            fullName: {name: 'Panda', surname: 'Junior'},
-            photo: ' ',
-            address: {city: 'Minsk', country: 'Belarus'},
-            follow: true,
-            status: "I am a panda"
-        }
-]
+let initialState: UserType[] = []
 
 export const UserPageReducer = (state: UserType[] = initialState, action: UsersACTypes): UserType[] => {
     switch (action.type) {
         case FOLLOW:
             return state.map(u => {
                 if (u.id === action.id) {
-                    return {...u, follow: true}
+                    return {...u, followed: true}
                 } else {
                     return u
                 }
@@ -78,7 +50,7 @@ export const UserPageReducer = (state: UserType[] = initialState, action: UsersA
         case UNFOLLOW:
             return state.map(u => {
                 if (u.id === action.id) {
-                    return {...u, follow: false}
+                    return {...u, followed: false}
                 } else {
                     return u
                 }
