@@ -7,32 +7,32 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
-export const FollowAC = (id: number) => ({
+export const Follow = (id: number) => ({
     type: FOLLOW,
     id: id
 }) as const
 
-export const UnfollowAC = (id: number) => ({
+export const Unfollow = (id: number) => ({
     type: UNFOLLOW,
     id: id
 }) as const
 
-export const SetUsersAC = (newUsers: UserType[]) => ({
+export const SetUsers = (newUsers: UserType[]) => ({
     type: SET_USERS,
     newUsers: newUsers
 }) as const
 
-export const setCurrentPageAC = (newCurrentPage: number) => ({
+export const setCurrentPage = (newCurrentPage: number) => ({
     type: SET_CURRENT_PAGE,
     newCurrentPage: newCurrentPage
 }) as const
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+export const setTotalUsersCount = (totalUsersCount: number) => ({
     type: SET_TOTAL_USERS,
     totalUsersCount: totalUsersCount
 }) as const
 
-export const toggleIsFetchingAC = (isFetching: boolean) => ({
+export const toggleIsFetching = (isFetching: boolean) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching: isFetching
 }) as const
