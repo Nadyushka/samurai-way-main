@@ -21,7 +21,7 @@ const User = (props: PropsType) => {
     return (
         <div className={s.user}>
             <div className={s.user_photo}>
-                <NavLink to={'/profile' + props.id}>
+                <NavLink to={'/main/profile/' + props.id}>
                     <img
                         src={props.photos.small ? props.photos.small : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'}
                         alt='photo'/>

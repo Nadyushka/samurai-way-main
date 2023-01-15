@@ -1,24 +1,22 @@
 import React from 'react';
 import s from "./main.module.css"
-import Profile from "./profile/profile";
 import Messages from "./Messages/messages";
 import {Route, Switch} from "react-router-dom"
 import UsersContainerAdditional from "./users/UsersContainer";
-
-
+import ProfileContainer from "./profile/ProfileContainer";
 
 
 const Main = () => {
     return (
         <div className={s.main}>
             <Switch>
-                <Route exact path="/main/profile" render={() => <Profile/>}/>
-                <Route exact path="/main/messages" render={() => <Messages/>}/>
+                <Route path="/main/profile" render={() => <ProfileContainer/>}/>
+                <Route path="/main/messages" render={() => <Messages/>}/>
                 {/* Route exact path="/main/news" render={() => <News/>} */}
                 {/* <Music/> */}
                 {/* <Messages/> */}
 
-                <Route exact path="/main/users" render={() => <UsersContainerAdditional/>}/>
+                <Route path="/main/users" render={() => <UsersContainerAdditional/>}/>
 
                 {/* <Settings/> */}
             </Switch>

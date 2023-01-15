@@ -1,7 +1,7 @@
 import {
     dispatchAddPostType,
     dispatchChangeNewPostType,
-    profilePageReducer
+    profilePageReducer, setUsersProfileType
 } from "./profile-pages-reducer";
 
 import {
@@ -59,7 +59,7 @@ export type dispatchTypes =
     dispatchAddPostType
     | dispatchChangeNewPostType
     | addNewMessageActionCreatorType
-    | changeNewMessageActionCreatorType
+    | changeNewMessageActionCreatorType | setUsersProfileType
 
 export const store: storeType = {
     _state: {
@@ -96,7 +96,7 @@ export const store: storeType = {
         this._onChange = callback
     },
     dispatch(action) {
-        profilePageReducer(store._state.stateAll.profilePages, action)
+       // profilePageReducer(store._state.stateAll.profilePages, action)
         messagePageReducer(store._state.stateAll.messagePages, action)
         this._onChange()
     }
