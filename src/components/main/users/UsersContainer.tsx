@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {
-    Follow,
+    follow,
     setCurrentPage,
     setTotalUsersCount,
-    SetUsers, toggleIsFetching,
-    Unfollow,
+    setUsers, toggleIsFetching,
+    unfollow,
     UserType
 } from "../../../redux/users-page-reducer";
 import {Dispatch} from "redux";
@@ -72,7 +72,7 @@ type PropsType = {
     currentPage: number
     isFetching: boolean
     follow: (id: number) => void
-    unFollow: (id: number) => void
+    unfollow: (id: number) => void
     setUsers: (newUsers: UserType[]) => void
     setTotalUsersCount: (totalCount: number) => void
     setCurrentPage: (newCurrentPage: number) => void
@@ -111,7 +111,7 @@ class UsersContainer extends React.Component<PropsType, any> {
                    totalUsersCont={this.props.totalUsersCont}
                    currentPage={this.props.currentPage}
                    follow={this.props.follow}
-                   unFollow={this.props.unFollow}
+                   unfollow={this.props.unfollow}
                    changePage={this.changePage}
             />
         </>
@@ -121,12 +121,12 @@ class UsersContainer extends React.Component<PropsType, any> {
 
 const UsersContainerAdditional = connect(mapStateToProps,
     {
-        follow: Follow,
-        unFollow: Unfollow,
-        setUsers: SetUsers,
-        setCurrentPage: setCurrentPage,
-        setTotalUsersCount: setTotalUsersCount,
-        toggleIsFetching: toggleIsFetching,
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsFetching,
     }
 )(UsersContainer)
 

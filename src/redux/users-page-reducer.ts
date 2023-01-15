@@ -1,4 +1,3 @@
-import users from "../components/main/users/UsersFirst";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -7,17 +6,17 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
-export const Follow = (id: number) => ({
+export const follow = (id: number) => ({
     type: FOLLOW,
     id: id
 }) as const
 
-export const Unfollow = (id: number) => ({
+export const unfollow = (id: number) => ({
     type: UNFOLLOW,
     id: id
 }) as const
 
-export const SetUsers = (newUsers: UserType[]) => ({
+export const setUsers = (newUsers: UserType[]) => ({
     type: SET_USERS,
     newUsers: newUsers
 }) as const
@@ -37,12 +36,12 @@ export const toggleIsFetching = (isFetching: boolean) => ({
     isFetching: isFetching
 }) as const
 
-export type FollowACType = ReturnType<typeof FollowAC>
-export type UnFollowACType = ReturnType<typeof UnfollowAC>
-export type SetUsersACType = ReturnType<typeof SetUsersAC>
-export type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+export type FollowACType = ReturnType<typeof follow>
+export type UnFollowACType = ReturnType<typeof unfollow>
+export type SetUsersACType = ReturnType<typeof setUsers>
+export type SetCurrentPageACType = ReturnType<typeof setCurrentPage>
+export type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+export type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 
 type UsersACTypes =
     FollowACType

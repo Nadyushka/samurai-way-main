@@ -9,7 +9,7 @@ type PropsType = {
     totalUsersCont: number
     currentPage: number
     follow: (id: number) => void
-    unFollow: (id: number) => void
+    unfollow: (id: number) => void
     changePage:(pageNumber: number) => void
 }
 
@@ -40,7 +40,7 @@ const Users = (props:PropsType) => {
                               status={el.status}
                               followed={el.followed}
                               followF={props.follow}
-                              unFollowF={props.unFollow}
+                              unFollowF={props.unfollow}
                 />)
             })}
         </div>

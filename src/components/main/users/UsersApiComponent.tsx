@@ -9,7 +9,7 @@ type PropsType = {
     totalUsersCont: number
     currentPage: number
     follow: (id: number) => void
-    unFollow: (id: number) => void
+    unfollow: (id: number) => void
     setUsers: (newUsers: UserType[]) => void
     setTotalUsersCount: (totalCount: number) => void
     setCurrentPage: (newCurrentPage: number) => void
@@ -42,7 +42,7 @@ class UsersApiComponent extends React.Component<PropsType, any> {
                       totalUsersCont={this.props.totalUsersCont}
                       currentPage={this.props.currentPage}
                       follow={this.props.follow}
-                      unFollow={this.props.unFollow}
+                      unfollow={this.props.unfollow}
                       changePage={this.changePage}
         />
     }
