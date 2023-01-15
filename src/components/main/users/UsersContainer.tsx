@@ -16,20 +16,20 @@ import Users from "./Users";
 
 type mapStateToPropsType = {
     users: UserType[]
-    pageSize:number
+    pageSize: number
     totalUsersCont: number
     currentPage: number
 }
 
 type mapDispatchToPropsType = {
     follow: (id: number) => void
-    unFollow :(id: number) => void
-    setUsers:(newUsers: UserType[]) => void
-    setCurrentPage:(newCurrentPage: number) => void
-    setTotalUsersCount:(totalUsersCount: number) => void
+    unFollow: (id: number) => void
+    setUsers: (newUsers: UserType[]) => void
+    setCurrentPage: (newCurrentPage: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
 }
 
-const mapStateToProps = (state: AppStateType):mapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         users: state.usersPages.users,
         pageSize: state.usersPages.pageSize,
@@ -39,13 +39,23 @@ const mapStateToProps = (state: AppStateType):mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch:Dispatch): mapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        follow: (id: number) => {dispatch(FollowAC(id))},
-        unFollow: (id: number)=> {dispatch(UnfollowAC(id))},
-        setUsers: (newUsers: UserType[])=> {dispatch(SetUsersAC(newUsers))},
-        setCurrentPage: (newCurrentPage: number)=> {dispatch(setCurrentPageAC(newCurrentPage))},
-        setTotalUsersCount: (totalUsersCount: number)=> {dispatch(setTotalUsersCountAC(totalUsersCount))},
+        follow: (id: number) => {
+            dispatch(FollowAC(id))
+        },
+        unFollow: (id: number) => {
+            dispatch(UnfollowAC(id))
+        },
+        setUsers: (newUsers: UserType[]) => {
+            dispatch(SetUsersAC(newUsers))
+        },
+        setCurrentPage: (newCurrentPage: number) => {
+            dispatch(setCurrentPageAC(newCurrentPage))
+        },
+        setTotalUsersCount: (totalUsersCount: number) => {
+            dispatch(setTotalUsersCountAC(totalUsersCount))
+        },
     }
 }
 
@@ -62,7 +72,7 @@ type PropsType = {
 }
 
 class UsersContainer extends React.Component<PropsType, any> {
-    
+
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
@@ -80,14 +90,17 @@ class UsersContainer extends React.Component<PropsType, any> {
 
     render() {
 
-        return <Users users={this.props.users}
-                      pageSize={this.props.pageSize}
-                      totalUsersCont={this.props.totalUsersCont}
-                      currentPage={this.props.currentPage}
-                      follow={this.props.follow}
-                      unFollow={this.props.unFollow}
-                      changePage={this.changePage}
-        />
+        return <>
+
+            <Users users={this.props.users}
+                   pageSize={this.props.pageSize}
+                   totalUsersCont={this.props.totalUsersCont}
+                   currentPage={this.props.currentPage}
+                   follow={this.props.follow}
+                   unFollow={this.props.unFollow}
+                   changePage={this.changePage}
+            />
+        </>
     }
 }
 
