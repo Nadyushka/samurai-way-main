@@ -31,3 +31,18 @@
     font-size: 20px;
 }
 
+.aboutMe {
+    margin-bottom: 5px;
+}
+
+.jobStatus{
+    margin-bottom: 5px;
+}
+
+.contactsTitle{
+    font-weight:600
+}
+
+.info_contactsOptions{
+    font-size: 14px;
+}

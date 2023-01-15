@@ -3,13 +3,15 @@ import {dispatchTypes} from "./state";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
+const SET_PROFILE_PAGE = 'SET_PROFILE_PAGE'
 
 export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
 export const changeNewPostPostActionCreator = (post: string) => ({type: CHANGE_NEW_POST, newPostValue: post}) as const
+export const setUsersProfile = (profile: any) => ({type: SET_PROFILE_PAGE, profile: profile}) as const
 
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
 export type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
-
+export type setUsersProfileType = ReturnType<typeof setUsersProfile>
 
 export type postsDataType = {
     id: number
@@ -18,17 +20,40 @@ export type postsDataType = {
     commentsCount: number
 }
 
+export type ProfilePageType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string
+    }
+}
+
 let initialState = {
     posts: [
         {id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
         {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}
     ] as postsDataType[],
     newPost: '',
+    profile: {} as ProfilePageType,
 }
 
 type initialStateType = typeof initialState
 
-export const profilePageReducer = (state:initialStateType = initialState,action:dispatchTypes):initialStateType => {
+export const profilePageReducer = (state: initialStateType = initialState, action: dispatchTypes): initialStateType => {
     if (action.type === ADD_POST) {
         let newPost: postsDataType = {
             id: new Date().getSeconds(),
@@ -36,13 +61,12 @@ export const profilePageReducer = (state:initialStateType = initialState,action:
             likesCount: 0,
             commentsCount: 0
         }
-       // state.posts.push(newPost)
-       // state.newPost = ''
-        return {...state, posts: [...state.posts, newPost], newPost:""}
+        return {...state, posts: [...state.posts, newPost], newPost: ""}
 
     } else if (action.type === CHANGE_NEW_POST) {
-        // state.newPost = action.newPostValue
         return {...state, newPost: action.newPostValue}
+    } else if (action.type === SET_PROFILE_PAGE) {
+        return {...state, profile: action.profile}
     }
 
     return state;
