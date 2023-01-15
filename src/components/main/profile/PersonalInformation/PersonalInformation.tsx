@@ -18,13 +18,14 @@ const PersonalInformation = (props: PropsType) => {
                     <div className={s.infoName}> {'Name: ' + props.profile.fullName}</div>
                     <div className={s.aboutMe}> {'About me: ' + props.profile.aboutMe}</div>
                     <div
-                        className={s.infoCity}>{props.profile.lookingForAJob && 'Looking for a job status: ' + props.profile.lookingForAJobDescription}</div>
+                        className={s.jobStatus}>{props.profile.lookingForAJob && 'Looking for a job status: ' + props.profile.lookingForAJobDescription}</div>
                     <div className={s.info_contacts}>
-
-                        Contacts:
-                        {props.profile.contacts.facebook && <div>{props.profile.contacts.facebook}</div>}
-                        {props.profile.contacts.youtube && <div>{props.profile.contacts.youtube}</div>}
-                        {props.profile.contacts.github && <div>{props.profile.contacts.github}</div>}
+                        {props.profile.contacts && <div className={s.contactsTitle}> Contacts:</div>}
+                        <div className={s.info_contactsOptions}>
+                            {props.profile.contacts.facebook && <div>{props.profile.contacts.facebook}</div>}
+                            {props.profile.contacts.youtube && <div>{props.profile.contacts.youtube}</div>}
+                            {props.profile.contacts.github && <div>{props.profile.contacts.github}</div>}
+                        </div>
                     </div>
                 </div>
             </div>
