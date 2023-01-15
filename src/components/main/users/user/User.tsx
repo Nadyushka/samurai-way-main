@@ -1,10 +1,11 @@
 import React from 'react';
 import s from "./user.module.css"
 import {UserType} from "../../../../redux/users-page-reducer";
+import {NavLink} from "react-router-dom";
 
 type PropsType = UserType & {
     followF: (id: number) => void
-    unFollowF :(id: number) => void
+    unFollowF: (id: number) => void
 }
 
 const User = (props: PropsType) => {
@@ -17,10 +18,14 @@ const User = (props: PropsType) => {
         }
     }
 
-       return (
+    return (
         <div className={s.user}>
             <div className={s.user_photo}>
-                <img src={props.photos.small ? props.photos.small : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'} alt='photo'/>
+                <NavLink to={'/profile' + props.id}>
+                    <img
+                        src={props.photos.small ? props.photos.small : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'}
+                        alt='photo'/>
+                </NavLink>
                 <button onClick={ButtonOnClickHandler}>{props.followed === false ? 'Follow' : 'Unfollow'}</button>
             </div>
             <div className={s.user_info}>
