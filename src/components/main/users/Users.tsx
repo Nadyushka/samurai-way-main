@@ -5,6 +5,8 @@ import axios from 'axios'
 
 type PropsType = {
     users: UserType[]
+    pageSize:number
+    totalUsersCont: number
     follow: (id: number) => void
     unFollow :(id: number) => void
     setUsers:(newUsers: UserType[]) => void
@@ -21,6 +23,7 @@ const Users = (props: PropsType) => {
             )
         }
     }
+
 
 
         // props.setUsers([ {
