@@ -1,3 +1,5 @@
+import users from "../components/main/users/Users";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -35,28 +37,51 @@ export type UserType = {
     followed: boolean
 }
 
-let initialState: UserType[] = []
+type initialStateType = {
+    users: UserType[] | Array<any>
+    pageSize:number
+    totalUsersCont: number
+}
 
-export const UserPageReducer = (state: UserType[] = initialState, action: UsersACTypes): UserType[] => {
+type stateType = {
+    users: UserType[]
+    pageSize:number
+    totalUsersCont: number
+}
+
+let initialState: initialStateType = {
+    users:[],
+    pageSize: 5,
+    totalUsersCont: 5
+}
+
+
+export const UserPageReducer = (state: initialStateType = initialState, action: UsersACTypes): stateType => {
     switch (action.type) {
         case FOLLOW:
-            return state.map(u => {
-                if (u.id === action.id) {
-                    return {...u, followed: true}
-                } else {
-                    return u
-                }
-            })
+            return {...state,
+                users: state.users.map(u => {
+                    if (u.id === action.id) {
+                        return {...u, followed: true}
+                    } else {
+                        return u
+                    }
+                })
+            }
         case UNFOLLOW:
-            return state.map(u => {
-                if (u.id === action.id) {
-                    return {...u, followed: false}
-                } else {
-                    return u
-                }
-            })
+            return {...state,
+                users: state.users.map(u => {
+                    if (u.id === action.id) {
+                        return {...u, followed: false}
+                    } else {
+                        return u
+                    }
+                })
+            }
         case SET_USERS:
-            return [...state, ...action.newUsers]
+            return {...state,
+                users: [...state, ...action.newUsers]
+            }
         default:
             return state
     }
