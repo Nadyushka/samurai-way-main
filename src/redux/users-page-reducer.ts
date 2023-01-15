@@ -88,7 +88,7 @@ let initialState: initialStateType = {
     pageSize: 5,
     totalUsersCont: 0,
     currentPage: 1,
-   isFetching: false,
+   isFetching: true,
 }
 
 
