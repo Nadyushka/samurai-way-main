@@ -4,7 +4,7 @@ import Profile from "./profile/profile";
 import Messages from "./Messages/messages";
 import {Route, Switch} from "react-router-dom"
 import UsersContainer from "./users/UsersContainer";
-import Users from "./users/Users";
+import Users from "./users/UsersFirst";
 
 
 const Main = () => {

@@ -3,6 +3,7 @@ import {UserType} from "../../../redux/users-page-reducer";
 import User from './user/User';
 import axios from 'axios'
 import s from './users.module.css'
+import Users from "./Users";
 
 type PropsType = {
     users: UserType[]
@@ -16,7 +17,7 @@ type PropsType = {
     setCurrentPage: (newCurrentPage: number) => void
 }
 
-class Users extends React.Component<PropsType, any> {
+class UsersApiComponent extends React.Component<PropsType, any> {
 
 
     componentDidMount() {
@@ -30,13 +31,6 @@ class Users extends React.Component<PropsType, any> {
 
     render() {
 
-        let pagesCount = Math.ceil(this.props.totalUsersCont / this.props.pageSize)
-
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-
         const changePage = (pageNumber: number) => {
             this.props.setCurrentPage(pageNumber)
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response =>
@@ -44,28 +38,15 @@ class Users extends React.Component<PropsType, any> {
             )
         }
 
-        return (
-            <div>
-                {pages.map((p,i) => {
-                    return (
-                        <span key={i} onClick={() => changePage(p)}
-                              className={this.props.currentPage === p ? s.activePage : s.notActivePage}>{p}</span>
-                    )
-                })}
-                {this.props.users.map(el => {
-                    return (<User key={el.id}
-                                  name={el.name}
-                                  id={el.id}
-                                  photos={el.photos}
-                                  status={el.status}
-                                  followed={el.followed}
-                                  followF={this.props.follow}
-                                  unFollowF={this.props.unFollow}
-                    />)
-                })}
-            </div>
-        );
+        return <Users users={this.props.users}
+                      pageSize={this.props.pageSize}
+                      totalUsersCont={this.props.totalUsersCont}
+                      currentPage={this.props.currentPage}
+                      follow={this.props.follow}
+                      unFollow={this.props.unFollow}
+                      changePage={changePage}
+        />
     }
 }
 
-export default Users;
+export default UsersApiComponent;

@@ -1,4 +1,4 @@
-import users from "../components/main/users/Users";
+import users from "../components/main/users/UsersFirst";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
