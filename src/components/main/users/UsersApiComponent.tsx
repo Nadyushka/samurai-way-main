@@ -1,8 +1,6 @@
 import React from 'react';
 import {UserType} from "../../../redux/users-page-reducer";
-import User from './user/User';
 import axios from 'axios'
-import s from './users.module.css'
 import Users from "./Users";
 
 type PropsType = {
@@ -28,15 +26,16 @@ class UsersApiComponent extends React.Component<PropsType, any> {
         })
     }
 
+    changePage = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response =>
+            this.props.setUsers(response.data.items)
+        )
+    }
 
     render() {
 
-        const changePage = (pageNumber: number) => {
-            this.props.setCurrentPage(pageNumber)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response =>
-                this.props.setUsers(response.data.items)
-            )
-        }
+
 
         return <Users users={this.props.users}
                       pageSize={this.props.pageSize}
@@ -44,7 +43,7 @@ class UsersApiComponent extends React.Component<PropsType, any> {
                       currentPage={this.props.currentPage}
                       follow={this.props.follow}
                       unFollow={this.props.unFollow}
-                      changePage={changePage}
+                      changePage={this.changePage}
         />
     }
 }

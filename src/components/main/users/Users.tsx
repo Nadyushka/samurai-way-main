@@ -1,7 +1,6 @@
 import React from 'react';
 import {UserType} from "../../../redux/users-page-reducer";
 import User from './user/User';
-import axios from 'axios'
 import s from './users.module.css'
 
 type PropsType = {
@@ -28,7 +27,7 @@ const Users = (props:PropsType) => {
         <div>
             {pages.map((p,i) => {
                 return (
-                    <span key={i} onClick={() => props.changePage(p)}
+                    <span key={p} onClick={() => props.changePage(p)}
                           className={props.currentPage === p ? s.activePage : s.notActivePage}>{p}</span>
                 )
             })}
