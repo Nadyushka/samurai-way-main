@@ -4,11 +4,23 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {ProfilePageType, setUsersProfile} from "../../../redux/profile-pages-reducer";
 import {AppStateType} from "../../../redux/redux-store";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
-type PropsType = {
+type PathParamsType = {
+    useId: number
+}
+
+type PropsType = RouteComponentProps<> & OwnPropsType
+
+type mapStatePropsType = {
     profile: ProfilePageType | null
+}
+
+type mapsDispatchToProps = {
     setUsersProfile: (profileData: ProfilePageType) => void
 }
+
+type OwnPropsType = mapStatePropsType & mapsDispatchToProps
 
 class ProfileContainer extends React.Component<PropsType> {
 
@@ -18,6 +30,7 @@ class ProfileContainer extends React.Component<PropsType> {
             console.log(response.data.photos)
         })
     }
+
     render() {
         return (
             <Profile {...this.props} profile={this.props.profile}/>
@@ -26,9 +39,10 @@ class ProfileContainer extends React.Component<PropsType> {
 };
 
 
-let mapStateProps = (state: AppStateType) => ({
+let mapStateProps = (state: AppStateType): mapStatePropsType => ({
     profile: state.profilePages.profile
 })
 
+let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateProps, {setUsersProfile})(ProfileContainer);
+export default connect(mapStateProps, {setUsersProfile})(WithUrlDataContainerComponent);
