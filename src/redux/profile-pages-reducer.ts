@@ -7,7 +7,7 @@ const SET_PROFILE_PAGE = 'SET_PROFILE_PAGE'
 
 export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
 export const changeNewPostPostActionCreator = (post: string) => ({type: CHANGE_NEW_POST, newPostValue: post}) as const
-export const setUsersProfile = (profile: any) => ({type: SET_PROFILE_PAGE, profile: profile}) as const
+export const setUsersProfile = (profile: ProfilePageType) => ({type: SET_PROFILE_PAGE, profile: profile}) as const
 
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
 export type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
@@ -23,13 +23,13 @@ export type postsDataType = {
 export type ProfilePageType = {
     aboutMe: string,
     contacts: {
-        facebook: string | null,
-        website: string | null,
-        vk: string | null,
-        twitter: string | null,
-        instagram: string | null,
-        youtube: string | null,
-        github: string | null,
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
         mainLink: string | null
     },
     lookingForAJob: boolean,
@@ -37,21 +37,28 @@ export type ProfilePageType = {
     fullName: string,
     userId: number,
     photos: {
-        small: string,
-        large: string
+        small: string | null
+        large: string | null
     }
 }
 
-let initialState = {
+let initialState: initialStateType = {
     posts: [
         {id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
         {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}
-    ] as postsDataType[],
+    ],
     newPost: '',
-    profile: {} as ProfilePageType,
+    profile: null,
 }
 
-type initialStateType = typeof initialState
+type initialStateType = {
+    posts: postsDataType[]
+    newPost: string,
+    profile: ProfilePageType | null
+}
+
+
+
 
 export const profilePageReducer = (state: initialStateType = initialState, action: dispatchTypes): initialStateType => {
     if (action.type === ADD_POST) {
