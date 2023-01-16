@@ -7,10 +7,10 @@ import {AppStateType} from "../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type PathParamsType = {
-    useId: number
+    userId: string
 }
 
-type PropsType = RouteComponentProps<> & OwnPropsType
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 type mapStatePropsType = {
     profile: ProfilePageType | null
@@ -25,7 +25,10 @@ type OwnPropsType = mapStatePropsType & mapsDispatchToProps
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
+        let userId: string;
+        this.props.match.params.userId ? userId = this.props.match.params.userId : userId = '2'
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
             this.props.setUsersProfile(response.data)
             console.log(response.data.photos)
         })
