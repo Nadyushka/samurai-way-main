@@ -5,16 +5,31 @@ import PostsContainer from "./Posts/PostsContainer";
 import Preloader from "../../commonComponents/preloader/Preloader";
 import {ProfilePageType} from '../../../redux/profile-pages-reducer';
 
+
+// type Test = {
+//     first: boolean
+//     second: boolean
+// }
+//
+// type Name = keyof Test
+
 type PropsType = {
-    profile: ProfilePageType
+    profile: ProfilePageType | null
 }
 
 const Profile = (props: PropsType) => {
 
-
+    console.log(props.profile)
     if (!props.profile) {
         return <Preloader/>
     }
+
+
+    // const handleChange = (value: boolean, name: string) => {
+    //     const newState = {...state}
+    //     newState[name as Name] = value
+    //     setState(newState)
+    // }
 
     return (
         <div className={s.profile}>

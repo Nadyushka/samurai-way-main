@@ -1,30 +1,36 @@
 import React from 'react';
 import s from './PersonalInformation.module.css'
 import {ProfilePageType} from '../../../../redux/profile-pages-reducer';
+import Preloader from "../../../commonComponents/preloader/Preloader";
 
 type PropsType = {
-    profile: ProfilePageType
+    profile: ProfilePageType | null
 }
 
 const PersonalInformation = (props: PropsType) => {
-
+    const {profile} = props
+    // console.log('profile', profile)
 
     return (<div className={s.personalInformation}>
             <div className={s.personalInformationTitle}>Personal page</div>
             <div className={s.personalInformationInfo}>
-                <img
-                    src={props.profile.photos.small || 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flapkins.ru%2Fdog%2Fmops%2F&psig=AOvVaw2C3vMk_fCn2wu3djcdJg0p&ust=1673895063276000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCu5ZafyvwCFQAAAAAdAAAAABAE'}/>
+                <img src={
+                    profile?.photos.small
+                        ? profile.photos.small
+                        : 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fru.wallpaper.mob.org%2Fgallery%2Ftag%3D%25D0%25BC%25D0%25BE%25D0%25BF%25D1%2581%2F&psig=AOvVaw3A94uiD8oaR__AE144_gu4&ust=1673976395261000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCOD1l5TOzPwCFQAAAAAdAAAAABAE'
+                }/>
+
                 <div className={s.info}>
-                    <div className={s.infoName}> {'Name: ' + props.profile.fullName}</div>
-                    <div className={s.aboutMe}> {'About me: ' + props.profile.aboutMe}</div>
+                    <div className={s.infoName}> {'Name: ' + profile?.fullName}</div>
+                    <div className={s.aboutMe}> {'About me: ' + profile?.aboutMe}</div>
                     <div
-                        className={s.jobStatus}>{props.profile.lookingForAJob && 'Looking for a job status: ' + props.profile.lookingForAJobDescription}</div>
+                        className={s.jobStatus}>{profile?.lookingForAJob && 'Looking for a job status: ' + profile.lookingForAJobDescription}</div>
                     <div className={s.info_contacts}>
-                        {props.profile.contacts && <div className={s.contactsTitle}> Contacts:</div>}
+                        {profile?.contacts && <div className={s.contactsTitle}> Contacts:</div>}
                         <div className={s.info_contactsOptions}>
-                            {props.profile.contacts.facebook && <div>{props.profile.contacts.facebook}</div>}
-                            {props.profile.contacts.youtube && <div>{props.profile.contacts.youtube}</div>}
-                            {props.profile.contacts.github && <div>{props.profile.contacts.github}</div>}
+                            {profile?.contacts.facebook && <div>{profile.contacts.facebook}</div>}
+                            {profile?.contacts.youtube && <div>{profile.contacts.youtube}</div>}
+                            {profile?.contacts.github && <div>{profile.contacts.github}</div>}
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ const Main = () => {
     return (
         <div className={s.main}>
             <Switch>
-                <Route path="/main/profile" render={() => <ProfileContainer/>}/>
+                <Route path="/main/profile/:userId?" render={() => <ProfileContainer/>}/>
                 <Route path="/main/messages" render={() => <Messages/>}/>
                 {/* Route exact path="/main/news" render={() => <News/>} */}
                 {/* <Music/> */}
