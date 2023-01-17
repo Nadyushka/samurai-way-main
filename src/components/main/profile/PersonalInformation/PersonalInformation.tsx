@@ -31,7 +31,11 @@ const PersonalInformation = (props: PropsType) => {
                             {profile?.contacts.facebook && <div>{profile.contacts.facebook}</div>}
                             {profile?.contacts.youtube && <div>{profile.contacts.youtube}</div>}
                             {profile?.contacts.github && <div>{profile.contacts.github}</div>}
-                            {profile?.contacts.youtube && <div>{profile.contacts.youtube}</div>}
+                            {profile?.contacts.vk && <div>{profile.contacts.vk}</div>}
+                            {profile?.contacts.instagram && <div>{profile.contacts.instagram}</div>}
+                            {profile?.contacts.website && <div>{profile.contacts.website}</div>}
+                            {profile?.contacts.twitter && <div>{profile.contacts.twitter}</div>}
+                            {profile?.contacts.mainLink && <div>{profile.contacts.mainLink}</div>}
                         </div>
                     </div>
                 </div>
