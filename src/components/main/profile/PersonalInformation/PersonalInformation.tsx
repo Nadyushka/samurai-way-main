@@ -31,6 +31,7 @@ const PersonalInformation = (props: PropsType) => {
                             {profile?.contacts.facebook && <div>{profile.contacts.facebook}</div>}
                             {profile?.contacts.youtube && <div>{profile.contacts.youtube}</div>}
                             {profile?.contacts.github && <div>{profile.contacts.github}</div>}
+                            {profile?.contacts.youtube && <div>{profile.contacts.youtube}</div>}
                         </div>
                     </div>
                 </div>
