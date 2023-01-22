@@ -36,9 +36,10 @@ export const toggleIsFetching = (isFetching: boolean) => ({
     isFetching: isFetching
 }) as const
 
-export const toggleIsFollowingInProgress = (folowingInProgress: boolean) => ({
+export const toggleIsFollowingInProgress = (isFetching: boolean, id: number) => ({
     type: TOGGLE_FOLLOWING_IN_PROGRESS,
-    folowingInProgress: folowingInProgress
+    isFetching: isFetching,
+    id: id,
 }) as const
 
 export type FollowACType = ReturnType<typeof follow>
@@ -77,7 +78,7 @@ type stateType = {
     totalUsersCont: number
     currentPage: number
     isFetching: boolean
-    folowingInProgress: boolean
+    folowingInProgress: Array<any>
 }
 
 let initialState: stateType = {
@@ -86,7 +87,7 @@ let initialState: stateType = {
     totalUsersCont: 0,
     currentPage: 1,
     isFetching: true,
-    folowingInProgress: false,
+    folowingInProgress: [],
 }
 
 
@@ -137,7 +138,10 @@ export const UserPageReducer = (state: stateType = initialState, action: UsersAC
         case TOGGLE_FOLLOWING_IN_PROGRESS:
             return {
                 ...state,
-                folowingInProgress: action.folowingInProgress,
+                folowingInProgress:
+                    action.isFetching ?
+                        [...state.folowingInProgress, action.id] :
+                        state.folowingInProgress.filter(id => id !== action.id)
             }
         default:
             return state

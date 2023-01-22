@@ -12,7 +12,7 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../../commonComponents/preloader/Preloader";
-import { usersApi} from "../../../api/api";
+import {usersApi} from "../../../api/api";
 
 
 type mapStateToPropsType = {
@@ -21,7 +21,7 @@ type mapStateToPropsType = {
     totalUsersCont: number
     currentPage: number
     isFetching: boolean
-    followingInProgress:boolean
+    followingInProgress: Array<any>
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
@@ -42,14 +42,14 @@ type PropsType = {
     totalUsersCont: number
     currentPage: number
     isFetching: boolean
-    followingInProgress:boolean
+    followingInProgress: Array<any>
     follow: (id: number) => void
     unfollow: (id: number) => void
     setUsers: (newUsers: UserType[]) => void
     setTotalUsersCount: (totalCount: number) => void
     setCurrentPage: (newCurrentPage: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-    toggleIsFollowingInProgress: (isFollowing: boolean) => void
+    toggleIsFollowingInProgress: (isFollowing: boolean, id: number) => void
 }
 
 
@@ -57,25 +57,25 @@ class UsersContainer extends React.Component<PropsType, any> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        usersApi.getUsers(this.props.currentPage,this.props.pageSize)
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-            this.props.toggleIsFetching(false)
-        })
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+                this.props.toggleIsFetching(false)
+            })
     }
 
     changePage = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
 
-        usersApi.getUsers(pageNumber,this.props.pageSize)
+        usersApi.getUsers(pageNumber, this.props.pageSize)
 
             .then(data => {
-                this.props.setUsers(data.items)
-                this.props.toggleIsFetching(false)
-            }
-        )
+                    this.props.setUsers(data.items)
+                    this.props.toggleIsFetching(false)
+                }
+            )
     }
 
     render() {

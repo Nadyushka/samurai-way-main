@@ -8,10 +8,10 @@ type PropsType = {
     pageSize: number
     totalUsersCont: number
     currentPage: number
-    followingInProgress:boolean
+    followingInProgress:Array<any>
     follow: (id: number) => void
     unfollow: (id: number) => void
-    toggleIsFollowingInProgress:(isFollowing: boolean) => void
+    toggleIsFollowingInProgress:(isFollowing: boolean,id:number) => void
     changePage:(pageNumber: number) => void
 }
 
