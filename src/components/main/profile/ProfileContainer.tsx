@@ -28,7 +28,9 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId: string;
         this.props.match.params.userId ? userId = this.props.match.params.userId : userId = '2'
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {
+            withCredentials: true
+        }).then(response => {
             this.props.setUsersProfile(response.data)
             console.log(response.data.photos)
         })
@@ -40,7 +42,6 @@ class ProfileContainer extends React.Component<PropsType> {
         );
     }
 };
-
 
 let mapStateProps = (state: AppStateType): mapStatePropsType => ({
     profile: state.profilePages.profile
