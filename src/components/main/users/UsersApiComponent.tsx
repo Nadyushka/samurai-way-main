@@ -13,6 +13,8 @@ type PropsType = {
     setUsers: (newUsers: UserType[]) => void
     setTotalUsersCount: (totalCount: number) => void
     setCurrentPage: (newCurrentPage: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingInProgress: (isFollowing: boolean) => void
 }
 
 class UsersApiComponent extends React.Component<PropsType, any> {
@@ -33,19 +35,19 @@ class UsersApiComponent extends React.Component<PropsType, any> {
         )
     }
 
-    render() {
-
-
-
-        return <Users users={this.props.users}
-                      pageSize={this.props.pageSize}
-                      totalUsersCont={this.props.totalUsersCont}
-                      currentPage={this.props.currentPage}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
-                      changePage={this.changePage}
-        />
-    }
+    // render() {
+    //
+    //
+    //
+    //     // return <Users users={this.props.users}
+    //     //               pageSize={this.props.pageSize}
+    //     //               totalUsersCont={this.props.totalUsersCont}
+    //     //               currentPage={this.props.currentPage}
+    //     //               follow={this.props.follow}
+    //     //               unfollow={this.props.unfollow}
+    //     //               changePage={this.changePage}
+    //     // />
+    // }
 }
 
 export default UsersApiComponent;

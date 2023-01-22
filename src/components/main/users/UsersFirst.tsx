@@ -57,16 +57,16 @@ const Users = (props: PropsType) => {
             <br/>
             <button onClick={setUsers}>Add users</button>
             <br/>
-            {props.users.map(el=> {
-                return (<User key={el.id}
-                              name={el.name}
-                              id={el.id}
-                              photos={el.photos}
-                              status={el.status}
-                              followed={el.followed}
-                              followF={props.follow}
-                              unFollowF={props.unFollow}
-                />) })}
+            {/*{props.users.map(el=> {*/}
+            {/*    return (<User key={el.id}*/}
+            {/*                  name={el.name}*/}
+            {/*                  id={el.id}*/}
+            {/*                  photos={el.photos}*/}
+            {/*                  status={el.status}*/}
+            {/*                  followed={el.followed}*/}
+            {/*                  followF={props.follow}*/}
+            {/*                  unFollowF={props.unFollow}*/}
+            {/*    />) })}*/}
         </div>
     );
 };
