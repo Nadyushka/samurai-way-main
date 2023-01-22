@@ -43,7 +43,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 };
 
-
 let mapStateProps = (state: AppStateType): mapStatePropsType => ({
     profile: state.profilePages.profile
 })
