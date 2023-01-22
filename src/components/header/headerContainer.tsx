@@ -8,22 +8,18 @@ import {AppStateType} from "../../redux/redux-store";
 
 export type HeaderContainerType = mapStateToProsType & mapDispatchToProsType
 
-class HeaderContainer extends React.Component<HeaderContainerType, any> {
+class HeaderContainer extends React.Component<HeaderContainerType, initialStateType> {
 
     componentDidMount() {
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
             {withCredentials: true})
 
-
             .then(response => {
-        
                 if (response.data.resultCode === 0) {
                     let {id,email,login} = response.data.data;
                     this.props.setUserDataAC(id, email, login)
-
                 }
-
             })
     }
 

@@ -5,8 +5,8 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
     type: SET_USER_DATA,
     data: {
         id: id,
-        email:email,
-        login:login,
+        email: email,
+        login: login,
     }
 }) as const
 
@@ -38,7 +38,7 @@ export const authReducer = (state: initialStateType = initialState, action: setU
         case SET_USER_DATA:
             return {
                 ...state,
-               data: {...action.data},
+                data: {...action.data},
                 isFetching: true,
             }
         default:
