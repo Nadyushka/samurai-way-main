@@ -2,11 +2,12 @@ import React from 'react';
 import s from './header.module.css'
 import {NavLink} from "react-router-dom";
 import {initialStateType} from "../../redux/auth-reducer";
-import { HeaderContainerType } from './headerContainer';
 
-type propsType = HeaderContainerType
+
+type propsType = initialStateType
 
 const Header = (props: propsType) => {
+
     return (
         <div className={s.headerContainer}>
             <img
