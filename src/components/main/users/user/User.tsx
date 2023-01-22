@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./user.module.css"
 import {UserType} from "../../../../redux/users-page-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type PropsType = UserType & {
     followF: (id: number) => void
@@ -11,10 +12,30 @@ type PropsType = UserType & {
 const User = (props: PropsType) => {
 
     const ButtonOnClickHandler = () => {
-        if (props.followed === true) {
-            props.unFollowF(props.id)
+        if (props.followed === false) {
+
+            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
+                {},
+                {withCredentials: true})
+
+                .then(response => {
+                    if (response.data.resultCode === 0) {
+                        props.followF(props.id)
+                    }
+                })
+
+
         } else {
-            props.followF(props.id)
+
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
+                {withCredentials: true})
+
+                .then(response => {
+                    if (response.data.resultCode === 0) {
+                        props.unFollowF(props.id)
+                    }
+                })
+            
         }
     }
 
