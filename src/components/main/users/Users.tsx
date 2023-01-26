@@ -8,8 +8,10 @@ type PropsType = {
     pageSize: number
     totalUsersCont: number
     currentPage: number
+    followingInProgress:Array<any>
     follow: (id: number) => void
     unfollow: (id: number) => void
+    toggleIsFollowingInProgress:(isFollowing: boolean,id:number) => void
     changePage:(pageNumber: number) => void
 }
 
@@ -39,8 +41,10 @@ const Users = (props:PropsType) => {
                               photos={el.photos}
                               status={el.status}
                               followed={el.followed}
+                              followingInProgress={props.followingInProgress}
                               followF={props.follow}
                               unFollowF={props.unfollow}
+                              toggleIsFollowingInProgress={props.toggleIsFollowingInProgress}
                 />)
             })}
         </div>
