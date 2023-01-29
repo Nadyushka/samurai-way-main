@@ -52,7 +52,6 @@ type PropsType = {
     toggleIsFollowingInProgress: (isFollowing: boolean, id: number) => void
 }
 
-
 class UsersContainer extends React.Component<PropsType, any> {
 
     componentDidMount() {
