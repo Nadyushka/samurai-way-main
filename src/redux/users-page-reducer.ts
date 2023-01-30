@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersApi} from "../api/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -149,3 +152,14 @@ export const UserPageReducer = (state: stateType = initialState, action: UsersAC
 
 }
 
+export const getUsers = (currentPage:number,pageSize:number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersApi.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}

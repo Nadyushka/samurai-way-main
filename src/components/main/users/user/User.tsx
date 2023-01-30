@@ -3,12 +3,13 @@ import s from "./user.module.css"
 import {UserType} from "../../../../redux/users-page-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersApi} from "../../../../api/api";
 
 type PropsType = UserType & {
     followF: (id: number) => void
     unFollowF: (id: number) => void
     followingInProgress: Array<any>
-    toggleIsFollowingInProgress:(isFollowing: boolean,id:number) => void
+    toggleIsFollowingInProgress: (isFollowing: boolean, id: number) => void
 }
 
 const User = (props: PropsType) => {
@@ -19,27 +20,22 @@ const User = (props: PropsType) => {
 
         if (props.followed === false) {
 
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
-                {},
-                {withCredentials: true})
-
+            usersApi.follow(props.id)
                 .then(response => {
                     if (response.data.resultCode === 0) {
                         props.followF(props.id)
-                        props.toggleIsFollowingInProgress(false,props.id)
+                        props.toggleIsFollowingInProgress(false, props.id)
                     }
                 })
 
 
         } else {
 
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
-                {withCredentials: true})
-
+            usersApi.unFollow(props.id)
                 .then(response => {
                     if (response.data.resultCode === 0) {
                         props.unFollowF(props.id)
-                        props.toggleIsFollowingInProgress(false,props.id)
+                        props.toggleIsFollowingInProgress(false, props.id)
                     }
                 })
 
@@ -54,7 +50,8 @@ const User = (props: PropsType) => {
                         src={props.photos.small ? props.photos.small : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'}
                         alt='photo'/>
                 </NavLink>
-                <button disabled={props.followingInProgress.some(el=> el === props.id)} onClick={ButtonOnClickHandler}>{props.followed === false ? 'Follow' : 'Unfollow'}</button>
+                <button disabled={props.followingInProgress.some(el => el === props.id)}
+                        onClick={ButtonOnClickHandler}>{props.followed === false ? 'Follow' : 'Unfollow'}</button>
             </div>
             <div className={s.user_info}>
                 <div className={s.user_personalData}>
