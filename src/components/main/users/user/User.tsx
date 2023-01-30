@@ -2,43 +2,22 @@ import React from 'react';
 import s from "./user.module.css"
 import {UserType} from "../../../../redux/users-page-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersApi} from "../../../../api/api";
+
 
 type PropsType = UserType & {
-    followF: (id: number) => void
-    unFollowF: (id: number) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
     followingInProgress: Array<any>
-    toggleIsFollowingInProgress: (isFollowing: boolean, id: number) => void
 }
 
 const User = (props: PropsType) => {
 
     const ButtonOnClickHandler = () => {
 
-        props.toggleIsFollowingInProgress(true, props.id)
-
         if (props.followed === false) {
-
-            usersApi.follow(props.id)
-                .then(response => {
-                    if (response.data.resultCode === 0) {
-                        props.followF(props.id)
-                        props.toggleIsFollowingInProgress(false, props.id)
-                    }
-                })
-
-
+            props.follow(props.id)
         } else {
-
-            usersApi.unFollow(props.id)
-                .then(response => {
-                    if (response.data.resultCode === 0) {
-                        props.unFollowF(props.id)
-                        props.toggleIsFollowingInProgress(false, props.id)
-                    }
-                })
-
+            props.unfollow(props.id)
         }
     }
 
