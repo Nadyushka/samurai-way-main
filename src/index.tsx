@@ -3,7 +3,6 @@ import App from "./App";
 import React from "react";
 import './index.css';
 import {store} from './redux/redux-store'
-import {pagesTypes} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
