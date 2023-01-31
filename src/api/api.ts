@@ -11,12 +11,20 @@ export const usersApi = {
             .then(resolve => resolve.data)
     },
     follow: (userId: number) => {
-      return  instance.post(`follow/${userId}`)
+        return instance.post(`follow/${userId}`)
     },
     unFollow: (userId: number) => {
         return instance.delete(`follow/${userId}`)
     },
+    getProfile: (userId: string) => {
+       return instance.get(`profile/` + userId)
+    },
 }
 
+export const authApi = {
+    me: () => {
+        return  instance.get(`auth/me`)
+    }
+}
 
 
