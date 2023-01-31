@@ -1,4 +1,6 @@
 import {dispatchTypes} from "./state";
+import {Dispatch} from "redux";
+import {usersApi} from "../api/api";
 
 
 const ADD_POST = 'ADD-POST'
@@ -12,6 +14,16 @@ export const setUsersProfile = (profile: ProfilePageType) => ({type: SET_PROFILE
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
 export type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
 export type setUsersProfileType = ReturnType<typeof setUsersProfile>
+
+export const getUsersProfile = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        usersApi.getProfile(userId)
+            .then(response => {
+                    dispatch(setUsersProfile(response.data))
+                }
+            )
+    }
+}
 
 export type postsDataType = {
     id: number
@@ -56,8 +68,6 @@ type initialStateType = {
     newPost: string,
     profile: ProfilePageType | null
 }
-
-
 
 
 export const profilePageReducer = (state: initialStateType = initialState, action: dispatchTypes): initialStateType => {
