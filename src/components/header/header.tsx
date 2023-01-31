@@ -13,7 +13,7 @@ const Header = (props: propsType) => {
             <img
                 src='https://upload.wikimedia.org/wikipedia/ru/thumb/1/18/FC_Wolverhampton_Wanderers_Logo.svg/1182px-FC_Wolverhampton_Wanderers_Logo.svg.png'/>
             <div className={s.header_loginBlock}>
-                {props.isFetching ?
+                {props.isAuth ?
                    props.data.login :
                     <NavLink to={'/login'}>
                         Login

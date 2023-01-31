@@ -42,8 +42,8 @@ type mapDispatchToProsType = {
 
 const mapStateToPros = (state: AppStateType): mapStateToProsType => {
     return {
-            data: state.auth.data,
-            isFetching: state.auth.isFetching,
+        data: state.auth.data,
+        isAuth: state.auth.isAuth,
     }
 }
 
