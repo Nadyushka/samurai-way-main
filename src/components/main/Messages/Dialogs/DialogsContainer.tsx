@@ -8,31 +8,11 @@ import { messageDataType} from "../../../../redux/state";
 import {Dispatch} from "redux";
 
 
-//
-// const DialogsContainer1 = () => {
-//
-//     const onClickButtonSendHandler = () => {
-//         props.dispatch(addNewMessageActionCreator(props.newMessageText))
-//     }
-//
-//     const onChangeInputHandler = (text:string) => {
-//         props.dispatch(changeNewMessageActionCreator(text))
-//     }
-//
-//     return (
-//        <Dialogs
-//            onClickButtonSendHandler={onClickButtonSendHandler}
-//            onChangeInputHandler={onChangeInputHandler}
-//            dialogs={props.dialogs}
-//            newMessageText={props.newMessageText}
-//        />
-//     );
-// };
-
 
 export type mapStateToPropsType = {
     dialogs: messageDataType[]
     newMessageText: string
+    isAuth: boolean
 }
 
 export type mapDispatchToPropsType = {
@@ -45,7 +25,8 @@ export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         dialogs: state.messagePages.dialogs,
-        newMessageText: state.messagePages.newMessageText
+        newMessageText: state.messagePages.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 
