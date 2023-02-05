@@ -17,12 +17,12 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 export type setUserDataACType = ReturnType<typeof setUserDataAC>
 
 
-export const getUserData = () =>{
+export const getUserData = () => {
     return (dispatch: Dispatch) => {
         authApi.me()
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    let {id,email,login} = response.data.data;
+                    let {id, email, login} = response.data.data;
                     dispatch(setUserDataAC(id, email, login))
                 }
             })
@@ -50,12 +50,16 @@ let initialState: initialStateType = {
 
 
 export const authReducer = (state: initialStateType = initialState, action: setUserDataACType): initialStateType => {
+
+    debugger
+
     switch (action.type) {
         case SET_USER_DATA:
             return {
                 ...state,
-                data: {...action.data},
                 isAuth: true,
+                data: {...action.data},
+
             }
         default:
             return state;
