@@ -8,10 +8,11 @@ type PropsType = {
 }
 
 const PersonalInformation = (props: PropsType) => {
-    const {profile} = props
-    // console.log('profile', profile)
 
-    return (<div className={s.personalInformation}>
+    const {profile} = props
+
+    return (
+        <div className={s.personalInformation}>
             <div className={s.personalInformationTitle}>Personal page</div>
             <div className={s.personalInformationInfo}>
                 <img src={
@@ -23,6 +24,7 @@ const PersonalInformation = (props: PropsType) => {
                 <div className={s.info}>
                     <div className={s.infoName}> {'Name: ' + profile?.fullName}</div>
                     <div className={s.aboutMe}> {'About me: ' + profile?.aboutMe}</div>
+                    <ProfileStatus/>
                     <div
                         className={s.jobStatus}>{profile?.lookingForAJob && 'Looking for a job status: ' + profile.lookingForAJobDescription}</div>
                     <div className={s.info_contacts}>
