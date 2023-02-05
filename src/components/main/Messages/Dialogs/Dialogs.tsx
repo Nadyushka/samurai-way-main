@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './dialogs.module.css'
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
+
 
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -16,9 +16,7 @@ const Dialogs = (props: DialogsPropsType) => {
         props.onChangeInputHandler(text)
     }
 
-    if(!props.isAuth)  {return <Redirect to={'/login'}/>}
-
-    return (
+       return (
         <div className={s.dialogs}>
             <div className={s.dialogsBody}>
                 {props.dialogs.map((message) => <Message key={message.id} id={message.id} message={message.message}/>)}
