@@ -30,19 +30,14 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId: string;
         this.props.match.params.userId ? userId = this.props.match.params.userId : userId = '2'
 
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {
-        //     withCredentials: true
-        // })
-        //     usersApi.getProfile(userId)
-        //     .then(response => {
-        //     this.props.setUsersProfile(response.data)
-        // })
         this.props.getUsersProfile(userId)
     }
 
     render() {
 
-        if(!this.props.isAuth)  {return <Redirect to={'/login'}/>}
+        if (!this.props.isAuth) {
+            return <Redirect to={'/login'}/>
+        }
 
         return (
             <Profile {...this.props} profile={this.props.profile}/>

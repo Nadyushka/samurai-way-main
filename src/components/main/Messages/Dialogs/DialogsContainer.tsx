@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../../../redux/redux-store";
 import { messageDataType} from "../../../../redux/state";
 import {Dispatch} from "redux";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -40,7 +41,9 @@ const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
             dispatch(changeNewMessageActionCreator(text))
         }
     }
-}
+
+    
+if(!props.isAuth)  {return <Redirect to={'/login'}/>}
 
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
