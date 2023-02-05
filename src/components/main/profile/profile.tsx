@@ -12,7 +12,6 @@ type PropsType = {
 
 const Profile = (props: PropsType) => {
 
-    console.log(props.profile)
     if (!props.profile) {
         return <Preloader/>
     }
