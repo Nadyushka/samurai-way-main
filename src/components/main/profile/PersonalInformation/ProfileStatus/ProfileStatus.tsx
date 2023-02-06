@@ -22,7 +22,7 @@ class ProfileStatus extends React.Component<PropsType, any> {
         this.setState({
             editMode: false
         })
-        this.props.updateStatus(this.state.status ? this.state.status : ' - ')
+        this.props.updateStatus(this.state.status ? this.state.status : ' ---- ')
     }
 
     onChangeHandler(currentStatus: string) {
@@ -32,14 +32,19 @@ class ProfileStatus extends React.Component<PropsType, any> {
     }
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<any>) {
-        
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
         return <>
             {!this.state.editMode ?
                 <div onClick={this.modeEditOn}>{`Status: ` + this.state.status}</div> :
-                <input onChange={(e) => this.onChangeHandler(e.currentTarget.value)}
+                <input
+                    onChange={(e) => this.onChangeHandler(e.currentTarget.value)}
                        onBlur={this.modeEditOff}
                        value={this.state.status ? this.state.status : ''}
                        autoFocus={true}/>
