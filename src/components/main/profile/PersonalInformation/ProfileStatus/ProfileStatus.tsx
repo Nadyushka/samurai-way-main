@@ -31,6 +31,10 @@ class ProfileStatus extends React.Component<PropsType, any> {
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<any>) {
+        
+    }
+
     render() {
         return <>
             {!this.state.editMode ?
