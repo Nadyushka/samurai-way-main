@@ -6,6 +6,8 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 type PropsType = {
     profile: ProfilePageType | null
+    status: string | null
+    updateStatus: (status:string) => void
 }
 
 const PersonalInformation = (props: PropsType) => {
@@ -24,7 +26,7 @@ const PersonalInformation = (props: PropsType) => {
                 <div className={s.info}>
                     <div className={s.infoName}> {'Name: ' + profile?.fullName}</div>
                     <div className={s.aboutMe}> {'About me: ' + profile?.aboutMe}</div>
-                    <ProfileStatus status={'I am happy'}/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     <div
                         className={s.jobStatus}>{profile?.lookingForAJob && 'Looking for a job status: ' + profile.lookingForAJobDescription}</div>
                     <div className={s.info_contacts}>
