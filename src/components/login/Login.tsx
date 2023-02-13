@@ -1,7 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-
 type LoginFormType = {
     login:string
     password:string
