@@ -10,7 +10,6 @@ export const addNewMessageActionCreator = (newMessage: string) => ({
 
 export type addNewMessageActionCreatorType = ReturnType<typeof addNewMessageActionCreator>
 
-
 export type contactDataType = {
     id: number
     name: string
