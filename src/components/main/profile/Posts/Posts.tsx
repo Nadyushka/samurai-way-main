@@ -1,28 +1,25 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Posts.module.css"
 import {PostsPropsType} from "./PostsContainer";
+import {Field, Form, InjectedFormProps, reduxForm} from "redux-form";
 
 
 const Posts = (props: PostsPropsType) => {
 
-        const addNewPost = () => {
-            props.addNewPost(props.newPost)
+        const addNewPost = (values:AddPostFormType) => {
+            props.addNewPost(values.newPostBody)
         }
-
-        const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-            let text = e.currentTarget.value
-            props.onChangeHandler(text)
-        }
+        //
+        // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        //     let text = e.currentTarget.value
+        //     props.onChangeHandler(text)
+        // }
 
         return (
             <div className={s.posts}>
-                <div className={s.addInfoInput}>
-                    <input placeholder='Share your news'
-                           value={props.newPost}
-                           onChange={onChangeHandler}
-                           />
-                    <button onClick={addNewPost}> Add posts</button>
-                </div>
+
+                <AddPostFormRedux onSubmit={addNewPost}/>
+
                 <div className={s.post}>
                     {props.posts.map((p) => {
                         return <div key={p.id}>
@@ -40,3 +37,23 @@ const Posts = (props: PostsPropsType) => {
 ;
 
 export default Posts;
+
+type AddPostFormType = {
+    newPostBody: string
+}
+
+export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
+    return (
+        <div className={s.addInfoInput}>
+            <Form onSubmit={props.handleSubmit}>
+                <Field placeholder='Share your news'
+                       name={'newPostBody'}
+                       component={'input'}
+                />
+                <button> Add posts</button>
+            </Form>
+        </div>
+    )
+}
+
+const AddPostFormRedux = reduxForm<AddPostFormType>({form: 'AddMessageForm'})(AddPostForm)
