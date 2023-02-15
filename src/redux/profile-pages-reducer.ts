@@ -1,28 +1,24 @@
 import {Dispatch} from "redux";
 import {profileApi, usersApi} from "../api/api";
-import {addNewMessageActionCreatorType, changeNewMessageActionCreatorType} from "./message-page-reducer";
+import {addNewMessageActionCreatorType} from "./message-page-reducer";
 
 
 const ADD_POST = 'ADD-POST'
-const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
 const SET_PROFILE_PAGE = 'SET_PROFILE_PAGE'
 const SET_STATUS = 'SET_STATUS'
 
 export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
-export const changeNewPostPostActionCreator = (post: string) => ({type: CHANGE_NEW_POST, newPostValue: post}) as const
 export const setUsersProfile = (profile: ProfilePageType) => ({type: SET_PROFILE_PAGE, profile: profile}) as const
 export const setStatus = (status: string) => ({type: SET_STATUS, status: status}) as const
 
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
-export type dispatchChangeNewPostType = ReturnType<typeof changeNewPostPostActionCreator>
 export type setUsersProfileType = ReturnType<typeof setUsersProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 
 type dispatchTypes =
     dispatchAddPostType
-    | dispatchChangeNewPostType
     | addNewMessageActionCreatorType
-    | changeNewMessageActionCreatorType | setUsersProfileType | setStatusType
+    | setUsersProfileType | setStatusType
 
 export const getUsersProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
@@ -90,14 +86,12 @@ let initialState: initialStateType = {
         {id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
         {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}
     ],
-    newPost: '',
     profile: null,
     status: '',
 }
 
 type initialStateType = {
     posts: postsDataType[]
-    newPost: string,
     profile: ProfilePageType | null
     status: string
 }
@@ -111,10 +105,8 @@ export const profilePageReducer = (state: initialStateType = initialState, actio
             likesCount: 0,
             commentsCount: 0
         }
-        return {...state, posts: [...state.posts, newPost], newPost: ""}
+        return {...state, posts: [...state.posts, newPost]}
 
-    } else if (action.type === CHANGE_NEW_POST) {
-        return {...state, newPost: action.newPostValue}
     } else if (action.type === SET_PROFILE_PAGE) {
         return {...state, profile: action.profile}
     } else if (action.type === SET_STATUS) {
