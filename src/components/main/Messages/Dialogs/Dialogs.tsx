@@ -10,7 +10,7 @@ const Dialogs = (props: DialogsPropsType) => {
     const onClickButtonSendHandler = (values: AddMessageFormType) => {
         props.onClickButtonSendHandler(values.newMessageBody)
     }
-    
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsBody}>

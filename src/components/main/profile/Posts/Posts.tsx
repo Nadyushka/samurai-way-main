@@ -1,7 +1,8 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import s from "./Posts.module.css"
 import {PostsPropsType} from "./PostsContainer";
 import {Field, Form, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../../utils/validators";
 
 
 const Posts = (props: PostsPropsType) => {
@@ -42,6 +43,8 @@ type AddPostFormType = {
     newPostBody: string
 }
 
+const maxLength = maxLengthCreator(10)
+
 export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
     return (
         <div className={s.addInfoInput}>
@@ -49,6 +52,7 @@ export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props)
                 <Field placeholder='Share your news'
                        name={'newPostBody'}
                        component={'input'}
+                       validate={[required,maxLength]}
                 />
                 <button> Add posts</button>
             </Form>
