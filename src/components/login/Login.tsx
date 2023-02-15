@@ -1,20 +1,23 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import Textarea from "../commonComponents/FormsControl/FormsControl";
+import {required} from "../../utils/validators";
 
 type LoginFormType = {
-    login:string
-    password:string
-    rememberMe:string
+    login: string
+    password: string
+    rememberMe: string
 }
 
-const LoginForm:React.FC<InjectedFormProps<LoginFormType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
 
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field placeholder={'Login'} name={'login'} component={'input'}/>
+            <Field placeholder={'Login'} name={'login'} component={Textarea} validate={[required]}/>
         </div>
         <div>
-            <Field type={'password'} name={'password'} placeholder={'Password'} component={'input'}/>
+            <Field type={'password'} name={'password'} placeholder={'Password'} component={Textarea}
+                   validate={[required]}/>
         </div>
         <div>
             <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> Remember me
@@ -25,12 +28,12 @@ const LoginForm:React.FC<InjectedFormProps<LoginFormType>> = (props) => {
     </form>
 }
 
-const LoginReduxForm = reduxForm<LoginFormType>({form:'Login'})(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormType>({form: 'Login'})(LoginForm)
 
 
 const Login = () => {
 
-    const onSubmitHandler = (formData:LoginFormType) => {
+    const onSubmitHandler = (formData: LoginFormType) => {
         console.log(formData)
     }
 

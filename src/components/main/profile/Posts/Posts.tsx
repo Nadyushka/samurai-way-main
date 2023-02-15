@@ -3,6 +3,7 @@ import s from "./Posts.module.css"
 import {PostsPropsType} from "./PostsContainer";
 import {Field, Form, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../../utils/validators";
+import Textarea from '../../../commonComponents/FormsControl/FormsControl';
 
 
 const Posts = (props: PostsPropsType) => {
@@ -19,7 +20,7 @@ const Posts = (props: PostsPropsType) => {
         return (
             <div className={s.posts}>
 
-                <AddPostFormRedux onSubmit={addNewPost}/>
+                <AddPostFormRedux onSubmit={addNewPost} />
 
                 <div className={s.post}>
                     {props.posts.map((p) => {
@@ -51,7 +52,7 @@ export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props)
             <Form onSubmit={props.handleSubmit}>
                 <Field placeholder='Share your news'
                        name={'newPostBody'}
-                       component={'input'}
+                       component={Textarea}
                        validate={[required,maxLength]}
                 />
                 <button> Add posts</button>

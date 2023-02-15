@@ -1,11 +1,16 @@
 import React from 'react';
+import style from './FormsControl.module.css'
 
-const FormsControl = () => {
+const Textarea = (props:any) => {
+
+    const hasError = props.meta.error && props.meta.touched
+
     return (
-        <div>
-            
-        </div>
+        <>
+            <input {...props.input} {...props} className={style.textareaInput + ' ' + (hasError && style.textareaInputError)}/>
+            <div className={style.errorSpan}>{hasError && props.meta.error}</div>
+        </>
     );
 };
 
-export default FormsControl;
+export default Textarea;
