@@ -30,7 +30,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
 
 const LoginReduxForm = reduxForm<LoginFormType>({form: 'Login'})(LoginForm)
 
-
 const Login = () => {
 
     const onSubmitHandler = (formData: LoginFormType) => {
