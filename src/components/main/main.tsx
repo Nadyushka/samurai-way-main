@@ -4,7 +4,7 @@ import Messages from "./Messages/messages";
 import {Route, Switch} from "react-router-dom"
 import UsersContainerAdditional from "./users/UsersContainer";
 import ProfileContainer from "./profile/ProfileContainer";
-import Login from "../login/Login";
+import Login, {LoginContainer} from "../login/Login";
 
 
 const Main = () => {
@@ -19,7 +19,7 @@ const Main = () => {
 
                 <Route path="/main/users" render={() => <UsersContainerAdditional/>}/>
 
-                <Route path="/login" render={() => <Login/>}/>
+                <Route path="/login" render={() => <LoginContainer/>}/>
                 {/* <Settings/> */}
             </Switch>
         </div>

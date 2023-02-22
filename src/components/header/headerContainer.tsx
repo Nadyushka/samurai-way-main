@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './header'
 import axios from "axios";
 import {connect} from "react-redux";
-import {getUserData, initialStateType, setUserDataAC, setUserDataACType} from "../../redux/auth-reducer";
+import {getUserData, initialStateType, logout, setUserDataAC, setUserDataACType} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {authApi} from "../../api/api";
 
@@ -26,6 +26,7 @@ type mapStateToProsType = initialStateType
 
 type mapDispatchToProsType = {
     getUserData: () => void
+    logout: () => void
 }
 
 const mapStateToPros = (state: AppStateType): mapStateToProsType => {
@@ -35,4 +36,4 @@ const mapStateToPros = (state: AppStateType): mapStateToProsType => {
     }
 }
 
-export default connect(mapStateToPros, {getUserData})(HeaderContainer);
+export default connect(mapStateToPros, {getUserData, logout})(HeaderContainer);

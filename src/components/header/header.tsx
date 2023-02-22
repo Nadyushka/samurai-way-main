@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './header.module.css'
 import {NavLink} from "react-router-dom";
-import {initialStateType} from "../../redux/auth-reducer";
+import {HeaderContainerType} from "./headerContainer";
 
 
-type propsType = initialStateType
+type propsType = HeaderContainerType
 
 const Header = (props: propsType) => {
 
@@ -14,10 +14,12 @@ const Header = (props: propsType) => {
                 src='https://upload.wikimedia.org/wikipedia/ru/thumb/1/18/FC_Wolverhampton_Wanderers_Logo.svg/1182px-FC_Wolverhampton_Wanderers_Logo.svg.png'/>
             <div className={s.header_loginBlock}>
                 {props.isAuth ?
-                   props.data.login :
+                    <div>
+                        <div>{props.data.login} </div>
+                        - <button onClick={props.logout}>Log out</button>
+                    </div> :
                     <NavLink to={'/login'}>
-                        Login
-                    </NavLink>}
+                        Login</NavLink>}
 
             </div>
         </div>
