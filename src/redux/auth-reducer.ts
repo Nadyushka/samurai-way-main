@@ -41,7 +41,7 @@ export const login = (email: string, password: string, rememberMe: boolean = fal
                     dispatch(setUserDataAC(id, email, login, true))
                 } else {
                     let errorMessage = response.data.messages[0].length > 0 ? response.data.messages[0] : 'Some error'
-                    dispatch(stopSubmit('login', {_error: errorMessage}))
+                    dispatch(stopSubmit("login", {_error: errorMessage}))
                 }
             })
     }

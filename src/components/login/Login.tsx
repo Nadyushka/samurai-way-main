@@ -15,6 +15,7 @@ type LoginFormType = {
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
 
+
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field placeholder={'Login'} name={'login'} component={Textarea} validate={[required]}/>
@@ -26,6 +27,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
         <div>
             <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> Remember me
         </div>
+
         {props.error && <div style={{border:'1px solid red'}}>{props.error}</div>}
         <div>
             <button>Login</button>
