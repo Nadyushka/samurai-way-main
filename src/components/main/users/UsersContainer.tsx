@@ -40,7 +40,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-
 type PropsType = {
     users: UserType[]
     pageSize: number
