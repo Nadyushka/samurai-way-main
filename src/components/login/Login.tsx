@@ -28,7 +28,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
             <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> Remember me
         </div>
 
-        {props.error && <div style={{border: '1px solid red'}}>{props.error}</div>}
+        {props.error && <div style={{color:'red'}}>{props.error}</div>}
 
         <div>
             <button>Login</button>
@@ -36,7 +36,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
     </form>
 }
 
-const LoginReduxForm = reduxForm<LoginFormType>({form: 'Login'})(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormType>({form: 'login'})(LoginForm)
 
 const Login = (props: mapDispatchToPropsType & mapStateToPropsType) => {
 

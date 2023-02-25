@@ -10,9 +10,6 @@ export type HeaderContainerType = mapStateToProsType & mapDispatchToProsType
 
 class HeaderContainer extends React.Component<HeaderContainerType, initialStateType> {
 
-    componentDidMount() {
-        this.props.getUserData()
-    }
 
     render() {
         return <Header {...this.props} />
