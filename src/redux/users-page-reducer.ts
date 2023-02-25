@@ -160,6 +160,7 @@ export const getUsers = (currentPage:number,pageSize:number) => {
                 dispatch(setUsers(data.items))
                 dispatch(setTotalUsersCount(data.totalCount))
                 dispatch(toggleIsFetching(false))
+                dispatch(setCurrentPage(currentPage))
             })
     }
 }
