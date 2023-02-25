@@ -19,7 +19,9 @@ const ProfileStatusWithHook = (props: PropsType) => {
         setNewStatus(e.currentTarget.value)
     }
 
- 
+    const onClickHandler = () => {
+        setEditMode(!editMode)
+    }
 
 
     return <>
