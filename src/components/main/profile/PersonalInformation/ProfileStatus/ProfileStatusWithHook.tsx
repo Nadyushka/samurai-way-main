@@ -10,6 +10,8 @@ const ProfileStatusWithHook = (props: PropsType) => {
     let [editMode, setEditMode] = useState(false)
     let [newStatus, setNewStatus] = useState(props.status)
 
+    
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setEditMode(!editMode)
         props.updateStatus(e.currentTarget.value)
