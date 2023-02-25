@@ -3,6 +3,7 @@ import s from './PersonalInformation.module.css'
 import {ProfilePageType} from '../../../../redux/profile-pages-reducer';
 import Preloader from "../../../commonComponents/preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusWithHook from "./ProfileStatus/ProfileStatusWithHook";
 
 type PropsType = {
     profile: ProfilePageType | null
@@ -26,7 +27,7 @@ const PersonalInformation = (props: PropsType) => {
                 <div className={s.info}>
                     <div className={s.infoName}> {'Name: ' + profile?.fullName}</div>
                     <div className={s.aboutMe}> {'About me: ' + profile?.aboutMe}</div>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                    <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus} />
                     <div
                         className={s.jobStatus}>{profile?.lookingForAJob && 'Looking for a job status: ' + profile.lookingForAJobDescription}</div>
                     <div className={s.info_contacts}>
