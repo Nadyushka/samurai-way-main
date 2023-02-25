@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type PropsType = {
     status: string | null
@@ -8,9 +8,11 @@ type PropsType = {
 const ProfileStatusWithHook = (props: PropsType) => {
 
     let [editMode, setEditMode] = useState(false)
-    let [newStatus, setNewStatus] = useState(props.status)
+    let [status, setStatus] = useState(props.status)
 
-    
+    useEffect(()=>{
+        setStatus(props.status)
+    },[props.status])
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setEditMode(!editMode)
@@ -18,7 +20,7 @@ const ProfileStatusWithHook = (props: PropsType) => {
     }
 
     const onChangeHandlerNewStatus = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewStatus(e.currentTarget.value)
+        setStatus(e.currentTarget.value)
     }
 
     const onClickHandler = () => {
@@ -32,7 +34,7 @@ const ProfileStatusWithHook = (props: PropsType) => {
             <input
                 onChange={onChangeHandlerNewStatus}
                 onBlur={onChangeHandler}
-                value={newStatus ? newStatus : ''}
+                value={status ? status : ''}
                 autoFocus={true}/>
         }
     </>
