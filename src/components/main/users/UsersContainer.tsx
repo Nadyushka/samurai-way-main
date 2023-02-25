@@ -11,7 +11,13 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../../commonComponents/preloader/Preloader";
-
+import {
+    getCurrentPageS, getFolowingInProgressS,
+    getIsFetchingS,
+    getPageSizeS,
+    getTotalUsersContS,
+    getUsersS
+} from "../../../redux/users-page-selectors";
 
 
 type mapStateToPropsType = {
@@ -25,12 +31,12 @@ type mapStateToPropsType = {
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        users: state.usersPages.users,
-        pageSize: state.usersPages.pageSize,
-        totalUsersCont: state.usersPages.totalUsersCont,
-        currentPage: state.usersPages.currentPage,
-        isFetching: state.usersPages.isFetching,
-        followingInProgress: state.usersPages.folowingInProgress,
+        users: getUsersS(state),
+        pageSize: getPageSizeS(state),
+        totalUsersCont: getTotalUsersContS(state),
+        currentPage: getCurrentPageS(state),
+        isFetching: getIsFetchingS(state),
+        followingInProgress: getFolowingInProgressS(state),
     }
 }
 
@@ -45,37 +51,17 @@ type PropsType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
     setCurrentPage: (newCurrentPage: number) => void
-    getUsers: (currentPage:number,pageSize:number)=> void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 class UsersContainer extends React.Component<PropsType, any> {
 
     componentDidMount() {
-
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-
-        // this.props.toggleIsFetching(true)
-        // usersApi.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(data.totalCount)
-        //         this.props.toggleIsFetching(false)
-        //     })
     }
 
     changePage = (pageNumber: number) => {
-
         this.props.getUsers(pageNumber, this.props.pageSize)
-
-        // this.props.toggleIsFetching(true)
-        // this.props.setCurrentPage(pageNumber)
-        //
-        // usersApi.getUsers(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //             this.props.setUsers(data.items)
-        //             this.props.toggleIsFetching(false)
-        //         }
-        //     )
     }
 
     render() {
