@@ -8,6 +8,7 @@ type propsType = HeaderContainerType
 
 const Header = (props: propsType) => {
 
+
     return (
         <div className={s.headerContainer}>
             <img

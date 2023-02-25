@@ -1,10 +1,9 @@
 import React from 'react';
 import Header from './header'
-import axios from "axios";
 import {connect} from "react-redux";
 import {getUserData, initialStateType, logout, setUserDataAC, setUserDataACType} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {authApi} from "../../api/api";
+
 
 
 export type HeaderContainerType = mapStateToProsType & mapDispatchToProsType
