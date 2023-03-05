@@ -5,7 +5,7 @@ type PropsType = {
     updateStatus: (status: string) => void
 }
 
-class ProfileStatus extends React.Component<PropsType, {editMode:boolean,status:string|null}> {
+class ProfileStatus extends React.PureComponent<PropsType, {editMode:boolean,status:string|null}> {
 
     state = {
         editMode: false,
