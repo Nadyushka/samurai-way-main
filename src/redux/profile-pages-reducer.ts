@@ -4,21 +4,24 @@ import {addNewMessageActionCreatorType} from "./message-page-reducer";
 
 
 const ADD_POST = 'ADD-POST'
+const DELETE_POST = 'DELETE_POST'
 const SET_PROFILE_PAGE = 'SET_PROFILE_PAGE'
 const SET_STATUS = 'SET_STATUS'
 
 export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
+export const postDeleteActionCreator = (postId: number) => ({type: DELETE_POST, postId: postId}) as const
 export const setUsersProfile = (profile: ProfilePageType) => ({type: SET_PROFILE_PAGE, profile: profile}) as const
 export const setStatus = (status: string) => ({type: SET_STATUS, status: status}) as const
 
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
+export type deletePostType = ReturnType<typeof postDeleteActionCreator>
 export type setUsersProfileType = ReturnType<typeof setUsersProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 
 type dispatchTypes =
     dispatchAddPostType
     | addNewMessageActionCreatorType
-    | setUsersProfileType | setStatusType
+    | setUsersProfileType | setStatusType | deletePostType
 
 export const getUsersProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
@@ -111,6 +114,8 @@ export const profilePageReducer = (state: initialStateType = initialState, actio
         return {...state, profile: action.profile}
     } else if (action.type === SET_STATUS) {
         return {...state, status: action.status}
+    } else if (action.type === DELETE_POST) {
+        return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
     }
 
     return state;
