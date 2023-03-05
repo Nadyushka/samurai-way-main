@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import {authApi} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA'
+const SET_USER_DATA = 'samurai-way/auth/SET_USER_DATA'
 
 
 export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
@@ -20,30 +20,27 @@ export type setUserDataACType = ReturnType<typeof setUserDataAC>
 
 
 export const getUserData = () => {
-    return (dispatch: Dispatch) => {
-        return authApi.me()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let {id, email, login} = response.data.data;
-                     dispatch(setUserDataAC(id, email, login, true))
-                }
-            })
+    return async (dispatch: Dispatch) => {
+        let response = await authApi.me()
+        if (response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data;
+            dispatch(setUserDataAC(id, email, login, true))
+        }
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean = false) => {
-    return (dispatch: any) => {
-        authApi.login(email, password, rememberMe)
-            .then((response) => {
+    return async (dispatch: any) => {
+        let response = await authApi.login(email, password, rememberMe)
+        
+        if (response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data;
+            dispatch(setUserDataAC(id, email, login, true))
+        } else {
+            let errorMessage = response.data.messages[0].length > 0 ? response.data.messages[0] : 'Some error'
+            dispatch(stopSubmit("login", {_error: errorMessage}))
+        }
 
-                if (response.data.resultCode === 0) {
-                    let {id, email, login} = response.data.data;
-                    dispatch(setUserDataAC(id, email, login, true))
-                } else {
-                    let errorMessage = response.data.messages[0].length > 0 ? response.data.messages[0] : 'Some error'
-                    dispatch(stopSubmit("login", {_error: errorMessage}))
-                }
-            })
     }
 }
 
