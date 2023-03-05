@@ -28,7 +28,6 @@ const Profile = React.memo((props: PropsType) => {
             <PostsContainer/>
         </div>
     );
-
 })
 
 
