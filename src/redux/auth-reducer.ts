@@ -2,67 +2,18 @@ import {Dispatch} from "redux";
 import {authApi} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'samurai-way/auth/SET_USER_DATA'
-
-
-export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
-    type: SET_USER_DATA,
-    data: {
-        id: id,
-        email: email,
-        login: login,
-        isAuth: isAuth
+export const authReducer = (state: initialStateType = initialState, action: setUserDataACType): initialStateType => {
+    switch (action.type) {
+        case SET_USER_DATA:
+            return {
+                ...state,
+                isAuth: action.data.isAuth,
+                data: {...action.data},
+            }
+        default:
+            return state;
     }
-}) as const
 
-
-export type setUserDataACType = ReturnType<typeof setUserDataAC>
-
-
-export const getUserData = () => {
-    return async (dispatch: Dispatch) => {
-        let response = await authApi.me()
-        if (response.data.resultCode === 0) {
-            let {id, email, login} = response.data.data;
-            dispatch(setUserDataAC(id, email, login, true))
-        }
-    }
-}
-
-export const login = (email: string, password: string, rememberMe: boolean = false) => {
-    return async (dispatch: any) => {
-        let response = await authApi.login(email, password, rememberMe)
-        
-        if (response.data.resultCode === 0) {
-            let {id, email, login} = response.data.data;
-            dispatch(setUserDataAC(id, email, login, true))
-        } else {
-            let errorMessage = response.data.messages[0].length > 0 ? response.data.messages[0] : 'Some error'
-            dispatch(stopSubmit("login", {_error: errorMessage}))
-        }
-
-    }
-}
-
-export const logout = () => {
-    return (dispatch: any) => {
-        authApi.logout()
-            .then((response) => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setUserDataAC(null, null, null, false))
-                }
-            })
-    }
-}
-
-
-export type initialStateType = {
-    data: {
-        id: number | null
-        email: string | null
-        login: string | null
-    },
-    isAuth: boolean
 }
 
 let initialState: initialStateType = {
@@ -74,20 +25,64 @@ let initialState: initialStateType = {
     isAuth: false,
 }
 
+// const
 
-export const authReducer = (state: initialStateType = initialState, action: setUserDataACType): initialStateType => {
+const SET_USER_DATA = 'samurai-way/auth/SET_USER_DATA'
 
-    switch (action.type) {
-        case SET_USER_DATA:
-            return {
-                ...state,
-                isAuth: action.data.isAuth,
-                data: {...action.data},
+// action creators
 
-            }
-        default:
-            return state;
+export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
+    type: SET_USER_DATA,
+    data: {
+        id: id,
+        email: email,
+        login: login,
+        isAuth: isAuth
     }
+}) as const
 
+// thunk creators
+
+export const getUserData = () => {
+    return async (dispatch: Dispatch) => {
+        let response = await authApi.me()
+        if (response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data;
+            dispatch(setUserDataAC(id, email, login, true))
+        }
+    }
+}
+export const login = (email: string, password: string, rememberMe: boolean = false) => {
+    return async (dispatch: any) => {
+        let response = await authApi.login(email, password, rememberMe)
+        if (response.data.resultCode === 0) {
+            dispatch(getUserData())
+        } else {
+            let errorMessage = response.data.messages[0].length > 0 ? response.data.messages[0] : 'Some error'
+            dispatch(stopSubmit("login", {_error: errorMessage}))
+        }
+
+    }
+}
+export const logout = () => {
+    return async (dispatch: any) => {
+        let response = await authApi.logout()
+        if (response.data.resultCode === 0) {
+            dispatch(setUserDataAC(null, null, null, false))
+        }
+    }
 }
 
+
+// types
+
+export type setUserDataACType = ReturnType<typeof setUserDataAC>
+
+export type initialStateType = {
+    data: {
+        id: number | null
+        email: string | null
+        login: string | null
+    },
+    isAuth: boolean
+}
