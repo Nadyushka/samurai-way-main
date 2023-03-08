@@ -16,19 +16,9 @@ type LoginFormType = {
 const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({handleSubmit, error}) => {
 
     return <form onSubmit={handleSubmit}>
-        {/*{createField('Login', 'login', Textarea, [required])}*/}
-        {/*{createField('Password', 'password', Textarea, [required], {type: 'password'})}*/}
-        {/*{createField('', 'rememberMe', 'input', [], {type: 'checkbox'}, 'Remember me')}*/}
-        <div>
-            <Field placeholder={'Login'} name={'login'} component={Textarea} validate={[required]}/>
-        </div>
-        <div>
-            <Field placeholder={'Password'}  name={'password'}  component={Textarea}
-                   validate={[required]} type={'password'}/>
-        </div>
-        <div>
-            <Field name={'rememberMe'} component={'input'} type={'checkbox'}  /> Remember me
-        </div>
+        {createField('Login', 'login', Textarea, [required])}
+        {createField('Password', 'password', Textarea, [required], {type: 'password'})}
+        {createField('', 'rememberMe', 'input', [], {type: 'checkbox'}, 'Remember me')}
 
         {error && <div style={{color: 'red'}}>{error}</div>}
 
