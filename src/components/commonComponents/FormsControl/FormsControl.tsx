@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './FormsControl.module.css'
 import {Field} from "redux-form";
-import {required} from "../../../utils/validators";
 
 const Textarea = (props: any) => {
 
