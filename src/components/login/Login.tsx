@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import Textarea from "../commonComponents/FormsControl/FormsControl";
+import Textarea, {createField} from "../commonComponents/FormsControl/FormsControl";
 import {required} from "../../utils/validators";
 import {connect} from "react-redux";
 import {login} from '../../redux/auth-reducer';
@@ -13,22 +13,14 @@ type LoginFormType = {
     rememberMe: boolean
 }
 
-const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({handleSubmit, error}) => {
 
+    return <form onSubmit={handleSubmit}>
+        {createField('Login', 'login', Textarea, [required])}
+        {createField('Password', 'password', Textarea, [required], {type: 'password'})}
+        {createField('', 'rememberMe', 'input', [], {type: 'checkbox'}, 'Remember me')}
 
-    return <form onSubmit={props.handleSubmit}>
-        <div>
-            <Field placeholder={'Login'} name={'login'} component={Textarea} validate={[required]}/>
-        </div>
-        <div>
-            <Field type={'password'} name={'password'} placeholder={'Password'} component={Textarea}
-                   validate={[required]}/>
-        </div>
-        <div>
-            <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> Remember me
-        </div>
-
-        {props.error && <div style={{color:'red'}}>{props.error}</div>}
+        {error && <div style={{color: 'red'}}>{error}</div>}
 
         <div>
             <button>Login</button>
@@ -47,14 +39,12 @@ const Login = (props: mapDispatchToPropsType & mapStateToPropsType) => {
     if (props.isAuth) {
         return <Redirect to={'/main/profile'}/>
     }
-
     return (
         <div>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmitHandler}/>
         </div>
     )
-        ;
 }
 
 
@@ -67,12 +57,8 @@ type mapStateToPropsType = {
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-    return {
-        isAuth: state.auth.isAuth
-    }
+    return {isAuth: state.auth.isAuth}
 }
 
-
 export const LoginContainer = connect(mapStateToProps, {login})(Login)
-
 export default Login;

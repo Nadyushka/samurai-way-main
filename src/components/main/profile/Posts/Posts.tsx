@@ -8,35 +8,28 @@ import Textarea from '../../../commonComponents/FormsControl/FormsControl';
 
 const Posts = (props: PostsPropsType) => {
 
-        const addNewPost = (values:AddPostFormType) => {
-            props.addNewPost(values.newPostBody)
-        }
-        //
-        // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        //     let text = e.currentTarget.value
-        //     props.onChangeHandler(text)
-        // }
+    const addNewPost = (values: AddPostFormType) => props.addNewPost(values.newPostBody)
 
-        return (
-            <div className={s.posts}>
+    return (
+        <div className={s.posts}>
 
-                <AddPostFormRedux onSubmit={addNewPost} />
+            <AddPostFormRedux onSubmit={addNewPost}/>
 
-                <div className={s.post}>
-                    {props.posts.map((p) => {
-                        return <div key={p.id}>
-                            <div className={s.postText}>{p.post}</div>
-                            <div className={s.postReaction}>
-                                <div className={s.postLikes}>likes: {p.likesCount}</div>
-                                <span className={s.postComments}>Comments: {p.commentsCount}</span>
-                            </div>
+            <div className={s.post}>
+                {props.posts.map((p) => {
+                    return <div key={p.id}>
+                        <div className={s.postText}>{p.post}</div>
+                        <div className={s.postReaction}>
+                            <div className={s.postLikes}>likes: {p.likesCount}</div>
+                            <span className={s.postComments}>Comments: {p.commentsCount}</span>
                         </div>
-                    })}
-                </div>
+                    </div>
+                })}
             </div>
-        )
-    }
-;
+        </div>
+    )
+}
+
 
 export default Posts;
 
@@ -53,7 +46,7 @@ export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props)
                 <Field placeholder='Share your news'
                        name={'newPostBody'}
                        component={Textarea}
-                       validate={[required,maxLength]}
+                       validate={[required, maxLength]}
                 />
                 <button> Add posts</button>
             </Form>

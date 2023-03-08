@@ -12,11 +12,9 @@ type PropsType = {
     updateStatus: (status: string) => void
 }
 
-const Profile = React.memo((props: PropsType) => {
+const Profile = (props: PropsType) => {
 
-    if (!props.profile) {
-        return <Preloader/>
-    }
+    if (!props.profile) {return <Preloader/>}
 
     return (
         <div className={s.profile}>
@@ -28,7 +26,7 @@ const Profile = React.memo((props: PropsType) => {
             <PostsContainer/>
         </div>
     );
-})
+}
 
 
 export default Profile;
