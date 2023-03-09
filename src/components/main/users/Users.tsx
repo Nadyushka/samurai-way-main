@@ -15,7 +15,6 @@ type PropsType = {
     changePage: (pageNumber: number) => void
 }
 
-
 const Users = (props: PropsType) => {
 
     return (
