@@ -19,7 +19,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({handleSubmit, er
         {createField('Login', 'login', Textarea, [required])}
         {createField('Password', 'password', Textarea, [required], {type: 'password'})}
         {createField('', 'rememberMe', 'input', [], {type: 'checkbox'}, 'Remember me')}
-
         {error && <div style={{color: 'red'}}>{error}</div>}
 
         <div>
