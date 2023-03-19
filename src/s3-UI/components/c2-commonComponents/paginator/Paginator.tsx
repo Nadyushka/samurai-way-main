@@ -27,19 +27,19 @@ const Paginator = (props: PropsType) => {
         <div>
             {portionNumber > 1 && <button onClick={() => {
                 setPortionNumber(portionNumber - 1);
-                props.changePage(rightPortionPageNumber + 1)
+         //       props.changePage(leftPortionPageNumber - props.portionSize)
             }}>prev</button>}
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map((p, i) => {
                     return (
-                        <span key={p} onClick={() => props.changePage(p)}
+                        <span key={i} onClick={() => props.changePage(p)}
                               className={props.currentPage === p ? s.activePage : s.notActivePage}>{p}</span>
                     )
                 })}
             {portionCount > portionNumber && <button onClick={() => {
                 setPortionNumber(portionNumber + 1);
-                props.changePage(rightPortionPageNumber + 1)
+         //       props.changePage(rightPortionPageNumber + 1)
             }}>next</button>}
         </div>
     );
