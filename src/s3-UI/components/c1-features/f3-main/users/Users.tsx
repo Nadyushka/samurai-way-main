@@ -19,8 +19,11 @@ const Users = (props: PropsType) => {
 
     return (
         <div>
-            <Paginator pageSize={props.pageSize} totalUsersCont={props.totalUsersCont} currentPage={props.currentPage}
-                       changePage={props.changePage}/>
+            <Paginator pageSize={props.pageSize}
+                       currentPage={props.currentPage}
+                       changePage={props.changePage}
+                       totalItemCount={props.totalUsersCont}
+                       portionSize={10}/>
             {props.users.map(el => {
                 return (<User key={el.id}
                               name={el.name}
