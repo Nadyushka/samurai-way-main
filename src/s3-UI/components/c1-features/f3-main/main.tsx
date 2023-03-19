@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import s from "./main.module.css"
-import Messages from "./Messages/messages";
+// import Messages from "./Messages/messages";
 import {Route, Switch, withRouter} from "react-router-dom"
 import UsersContainerAdditional from "./users/UsersContainer";
 // import ProfileContainer from "./profile/ProfileContainer";
@@ -11,7 +11,8 @@ import {AppStateType} from "../../../../s2-BLL/redux-store";
 import Preloader from "../../c2-commonComponents/preloader/Preloader";
 import {initializeApp} from "../../../../s2-BLL/app-reducer";
 
-const ProfileContainer = React.lazy(()=>import("./profile/ProfileContainer"))
+const ProfileContainer = React.lazy(() => import("./profile/ProfileContainer"))
+const Messages = React.lazy(() => import("./Messages/messages"))
 
 type mapDispatchToProsType = {
     initializeApp: () => void
@@ -34,18 +35,28 @@ class Main extends React.Component<MainContainerType, any> {
         return (
             <div className={s.main}>
                 <Switch>
-                    <Suspense fallback={<div><Preloader/></div>}>
-                        <Route path="/main/profile/:userId?" render={() => <ProfileContainer/>}/>
-                        <Route path="/main/messages" render={() => <Messages/>}/>
-                        {/* Route exact path="/f3-main/news" render={() => <News/>} */}
-                        {/* <Music/> */}
-                        {/* <Messages/> */}
 
-                        <Route path="/main/users" render={() => <UsersContainerAdditional/>}/>
+                    <Route path="/main/profile/:userId?" render={() => {
+                        return (
+                            <Suspense fallback={<div><Preloader/></div>}>
+                                <ProfileContainer/>
+                            </Suspense>)
+                    }}/>
+                    <Route path="/main/messages" render={() => {
+                        return (
+                            <Suspense fallback={<div><Preloader/></div>}>
+                                <Messages/>
+                            </Suspense>)
+                    }}/>
+                    {/* Route exact path="/f3-main/news" render={() => <News/>} */}
+                    {/* <Music/> */}
+                    {/* <Messages/> */}
 
-                        <Route path="/login" render={() => <LoginContainer/>}/>
-                        {/* <Settings/> */}
-                    </Suspense>
+                    <Route path="/main/users" render={() => <UsersContainerAdditional/>}/>
+
+                    <Route path="/login" render={() => <LoginContainer/>}/>
+                    {/* <Settings/> */}
+
                 </Switch>
             </div>
 
