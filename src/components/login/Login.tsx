@@ -46,7 +46,6 @@ const Login = (props: mapDispatchToPropsType & mapStateToPropsType) => {
     )
 }
 
-
 type mapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void,
 }
