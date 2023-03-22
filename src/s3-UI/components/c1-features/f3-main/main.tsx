@@ -68,7 +68,6 @@ type mapStateToPropsType = {
     initialized: boolean
 }
 
-
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         initialized: state.app.initialized
