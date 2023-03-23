@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './App.module.css';
-import Aside from "./components/aside/aside";
-import HeaderContainer from "./components/header/headerContainer";
-import Main from "./components/main/main";
+import Aside from "./s3-UI/components/c1-features/f2-aside/aside";
+import HeaderContainer from "./s3-UI/components/c1-features/f1-header/headerContainer";
+import Main from "./s3-UI/components/c1-features/f3-main/main";
 
 
 const App = () => {
