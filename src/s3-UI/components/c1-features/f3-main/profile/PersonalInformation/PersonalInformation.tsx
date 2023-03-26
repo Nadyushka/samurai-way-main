@@ -39,7 +39,7 @@ const PersonalInformation = (props: PropsType) => {
                     <div className={s.aboutMe}> {'About me: ' + profile?.aboutMe}</div>
                     <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
                     <div
-                        className={s.jobStatus}>{profile?.lookingForAJob && 'Looking for a job status: ' + profile.lookingForAJobDescription}</div>
+                        className={s.jobStatus}>Looking for a job status:{profile?.lookingForAJob ? ' yes' : ' no'}</div>
                     <div className={s.info_contacts}>
                         {profile?.contacts && <div className={s.contactsTitle}> Contacts:</div>}
                         <div className={s.info_contactsOptions}>
