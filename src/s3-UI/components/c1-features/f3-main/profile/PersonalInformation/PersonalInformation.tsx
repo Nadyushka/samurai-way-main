@@ -1,9 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './PersonalInformation.module.css'
 import {ProfilePageType} from '../../../../../../s2-BLL/profile-pages-reducer';
 import Preloader from "../../../../c2-commonComponents/preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import ProfileStatusWithHook from "./ProfileStatus/ProfileStatusWithHook";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import ProfileEditableInfo from "./ProfileEtditableInfo/ProfileEditableInfo";
+import {profileType} from "../../../../../../s1-DAL/api";
 
 
 type PropsType = {
@@ -12,11 +15,12 @@ type PropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     onChangePhoto: (photo: File) => void
+    saveProfile: (profile: profileType) => void
 }
 
 const PersonalInformation = (props: PropsType) => {
 
-    const {profile} = props
+    const [editableMode, setEditableMode] = useState<boolean>(false)
 
     const onProfilePhotoChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -24,35 +28,39 @@ const PersonalInformation = (props: PropsType) => {
         }
     }
 
+    const buttonChangeModeHandler = () => {
+        setEditableMode(true)
+    }
+
     return (
         <div className={s.personalInformation}>
-            <div className={s.personalInformationTitle}>Personal page</div>
+            <span>Status:  </span><ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
+            <div className={s.personalInformationTitle}>Personal page
+                <button
+                    onClick={buttonChangeModeHandler}
+                    style={editableMode ? {visibility: 'hidden'} : {visibility: 'visible'}}
+                    className={s.personalInformationInfo_buttonEdit}>
+                    Edit information
+                </button>
+            </div>
             <div className={s.personalInformationInfo}>
-                <img src={
-                    profile?.photos.small
-                        ? profile.photos.small
-                        : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'
-                }/>
-                {props.isOwner && <input type={'file'} onChange={onProfilePhotoChangeInput}/>}
+                <div className={s.personalInformationInfo_edit}>
+                    <img src={
+                        props.profile?.photos.small
+                            ? props.profile.photos.small
+                            : 'https://i.pinimg.com/736x/1e/e4/9c/1ee49c569ceea55206d0c05bdaa8be32.jpg'
+                    }/>
+
+                    {props.isOwner && <input type={'file'} onChange={onProfilePhotoChangeInput}/>}
+
+                </div>
                 <div className={s.info}>
-                    <div className={s.infoName}> {'Name: ' + profile?.fullName}</div>
-                    <div className={s.aboutMe}> {'About me: ' + profile?.aboutMe}</div>
-                    <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
-                    <div
-                        className={s.jobStatus}>Looking for a job status:{profile?.lookingForAJob ? ' yes' : ' no'}</div>
-                    <div className={s.info_contacts}>
-                        {profile?.contacts && <div className={s.contactsTitle}> Contacts:</div>}
-                        <div className={s.info_contactsOptions}>
-                            {profile?.contacts.facebook && <div>{profile.contacts.facebook}</div>}
-                            {profile?.contacts.youtube && <div>{profile.contacts.youtube}</div>}
-                            {profile?.contacts.github && <div>{profile.contacts.github}</div>}
-                            {profile?.contacts.vk && <div>{profile.contacts.vk}</div>}
-                            {profile?.contacts.instagram && <div>{profile.contacts.instagram}</div>}
-                            {profile?.contacts.website && <div>{profile.contacts.website}</div>}
-                            {profile?.contacts.twitter && <div>{profile.contacts.twitter}</div>}
-                            {profile?.contacts.mainLink && <div>{profile.contacts.mainLink}</div>}
-                        </div>
-                    </div>
+
+                    <ProfileInfo profile={props.profile}/>
+                    {editableMode && <ProfileEditableInfo profile={props.profile} toggleMode={setEditableMode}
+                                                          saveProfile={props.saveProfile}/>}
+
+
                 </div>
             </div>
         </div>

@@ -6,12 +6,14 @@ import {
     getUsersProfile,
     onChangePhoto,
     ProfilePageType,
+    saveProfile,
     updateStatus
 } from "../../../../../s2-BLL/profile-pages-reducer";
 import {AppStateType} from "../../../../../s2-BLL/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {profileType} from "../../../../../s1-DAL/api";
 
 type PathParamsType = {
     userId: string
@@ -30,6 +32,7 @@ type mapsDispatchToProps = {
     getStatus: (status: string) => void,
     updateStatus: (status: string) => void,
     onChangePhoto: (photo: File) => void
+    saveProfile: (profile: profileType) => void
 }
 
 type OwnPropsType = mapStatePropsType & mapsDispatchToProps
@@ -50,7 +53,7 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
-        if ( this.props.match.params.userId !==  prevProps.match.params.userId) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
     }
@@ -63,6 +66,8 @@ class ProfileContainer extends React.Component<PropsType> {
                      updateStatus={this.props.updateStatus}
                      isOwner={!this.props.match.params.userId}
                      onChangePhoto={this.props.onChangePhoto}
+                     saveProfile={this.props.saveProfile}
+
             />
         );
     }
@@ -80,7 +85,7 @@ let mapStateProps = (state: AppStateType): mapStatePropsType => ({
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateProps, {getUsersProfile, getStatus, updateStatus,onChangePhoto}),
+    connect(mapStateProps, {getUsersProfile, getStatus, updateStatus, onChangePhoto, saveProfile}),
     withRouter,
     WithAuthRedirect,
 )(ProfileContainer)

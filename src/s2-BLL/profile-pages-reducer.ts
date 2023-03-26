@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {profileApi, usersApi} from "../s1-DAL/api";
+import {profileApi, profileType, usersApi} from "../s1-DAL/api";
 import {addNewMessageActionCreatorType} from "./message-page-reducer";
 
 
@@ -81,6 +81,16 @@ export const onChangePhoto = (photo: File) => async (dispatch: Dispatch) => {
         dispatch(setNewProfilePhoto(response.data.data.photos))
     }
 }
+
+export const saveProfile = (profile: profileType) => async (dispatch: Dispatch) => {
+    let response = await profileApi.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        let responseInfo = await profileApi.getProfile('27362')
+        dispatch(setUsersProfile(responseInfo.data))
+    }
+}
+
+
 
 
 // types

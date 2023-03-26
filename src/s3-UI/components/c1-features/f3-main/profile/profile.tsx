@@ -4,6 +4,7 @@ import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import PostsContainer from "./Posts/PostsContainer";
 import Preloader from "../../../c2-commonComponents/preloader/Preloader";
 import {ProfilePageType} from '../../../../../s2-BLL/profile-pages-reducer';
+import {profileType} from "../../../../../s1-DAL/api";
 
 
 type PropsType = {
@@ -12,6 +13,7 @@ type PropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     onChangePhoto: (photo: File) => void
+    saveProfile: (profile: profileType) => void
 }
 
 const Profile = (props: PropsType) => {
@@ -27,6 +29,7 @@ const Profile = (props: PropsType) => {
                                  updateStatus={props.updateStatus}
                                  isOwner={props.isOwner}
                                  onChangePhoto={props.onChangePhoto}
+                                 saveProfile={props.saveProfile}
             />
             <PostsContainer/>
         </div>

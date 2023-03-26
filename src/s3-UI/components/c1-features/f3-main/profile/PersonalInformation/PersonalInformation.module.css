@@ -21,10 +21,16 @@
     border-radius: 100px;
 }
 
+.personalInformationInfo_edit {
+    display: flex;
+    flex-direction: column;
+}
+
 .info {
     margin-left: 10px;
     margin-top: 10px;
 }
+
 
 .infoName {
     margin-bottom: 20px;
