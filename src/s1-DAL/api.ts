@@ -28,7 +28,7 @@ export const authApi = {
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post(`auth/login`, {email, password, rememberMe})
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`)
     }
 }
@@ -43,6 +43,36 @@ export const profileApi = {
     updateStatus(status: string) {
         return instance.put(`profile/status/`, {status})
     },
+    changePhoto(photo: File) {
+        const formData = new FormData()
+        formData.append('image', photo)
+        return instance.put(`profile/photo/`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    saveProfile(profile: profileType) {
+        debugger
+        return instance.put(`profile`, profile)
+    }
 }
 
+export type profileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    aboutMe: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+}
 
