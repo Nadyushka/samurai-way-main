@@ -30,12 +30,14 @@ const ProfileStatusWithHook = (props: PropsType) => {
 
     return <>
         {!editMode ?
-            <div onClick={onClickHandler}>{`Status: ` + props.status}</div> :
+            <span style={{display:'inline-block', padding:'5px'}} onClick={onClickHandler}>{props.status}</span> :
             <input
+                style={{display:'inline-block', padding:'5px'}}
                 onChange={onChangeHandlerNewStatus}
                 onBlur={onChangeHandler}
                 value={status ? status : ''}
                 autoFocus={true}/>
+
         }
     </>
 

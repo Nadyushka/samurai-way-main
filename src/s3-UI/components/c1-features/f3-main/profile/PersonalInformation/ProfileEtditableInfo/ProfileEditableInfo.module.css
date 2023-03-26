@@ -1,0 +1,27 @@
+
+
+.editableInfo {
+    background-color: rgb(220, 220, 220, 0.9);
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.editableInfo_container {
+    margin: 10% auto auto;
+    background-color: gray;
+    width: 60%;
+    padding: 20px;
+}
+
+.editableInfo form div label {
+    width: 130px;
+    display: inline-block;
+}
+
+.editableInfo form div input:invalid{
+    border: 2px solid red;
+}
