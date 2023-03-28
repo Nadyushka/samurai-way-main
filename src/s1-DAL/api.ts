@@ -25,8 +25,8 @@ export const authApi = {
     me: () => {
         return instance.get(`auth/me`)
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete(`auth/login`)
@@ -58,16 +58,11 @@ export const profileApi = {
     }
 }
 
-export const secureApi = {
-    me: () => {
-        return instance.get(`auth/me`)
+export const securityApi = {
+    getCaptchaUrl: () => {
+        return instance.get<{ url: string }>(`security/get-captcha-url`)
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
-    },
-    logout() {
-        return instance.delete(`auth/login`)
-    }
+
 }
 
 export type profileType = {
