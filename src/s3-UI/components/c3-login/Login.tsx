@@ -46,7 +46,6 @@ const LoginReduxForm = reduxForm<LoginFormType, LoginFormOwnProps>({form: 'login
 const Login = (props: mapDispatchToPropsType & mapStateToPropsType) => {
 
     const onSubmitHandler = (formData: LoginFormType) => {
-        console.log(formData.captchaUrl)
         props.login(formData.login, formData.password, formData.rememberMe, formData.captchaUrl)
     }
 
