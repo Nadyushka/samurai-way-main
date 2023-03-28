@@ -36,12 +36,12 @@ const PersonalInformation = (props: PropsType) => {
         <div className={s.personalInformation}>
             <span>Status:  </span><ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
             <div className={s.personalInformationTitle}>Personal page
-                <button
+                {props.isOwner &&  <button
                     onClick={buttonChangeModeHandler}
                     style={editableMode ? {visibility: 'hidden'} : {visibility: 'visible'}}
                     className={s.personalInformationInfo_buttonEdit}>
                     Edit information
-                </button>
+                </button> }
             </div>
             <div className={s.personalInformationInfo}>
                 <div className={s.personalInformationInfo_edit}>
