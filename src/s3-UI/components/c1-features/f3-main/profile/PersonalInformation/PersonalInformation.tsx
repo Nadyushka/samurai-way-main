@@ -1,8 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './PersonalInformation.module.css'
 import {ProfilePageType} from '../../../../../../s2-BLL/profile-pages-reducer';
-import Preloader from "../../../../c2-commonComponents/preloader/Preloader";
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import ProfileStatusWithHook from "./ProfileStatus/ProfileStatusWithHook";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import ProfileEditableInfo from "./ProfileEtditableInfo/ProfileEditableInfo";
