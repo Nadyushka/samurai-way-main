@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './profile.module.css'
 import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import PostsContainer from "./Posts/PostsContainer";
 import Preloader from "../../../c2-commonComponents/preloader/Preloader";
 import {ProfilePageType} from '../../../../../s2-BLL/profile-pages-reducer';
 import {profileType} from "../../../../../s1-DAL/api";
+import changeBg from '../../../../../s4-common/assets/pictures/changeBg.png'
 
 
 type PropsType = {
@@ -18,12 +19,21 @@ type PropsType = {
 
 const Profile = (props: PropsType) => {
 
-    if (!props.profile) {return <Preloader/>}
+    const [toggleChangeBg, setToggleChangeBg] = useState<boolean>(false)
+
+    if (!props.profile) {
+        return <Preloader/>
+    }
 
     return (
         <div className={s.profile}>
             <img
+                onClick={() => setToggleChangeBg(!toggleChangeBg)}
                 src='https://img.poehalisnami.kz/static/psn/hotelreviews/r326961/orig/326961_638018749523431298.jpg'/>
+            {toggleChangeBg && <div
+                className={toggleChangeBg ? `${s.profile_changeBg} ${s.profile_changeBg_active}` : `${s.profile_changeBg}`}>
+                <img src={changeBg}/>
+            </div>}
             <PersonalInformation profile={props.profile}
                                  status={props.status}
                                  updateStatus={props.updateStatus}
