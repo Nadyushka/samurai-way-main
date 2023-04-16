@@ -32,6 +32,7 @@ const Profile = (props: PropsType) => {
 
             if (file.size < 1000000) {
                 convertFileToBase64(file, fileName => setBgImage(fileName))
+                setToggleChangeBg(false)
             }
         }
     };
