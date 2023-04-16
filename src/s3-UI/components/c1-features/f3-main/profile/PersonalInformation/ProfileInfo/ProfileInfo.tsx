@@ -27,7 +27,7 @@ export const ProfileInfo = ({profile, status, updateStatus}: PropsType) => {
             </div>
             <div className={s.aboutMe}> {profile?.aboutMe}</div>
 
-            {profile?.lookingForAJob && <div style={{marginTop: '10px', marginBottom: '10px', fontWeight: 500}}>I am looking fod a job: {profile.lookingForAJobDescription}</div>}
+            {profile?.lookingForAJob && <div style={{marginTop: '10px', marginBottom: '10px', fontWeight: 500}}>I am looking for a job: {profile.lookingForAJobDescription}</div>}
 
             <div className={s.info_contacts}>
                 {Object.values(profile!.contacts).every(k => typeof k === 'string' && k.length > 0) &&

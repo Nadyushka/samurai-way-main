@@ -21,7 +21,7 @@ export const profilePageReducer = (state: initialStateType = initialState, actio
                 likesCount: 0,
                 commentsCount: 0
             }
-            return {...state, posts: [...state.posts, newPost]}
+            return {...state, posts: [newPost, ...state.posts]}
         }
         case SET_PROFILE_PAGE:
             return {...state, profile: action.profile}

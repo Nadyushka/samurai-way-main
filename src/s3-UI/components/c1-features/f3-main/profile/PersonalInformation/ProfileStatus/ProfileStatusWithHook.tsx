@@ -33,7 +33,9 @@ const ProfileStatusWithHook = (props: PropsType) => {
         {!editMode ?
 
             <span style={{display: 'inline-block', paddingBottom: '5px', cursor: 'pointer'}} onClick={onClickHandler}>
-                <span style={{display: 'inline-block', marginRight: '5px'}}>{props.status} </span>
+                {props.status!.length > 0 ?
+                    <span style={{display: 'inline-block', marginRight: '5px'}}>{props.status} </span> :
+                    <span style={{display: 'inline-block', marginRight: '5px', opacity: 0.5, fontSize: "16px"}}>Write your status here</span>}
                 <img src={statusIconEdit}/>
             </span> :
             <input
