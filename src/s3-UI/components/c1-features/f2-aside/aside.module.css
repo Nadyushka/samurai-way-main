@@ -1,8 +1,9 @@
 .aside {
     grid-area: aside;
-    background-color: yellow;
+    background-color: #7AA899;
     padding-left: 20px;
     padding-top: 20px;
+    border-radius: 10px;
 }
 
 .aside a {
