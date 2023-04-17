@@ -33,7 +33,7 @@ export const UserPageReducer = (state: stateType = initialState, action: UsersAC
         case SET_USERS:
             return {
                 ...state,
-                users: [...action.newUsers, ...state.users]
+                users: [...action.newUsers]
             }
         case SET_CURRENT_PAGE:
             return {

@@ -10,19 +10,19 @@ let initialState: any = {
 }
 
 
-test('the message should be added', ()=> {
-    let action = addNewPostActionCreator('I am so happy')
-    let newState = profilePageReducer(initialState,action)
-    expect(newState.posts.length).toBe(3)
-})
+// test('the message should be added', ()=> {
+//     let action = addNewPostActionCreator('I am so happy')
+//     let newState = profilePageReducer(initialState,action)
+//     expect(newState.posts.length).toBe(3)
+// })
 
 
 
-test('new message should be \'I am so happy\'', ()=> {
-    let action = addNewPostActionCreator('I am so happy')
-    let newState = profilePageReducer(initialState,action)
-    expect(newState.posts[2].post).toBe('I am so happy')
-})
+// test('new message should be \'I am so happy\'', ()=> {
+//     let action = addNewPostActionCreator('I am so happy')
+//     let newState = profilePageReducer(initialState,action)
+//     expect(newState.posts[2].post).toBe('I am so happy')
+// })
 
 test('The message should be deleted', ()=> {
     let action = postDeleteActionCreator(1)

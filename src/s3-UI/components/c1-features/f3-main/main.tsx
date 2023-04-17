@@ -28,14 +28,12 @@ class Main extends React.Component<MainContainerType, any> {
 
     render() {
 
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
+        if (!this.props.initialized) {return <Preloader/>}
 
         return (
             <div className={s.main}>
                 <Switch>
-
+                    <Route exact={true} path="/" render={() => <LoginContainer/>}/>
                     <Route path="/f3-main/profile/:userId?" render={() => {
                         return (
                             <Suspense fallback={<div><Preloader/></div>}>
