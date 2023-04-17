@@ -15,28 +15,6 @@ import {WithAuthRedirect} from "../../../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import {profileType} from "../../../../../s1-DAL/api";
 
-type PathParamsType = {
-    userId: string
-}
-
-type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
-
-type mapStatePropsType = {
-    profile: ProfilePageType | null
-    status: string | null
-    isAuth: boolean
-    autorizedId: number | null
-}
-type mapsDispatchToProps = {
-    getUsersProfile: (userId: string) => void,
-    getStatus: (status: string) => void,
-    updateStatus: (status: string) => void,
-    onChangePhoto: (photo: File) => void
-    saveProfile: (profile: profileType) => void
-}
-
-type OwnPropsType = mapStatePropsType & mapsDispatchToProps
-
 class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
@@ -73,9 +51,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 };
 
-// let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-//
-// export default WithAuthRedirect(connect(mapStateProps, {getUsersProfile})(WithUrlDataContainerComponent))
 
 let mapStateProps = (state: AppStateType): mapStatePropsType => ({
     profile: state.profilePages.profile,
@@ -89,3 +64,27 @@ export default compose<React.ComponentType>(
     withRouter,
     WithAuthRedirect,
 )(ProfileContainer)
+
+// types
+
+type PathParamsType = {
+    userId: string
+}
+
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
+
+type mapStatePropsType = {
+    profile: ProfilePageType | null
+    status: string | null
+    isAuth: boolean
+    autorizedId: number | null
+}
+type mapsDispatchToProps = {
+    getUsersProfile: (userId: string) => void,
+    getStatus: (status: string) => void,
+    updateStatus: (status: string) => void,
+    onChangePhoto: (photo: File) => void
+    saveProfile: (profile: profileType) => void
+}
+
+type OwnPropsType = mapStatePropsType & mapsDispatchToProps

@@ -14,30 +14,36 @@
 }
 
 .profile_changeBg {
-    position: absolute;
-    right: 20px;
-    top: 20px;
     height: 0px;
+    width: 0px;
+    position: absolute;
+    right: 40px;
+    top: 40px;
     transition: 0.5s all;
-    width: 20px;
     border-radius: 100%;
 }
 
 .profile_changeBg img {
     height: 0px;
-    transition: 0.5s all;
-    object-fit: contain;
+    width: 0px;
+    transition: 0s all;
+    object-fit: cover;
 }
 
 .profile_changeBg_active{
+    width: 20px;
     height: 20px;
+    top: 20px;
+    right: 20px;
     padding: 10px;
     background-color: white;
     transition: 0.5s all;
+    cursor: pointer;
 }
 
 .profile_changeBg_active img {
     height: 20px;
+    width: 20px;
     transition: 0.5s all;
 }
 

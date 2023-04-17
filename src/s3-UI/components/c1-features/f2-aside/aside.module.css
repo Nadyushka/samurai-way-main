@@ -8,11 +8,25 @@
 
 .aside a {
     text-decoration: none;
-    color: black;
+    color: white;
+    transition: 0.5s all;
 }
 
-.aside a:focus {
-    color: green;
+.aside a:hover {
+    color: white;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
+    transition: 0.5s all;
+}
+
+.aside a:hover {
+    color: white;
+    transition: 0.5s all;
+}
+
+.aside .activeLink, .aside .activeLink:hover{
+    color: #27263D;
+    font-size: 18px;
+    font-weight: 600;
+    transition: 0.5s all;
 }

@@ -1,29 +1,83 @@
 .personalInformation {
     margin-top: 10px;
     position: relative;
+    color: #27263D;
 }
 
 .personalInformationTitle {
     font-size: 25px;
     font-weight: 600;
+    color: #27263D;
 }
+
 
 .personalInformationInfo {
     margin-top: 10px;
     display: flex;
 }
 
+@media (max-width: 700px) {
+    .personalInformationInfo {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
 .personalInformation img {
-    width: 100px;
-    height: 100px;
+    margin-left: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: 0.5s all;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+}
+
+.personalInformation_img:hover {
+    width: 22px;
+    height: 22px;
+    transition: 0.5s all;
+    top: 2px;
+}
+
+.personalInformationInfo img {
+    position: unset;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     margin: auto 0px;
     border-radius: 100px;
+    cursor: default;
+    border: 2px solid #27263D;
+    margin-left: 20px;
+    padding: 5px;
 }
 
 .personalInformationInfo_edit {
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.personalInformationInfo_edit span {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+.personalInformationInfo_updateProfileImg img {
+    position: absolute;
+    width: 20px ;
+    height: 20px;
+    cursor: pointer;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #27263D;
+    bottom: -100px;
+    left: 0;
 }
 
 .info {
@@ -33,22 +87,60 @@
 
 
 .infoName {
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 700;
 }
+
+.infoStatus {
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
 
 .aboutMe {
     margin-bottom: 5px;
 }
 
-.jobStatus{
+.jobStatus {
     margin-bottom: 5px;
 }
 
-.contactsTitle{
-    font-weight:600
+.contactsTitle {
+    font-weight: 600
 }
 
-.info_contactsOptions{
-    font-size: 14px;
+.info_contactsOptions a {
+    padding: 2px;
+}
+
+
+.info_contactsOption img {
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.statusInfo {
+    padding: 0;
+    position: relative;
+}
+
+.statusInfo img {
+    width: 15px;
+    height: 15px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    border-radius: 0;
+}
+
+.statusInfo img:hover {
+
 }

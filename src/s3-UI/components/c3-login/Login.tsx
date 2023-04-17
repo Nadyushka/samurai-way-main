@@ -33,7 +33,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType, LoginFormOwnProps> & 
         {error && <div className={s.loginMain_error}>{error}</div>}
 
 
-        {captchaUrl && <img style={{width: '300px', height: '100px'}} src={captchaUrl}/>}
+        {captchaUrl && <img style={{width: '300px', height: '100px',margin:'0px',borderRadius:'5px'}} src={captchaUrl}/>}
         {captchaUrl && createField('Symbols from image', 'captchaUrl', 'input', [required])}
 
         <div>

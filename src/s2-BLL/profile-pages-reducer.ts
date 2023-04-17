@@ -1,13 +1,11 @@
 import {Dispatch} from "redux";
 import {profileApi, profileType, usersApi} from "../s1-DAL/api";
 import {addNewMessageActionCreatorType} from "./message-page-reducer";
+import {AppStateType} from "./redux-store";
 
 
 let initialState: initialStateType = {
-    posts: [
-        {id: 1, post: 'Hello, everyone', likesCount: 10, commentsCount: 0},
-        {id: 2, post: 'I am happy', likesCount: 13, commentsCount: 0}
-    ],
+    posts: [],
     profile: null,
     status: '',
 }
@@ -15,13 +13,7 @@ let initialState: initialStateType = {
 export const profilePageReducer = (state: initialStateType = initialState, action: dispatchTypes): initialStateType => {
     switch (action.type) {
         case ADD_POST: {
-            let newPost: postsDataType = {
-                id: new Date().getSeconds(),
-                post: action.post,
-                likesCount: 0,
-                commentsCount: 0
-            }
-            return {...state, posts: [...state.posts, newPost]}
+            return {...state, posts: action.posts.map(p=> ({...p}))}
         }
         case SET_PROFILE_PAGE:
             return {...state, profile: action.profile}
@@ -30,7 +22,9 @@ export const profilePageReducer = (state: initialStateType = initialState, actio
         case DELETE_POST:
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         case SET_NEW_PROFILE_PHOTO:
-            return { ...state, profile: {...state.profile!, photos: action.photos}}
+            return {...state, profile: {...state.profile!, photos: action.photos}}
+        case SET_POSTS_lOCAL_STORAGE:
+            return {...state, posts: action.postsLocalStorage.map(p => ({...p}))}
         default:
             return state;
     }
@@ -43,10 +37,11 @@ const DELETE_POST = 'samurai-wai/profile/DELETE_POST'
 const SET_PROFILE_PAGE = 'samurai-wai/profile/SET_PROFILE_PAGE'
 const SET_STATUS = 'samurai-wai/profile/SET_STATUS'
 const SET_NEW_PROFILE_PHOTO = 'samurai-wai/profile/SET_NEW_PROFILE_PHOTO'
+const SET_POSTS_lOCAL_STORAGE = 'samurai-wai/profile/SET_POSTS-LOCAL-STORAGE'
 
 // action creators
 
-export const addNewPostActionCreator = (newPost: string) => ({type: ADD_POST, post: newPost}) as const
+export const addNewPostActionCreator = (posts: postsDataType[]) => ({type: ADD_POST, posts}) as const
 export const postDeleteActionCreator = (postId: number) => ({type: DELETE_POST, postId: postId}) as const
 export const setUsersProfile = (profile: ProfilePageType) => ({type: SET_PROFILE_PAGE, profile: profile}) as const
 export const setStatus = (status: string) => ({type: SET_STATUS, status: status}) as const
@@ -54,6 +49,11 @@ export const setNewProfilePhoto = (photos: { small: string | null, large: string
     type: SET_NEW_PROFILE_PHOTO,
     photos
 }) as const
+export const getPosts = (postsLocalStorage: postsDataType[]) => ({
+    type: SET_POSTS_lOCAL_STORAGE,
+    postsLocalStorage
+}) as const
+
 
 // thunk creators
 
@@ -90,8 +90,26 @@ export const saveProfile = (profile: profileType) => async (dispatch: Dispatch) 
     }
 }
 
+export const addPostTC = (post: string) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+    const newPost: postsDataType = {
+        id: new Date().getSeconds(),
+        post: post,
+        likesCount: 0,
+        commentsCount: 0
+    }
+    const posts = getState().profilePages.posts
+    const newPosts = [newPost, ...posts.map(p=>({...p}))]
+    localStorage.removeItem('postsLocalStorage')
+    localStorage.setItem('postsLocalStorage', JSON.stringify(newPosts))
+    dispatch(addNewPostActionCreator(newPosts))
+}
 
-
+export const deletePostTC = (postId: number) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+    let updatedPosts = getState().profilePages.posts.filter(p => p.id !== postId)
+    localStorage.removeItem('postsLocalStorage')
+    localStorage.setItem('postsLocalStorage', JSON.stringify(updatedPosts))
+    dispatch(postDeleteActionCreator(postId))
+}
 
 // types
 
@@ -100,11 +118,13 @@ export type deletePostType = ReturnType<typeof postDeleteActionCreator>
 export type setUsersProfileType = ReturnType<typeof setUsersProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 export type setNewProfilePhotoType = ReturnType<typeof setNewProfilePhoto>
+export type setPostsLocalStorageType = ReturnType<typeof getPosts>
 
 type dispatchTypes =
     dispatchAddPostType
     | addNewMessageActionCreatorType
-    | setUsersProfileType | setStatusType | deletePostType | setNewProfilePhotoType
+    | setUsersProfileType | setStatusType | deletePostType
+    | setNewProfilePhotoType | setPostsLocalStorageType
 
 
 export type postsDataType = {
