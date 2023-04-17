@@ -41,7 +41,7 @@ const Posts = (props: PostsPropsType) => {
     }, [])
 
     const deletePostHandler = (postId: number) => {
-       props.deletePostTC(postId)
+        props.deletePostTC(postId)
     }
 
     return (
@@ -60,7 +60,8 @@ const Posts = (props: PostsPropsType) => {
                     return <div className={s.postItem} key={p.id}>
                         <div className={s.postText}>
                             <span>{p.post}</span>
-                            <img src={deleteIcon} onClick={() => deletePostHandler(p.id)}/>
+                            <img src={deleteIcon}
+                                 onClick={() => deletePostHandler(p.id)}/>
                         </div>
                         <div className={s.postReaction}>
                             <div className={s.postLikes}>likes: {p.likesCount}</div>

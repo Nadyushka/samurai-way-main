@@ -57,7 +57,7 @@ const PersonalInformation = (props: PropsType) => {
                 </div>
                 <div className={s.info}>
 
-                    <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileInfo isOwner={props.isOwner} profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
                     {editableMode && <ProfileEditableInfo profile={props.profile} toggleMode={setEditableMode}
                                                           saveProfile={props.saveProfile}/>}
 

@@ -14,20 +14,24 @@ type PropsType = {
     profile: ProfilePageType | null
     status: string | null
     updateStatus: (status: string) => void
+    isOwner: boolean
 }
 
-export const ProfileInfo = ({profile, status, updateStatus}: PropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner}: PropsType) => {
     return (
         <div>
             <div className={s.infoName} style={{fontWeight: 600}}> {profile?.fullName}</div>
             <div className={s.infoStatus}>
                 <span className={s.statusInfo}>
-                    <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
+                   {isOwner ? <ProfileStatusWithHook status={status} updateStatus={updateStatus}/> :
+                       <span> {status} </span>}
                 </span>
             </div>
             <div className={s.aboutMe}> {profile?.aboutMe}</div>
 
-            {profile?.lookingForAJob && <div style={{marginTop: '10px', marginBottom: '10px', fontWeight: 500}}>I am looking for a job: {profile.lookingForAJobDescription}</div>}
+            {profile?.lookingForAJob &&
+                <div style={{marginTop: '10px', marginBottom: '10px', fontWeight: 500}}>I am looking for a
+                    job: {profile.lookingForAJobDescription}</div>}
 
             <div className={s.info_contacts}>
                 {Object.values(profile!.contacts).every(k => typeof k === 'string' && k.length > 0) &&
