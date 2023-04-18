@@ -45,6 +45,7 @@
     font-size: 12px;
     width: 100px;
     display: inline;
+    cursor: pointer;
 }
 
 .postsInput {
@@ -70,7 +71,7 @@
     padding-left: 10px;
 }
 
-.posts button {
+.posts_button {
     margin-top: -20px;
     margin-bottom: 10px;
     height: 30px;
@@ -85,7 +86,7 @@
     cursor: pointer;
 }
 
-.posts button:hover {
+.posts_button:hover {
     background-color: royalblue;
     color: white;
 }

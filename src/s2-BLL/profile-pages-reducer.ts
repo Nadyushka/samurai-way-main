@@ -13,7 +13,10 @@ let initialState: initialStateType = {
 export const profilePageReducer = (state: initialStateType = initialState, action: dispatchTypes): initialStateType => {
     switch (action.type) {
         case ADD_POST: {
-            return {...state, posts: action.posts.map(p=> ({...p}))}
+            return {...state, posts: action.posts.map(p => ({...p}))}
+        }
+        case TOGGLE_LIKE_POST: {
+            return {...state, posts: action.posts.map(p => ({...p}))}
         }
         case SET_PROFILE_PAGE:
             return {...state, profile: action.profile}
@@ -38,6 +41,8 @@ const SET_PROFILE_PAGE = 'samurai-wai/profile/SET_PROFILE_PAGE'
 const SET_STATUS = 'samurai-wai/profile/SET_STATUS'
 const SET_NEW_PROFILE_PHOTO = 'samurai-wai/profile/SET_NEW_PROFILE_PHOTO'
 const SET_POSTS_lOCAL_STORAGE = 'samurai-wai/profile/SET_POSTS-LOCAL-STORAGE'
+const TOGGLE_LIKE_POST = 'samurai-wai/profile/TOGGLE_LIKE_POST'
+
 
 // action creators
 
@@ -53,7 +58,7 @@ export const getPosts = (postsLocalStorage: postsDataType[]) => ({
     type: SET_POSTS_lOCAL_STORAGE,
     postsLocalStorage
 }) as const
-
+export const toggleLikePostActionCreator = (posts: postsDataType[]) => ({type: TOGGLE_LIKE_POST, posts}) as const
 
 // thunk creators
 
@@ -95,10 +100,12 @@ export const addPostTC = (post: string) => async (dispatch: Dispatch, getState: 
         id: new Date().getSeconds(),
         post: post,
         likesCount: 0,
-        commentsCount: 0
+        commentsCount: 0,
+        myLike: false,
+        comments: []
     }
     const posts = getState().profilePages.posts
-    const newPosts = [newPost, ...posts.map(p=>({...p}))]
+    const newPosts = [newPost, ...posts.map(p => ({...p}))]
     localStorage.removeItem('postsLocalStorage')
     localStorage.setItem('postsLocalStorage', JSON.stringify(newPosts))
     dispatch(addNewPostActionCreator(newPosts))
@@ -111,6 +118,18 @@ export const deletePostTC = (postId: number) => async (dispatch: Dispatch, getSt
     dispatch(postDeleteActionCreator(postId))
 }
 
+export const likeMyPostTC = (postId: number, likeMyPostValue: boolean) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+    let updatedPosts = getState().profilePages.posts.map(p => p.id === postId ? {
+        ...p,
+        myLike: likeMyPostValue,
+        likesCount: p.likesCount + (likeMyPostValue ? 1 : -1)
+    } : {...p})
+    localStorage.removeItem('postsLocalStorage')
+    localStorage.setItem('postsLocalStorage', JSON.stringify(updatedPosts))
+    console.log(updatedPosts)
+    dispatch(toggleLikePostActionCreator(updatedPosts))
+}
+
 // types
 
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
@@ -119,12 +138,13 @@ export type setUsersProfileType = ReturnType<typeof setUsersProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 export type setNewProfilePhotoType = ReturnType<typeof setNewProfilePhoto>
 export type setPostsLocalStorageType = ReturnType<typeof getPosts>
+export type toggleLikePostType = ReturnType<typeof toggleLikePostActionCreator>
 
 type dispatchTypes =
     dispatchAddPostType
     | addNewMessageActionCreatorType
     | setUsersProfileType | setStatusType | deletePostType
-    | setNewProfilePhotoType | setPostsLocalStorageType
+    | setNewProfilePhotoType | setPostsLocalStorageType | toggleLikePostType
 
 
 export type postsDataType = {
@@ -132,6 +152,8 @@ export type postsDataType = {
     post: string
     likesCount: number
     commentsCount: number
+    myLike: boolean,
+    comments: Array<{ userName: string, comment: string }> | []
 }
 
 export type ProfilePageType = {
