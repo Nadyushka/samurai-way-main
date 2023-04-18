@@ -58,7 +58,7 @@ const Profile = (props: PropsType) => {
                                  onChangePhoto={props.onChangePhoto}
                                  saveProfile={props.saveProfile}
             />
-            <PostsContainer/>
+            <PostsContainer isOwner={props.isOwner}/>
         </div>
     );
 }
