@@ -15,6 +15,19 @@ export const profilePageReducer = (state: initialStateType = initialState, actio
         case ADD_POST: {
             return {...state, posts: action.posts.map(p => ({...p}))}
         }
+        case ADD_NEW_COMMENT: {
+            return {...state, posts: action.posts.map(p => ({...p}))}
+        }
+        case DELETE_COMMENT: {
+            return {
+                ...state,
+                posts: state.posts.map(p => p.id === action.postId ? {
+                    ...p,
+                    comments: p.comments.filter(c => c.commentId !== action.commentId),
+                    commentsCount: p.commentsCount - 1
+                } : {...p})
+            }
+        }
         case TOGGLE_LIKE_POST: {
             return {...state, posts: action.posts.map(p => ({...p}))}
         }
@@ -42,7 +55,8 @@ const SET_STATUS = 'samurai-wai/profile/SET_STATUS'
 const SET_NEW_PROFILE_PHOTO = 'samurai-wai/profile/SET_NEW_PROFILE_PHOTO'
 const SET_POSTS_lOCAL_STORAGE = 'samurai-wai/profile/SET_POSTS-LOCAL-STORAGE'
 const TOGGLE_LIKE_POST = 'samurai-wai/profile/TOGGLE_LIKE_POST'
-
+const ADD_NEW_COMMENT = 'samurai-wai/profile/ADD_NEW_COMMENT'
+const DELETE_COMMENT = 'samurai-wai/profile/DELETE_COMMENT'
 
 // action creators
 
@@ -59,6 +73,12 @@ export const getPosts = (postsLocalStorage: postsDataType[]) => ({
     postsLocalStorage
 }) as const
 export const toggleLikePostActionCreator = (posts: postsDataType[]) => ({type: TOGGLE_LIKE_POST, posts}) as const
+export const addNewCommentActionCreator = (posts: postsDataType[]) => ({type: ADD_NEW_COMMENT, posts}) as const
+export const commentDeleteActionCreator = (postId: number, commentId: number) => ({
+    type: DELETE_COMMENT,
+    postId,
+    commentId
+}) as const
 
 // thunk creators
 
@@ -130,6 +150,34 @@ export const likeMyPostTC = (postId: number, likeMyPostValue: boolean) => async 
     dispatch(toggleLikePostActionCreator(updatedPosts))
 }
 
+export const addNewPostTC = (comment: string, postId: number, userName: string) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+    const newComment: { userName: string, comment: string, commentId: number } = {
+        userName,
+        comment,
+        commentId: +new Date().getTime()
+    }
+    const posts = getState().profilePages.posts
+    const newPosts = [...posts.map(p => p.id === postId ? {
+        ...p,
+        commentsCount: p.commentsCount + 1,
+        comments: [newComment, ...p.comments]
+    } : ({...p}))]
+    localStorage.removeItem('postsLocalStorage')
+    localStorage.setItem('postsLocalStorage', JSON.stringify(newPosts))
+    dispatch(addNewCommentActionCreator(newPosts))
+}
+
+export const deleteCommentTC = (postId: number, commentId: number) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+    let updatedPosts = getState().profilePages.posts.map(p => p.id === postId ? {
+        ...p,
+        comments: p.comments.filter(c => c.commentId !== commentId),
+        commentsCount: p.commentsCount - 1
+    } : {...p})
+    localStorage.removeItem('postsLocalStorage')
+    localStorage.setItem('postsLocalStorage', JSON.stringify(updatedPosts))
+    dispatch(commentDeleteActionCreator(postId, commentId))
+}
+
 // types
 
 export type dispatchAddPostType = ReturnType<typeof addNewPostActionCreator>
@@ -139,12 +187,14 @@ export type setStatusType = ReturnType<typeof setStatus>
 export type setNewProfilePhotoType = ReturnType<typeof setNewProfilePhoto>
 export type setPostsLocalStorageType = ReturnType<typeof getPosts>
 export type toggleLikePostType = ReturnType<typeof toggleLikePostActionCreator>
+export type addNewCommentType = ReturnType<typeof addNewCommentActionCreator>
+export type commentDeleteType = ReturnType<typeof commentDeleteActionCreator>
 
 type dispatchTypes =
     dispatchAddPostType
     | addNewMessageActionCreatorType
     | setUsersProfileType | setStatusType | deletePostType
-    | setNewProfilePhotoType | setPostsLocalStorageType | toggleLikePostType
+    | setNewProfilePhotoType | setPostsLocalStorageType | toggleLikePostType | addNewCommentType | commentDeleteType
 
 
 export type postsDataType = {
@@ -153,7 +203,7 @@ export type postsDataType = {
     likesCount: number
     commentsCount: number
     myLike: boolean,
-    comments: Array<{ userName: string, comment: string }> | []
+    comments: Array<{ userName: string, comment: string, commentId: number }> | []
 }
 
 export type ProfilePageType = {
