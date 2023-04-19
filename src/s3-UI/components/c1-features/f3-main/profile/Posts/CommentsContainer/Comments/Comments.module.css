@@ -1,0 +1,88 @@
+.comments {
+    left: 0px;
+    transition: 0.5s max-height;
+    border-radius: 5px;
+    /*transform: scaleY(0);*/
+    /*transform-origin: top;*/
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 20px;
+    max-height: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.commentsOpen {
+    left: 0px;
+    padding: 5px;
+    margin: 20px 5px 10px 20px;
+    transition: 0.5s max-height;
+    max-height: 500px;
+}
+
+.comment {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    width: 70%;
+    position: relative;
+}
+
+@media (max-width: 800px) {
+    .comment {
+        width: 100%
+    }
+}
+
+.comments_input {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.comments_input:focus {
+    border: 2px solid black;
+}
+
+.comments_button {
+    margin-bottom: 10px;
+    height: 30px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: 0.5s background-color;
+}
+
+.comments_button:hover {
+    background-color: royalblue;
+    color: white;
+    transition: 0.5s background-color;
+}
+
+.comments_button:disabled {
+    background-color: lightgray;
+    color: slategray;
+    transition: 0.5s background-color;
+}
+
+.deleteComment {
+    position: absolute;
+    width: 11px;
+    height: 13px;
+    right: 10px;
+    top: 3px;
+    transition: 0.5s all;
+}
+
+.deleteComment:hover {
+    transition: 0.5s all;
+    width: 14px !important;
+    height: 16px !important;
+}

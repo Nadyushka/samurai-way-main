@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import s from "./Posts.module.css"
 import {PostsPropsType} from "./PostsContainer";
-import deleteIcon from '../../../../../../s4-common/assets/pictures/delete.svg'
 import {getPosts, postsDataType} from '../../../../../../s2-BLL/profile-pages-reducer';
 import {useDispatch} from "react-redux";
-import likeNo from '../../../../../../s4-common/assets/pictures/likeNo.png'
-import likeYes from '../../../../../../s4-common/assets/pictures/likeYes.png'
-import Comments from './Comments/Comments';
+import {CommentsContainer} from "./CommentsContainer/CommentsContainer";
 
 
 export const Posts = (props: PostsPropsType) => {
@@ -42,7 +39,11 @@ export const Posts = (props: PostsPropsType) => {
                     likesCount: 13,
                     myLike: true,
                     commentsCount: 2,
-                    comments: [{userName: 'Boby', comment: 'Good for you))'}, {userName: 'Lily', comment: 'Cool'}]
+                    comments: [{userName: 'Boby', comment: 'Good for you))', commentId: 1}, {
+                        userName: 'Lily',
+                        comment: 'Cool',
+                        commentId: 2
+                    }]
                 }
             ]
             localStorage.setItem('postsLocalStorage', JSON.stringify(defaultValue))
@@ -58,23 +59,29 @@ export const Posts = (props: PostsPropsType) => {
 
     if (props.isOwner) {
         return (
-            <div className={s.posts}>
-                <input className={s.postsInput} value={inputValue} placeholder={'Share your thoughts'}
-                       onChange={(e) => {
-                           setInputValue(e.currentTarget.value)
-                           setError('')
-                       }}/>
-                <button className={s.posts_button} disabled={error.length > 0}
-                        onClick={() => addNewPost(inputValue)}>Submit
-                </button>
-                <div className={error ? `${s.errorInfo} ${s.errorInfo_active}` : `${s.errorInfo} `}>{error}</div>
-
+            <div className={s.postsBlock}>
+                <div className={s.posts}>
+                    <input className={s.postsInput} value={inputValue} placeholder={'Share your thoughts'}
+                           onChange={(e) => {
+                               setInputValue(e.currentTarget.value)
+                               setError('')
+                           }}/>
+                    <button className={s.posts_button} disabled={error.length > 0}
+                            onClick={() => addNewPost(inputValue)}>Submit
+                    </button>
+                    <div className={error ? `${s.errorInfo} ${s.errorInfo_active}` : `${s.errorInfo} `}>{error}</div>
+                </div>
 
                 <div className={s.post}>
-                    {props.posts.map((p) => {
-                        return <CommentsContainer p={p}
+                    {props.posts.map((posts) => {
+                        return <CommentsContainer postsData={posts}
                                                   deletePostHandler={deletePostHandler}
-                                                  onClickToggleHandler={onClickToggleHandler}/>
+                                                  onClickToggleHandler={onClickToggleHandler}
+                                                  addNewPostTC={props.addNewPostTC}
+                                                  userName={props.userName}
+                                                  key={posts.id}
+                                                  deleteCommentTC={props.deleteCommentTC}
+                        />
                     })}
                 </div>
             </div>
@@ -89,35 +96,7 @@ export const Posts = (props: PostsPropsType) => {
 export default Posts;
 
 
-type CommentsContainerProps = {
-    p: postsDataType
-    onClickToggleHandler: (postId: number, likeMyPostValue: boolean) => void
-    deletePostHandler: (postId: number) => void
-}
 
-const CommentsContainer = ({p, onClickToggleHandler, deletePostHandler}: CommentsContainerProps) => {
-
-    const [visibleComments, setVisibleComments] = useState<boolean>(false)
-
-    return <div className={s.postItem} key={p.id}>
-        <div className={s.postText}>
-            <span>{p.post}</span>
-            <img src={deleteIcon}
-                 onClick={() => deletePostHandler(p.id)}/>
-        </div>
-        <div className={s.postReaction}>
-            <div className={s.postLikes}><img
-                onClick={() => onClickToggleHandler(p.id, !p.myLike)}
-                style={{width: '10px', height: '10px'}}
-                src={p.myLike ? likeYes : likeNo}/> {p.likesCount}</div>
-            <div className={s.postComments} onClick={() => {
-                setVisibleComments(!visibleComments)
-            }}>Comments: {p.commentsCount}</div>
-            {visibleComments && <Comments comments={p.comments}/>}
-        </div>
-    </div>
-
-}
 
 
 

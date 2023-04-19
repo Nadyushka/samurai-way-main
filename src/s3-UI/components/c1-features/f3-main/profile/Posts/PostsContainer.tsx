@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    addNewPostActionCreator, addPostTC, deletePostTC, likeMyPostTC,
+    addNewPostActionCreator, addNewPostTC, addPostTC, deleteCommentTC, deletePostTC, likeMyPostTC,
     postDeleteActionCreator,
     postsDataType
 } from "../../../../../../s2-BLL/profile-pages-reducer";
@@ -15,25 +15,35 @@ type PropsType = {
 export type mapStateToProps = {
     posts: postsDataType[]
     isOwner: boolean
+    userName: string | null
 }
 
 export type mapDispatchToPropsType = {
     addPostTC: (newPost: string) => void
     deletePostTC: (postId: number) => void
+    deleteCommentTC: (postId: number, commentId: number) => void
     likeMyPostTC: (postId: number, likeMyPostValue: boolean) => void
+    addNewPostTC: (comment: string, postId: number, userName: string) => void
 
 }
 
 export type PostsPropsType = mapStateToProps & mapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateType, ownProps:PropsType): mapStateToProps => {
+const mapStateToProps = (state: AppStateType, ownProps: PropsType): mapStateToProps => {
     return {
         posts: state.profilePages.posts,
-        isOwner: ownProps.isOwner
+        isOwner: ownProps.isOwner,
+        userName: state.profilePages.profile!.fullName
     }
 }
 
 
-const PostsContainer = connect(mapStateToProps, {addPostTC, deletePostTC, likeMyPostTC})(Posts)
+const PostsContainer = connect(mapStateToProps, {
+    addPostTC,
+    deletePostTC,
+    likeMyPostTC,
+    addNewPostTC,
+    deleteCommentTC
+})(Posts)
 
 export default PostsContainer;
