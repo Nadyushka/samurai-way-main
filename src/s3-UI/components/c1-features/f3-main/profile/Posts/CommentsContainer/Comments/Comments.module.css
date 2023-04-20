@@ -6,7 +6,7 @@
     /*transform-origin: top;*/
     font-size: 12px;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 0px;
     max-height: 0;
     overflow: hidden;
     position: relative;
@@ -15,7 +15,7 @@
 .commentsOpen {
     left: 0px;
     padding: 5px;
-    margin: 20px 5px 10px 20px;
+    margin: 0px 5px 10px 20px;
     transition: 0.5s max-height;
     max-height: 500px;
 }
