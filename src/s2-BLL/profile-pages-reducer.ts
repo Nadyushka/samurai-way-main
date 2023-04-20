@@ -102,7 +102,6 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
 export const onChangePhoto = (photo: File) => async (dispatch: Dispatch) => {
     let response = await profileApi.changePhoto(photo)
     if (response.data.resultCode === 0) {
-        console.log(response.data.data.photos)
         dispatch(setNewProfilePhoto(response.data.data.photos))
     }
 }
