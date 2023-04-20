@@ -1,10 +1,9 @@
-import {dispatchTypes} from "./state";
-
 const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'
 
-export const addNewMessageActionCreator = (newMessage: string) => ({
+export const addNewMessageActionCreator = (newMessage: string, userId: number) => ({
     type: ADD_NEW_MESSAGE,
-    newMessageText: newMessage
+    newMessage,
+    userId
 }) as const
 
 
@@ -17,7 +16,7 @@ export type contactDataType = {
 
 export type messageDataType = {
     id: number
-    message: string
+    message: { messageText: string, userId: number }
 }
 
 let initialState = {
@@ -29,21 +28,24 @@ let initialState = {
         {id: 5, name: 'Sandra'}] as contactDataType[]
     ,
     dialogs: [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'How are you?'},
-        {id: 3, message: 'Enjoy your day'}
+        {id: 1, message: {messageText: 'Hi', userId: 1}},
+        {id: 2, message: {messageText: 'Hi.How are you?)', userId: 2}},
+        {id: 3, message: {messageText: 'I am good. Thank you.What about you?', userId: 1}},
     ] as messageDataType[],
 }
 
 type initialStateType = typeof initialState
 
-export const messagePageReducer = (state: initialStateType = initialState, action: dispatchTypes): initialStateType => {
+export const messagePageReducer = (state: initialStateType = initialState, action: addNewMessageActionCreatorType): initialStateType => {
     if (action.type === ADD_NEW_MESSAGE) {
         let newMessage: messageDataType = {
             id: new Date().getSeconds(),
-            message: action.newMessageText,
+            message: {
+                messageText: action.newMessage,
+                userId: action.userId
+            },
         }
-        let newState = {...state, dialogs: [...state.dialogs,newMessage]}
+        let newState = {...state, dialogs: [...state.dialogs, newMessage]}
         return newState
 
     }
