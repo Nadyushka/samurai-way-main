@@ -1,8 +1,8 @@
 .message {
    margin-top: 5px;
     font-size: 14px;
-    flex: 1 1 auto;
-    min-height: 0px;
+    margin-bottom: 5px;
+    margin-right: 10px;
 }
 
 .message img {
@@ -24,9 +24,8 @@
 
 .myMessage {
     margin-top: 5px;
-    margin-right: 10px;
-    flex: 1 1 auto;
-    min-height: 0px;
+    margin-right: 15px;
+    margin-bottom: 5px;
 }
 
 .myMessage img {
@@ -42,4 +41,5 @@
     border-bottom: 1px solid black;
     margin-left: 5px;
     margin-right: 5px;
+    padding: 5px;
 }
