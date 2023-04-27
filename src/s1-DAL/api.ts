@@ -68,11 +68,11 @@ export const pageApi = {
     getNews: (keyWord: string) => {
         return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}`)
     },
-    nextPageNews: (keyWord: string, nextPage: string) => {
-        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${nextPage}`)
+    nextPageNews: (keyWord: string, nextPageId: string) => {
+        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${nextPageId}`)
     },
-    prevPageNews: (keyWord: string, prevPage: string) => {
-        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${prevPage}`)
+    prevPageNews: (keyWord: string, prevPageId: string) => {
+        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${prevPageId}`)
     },
 }
 

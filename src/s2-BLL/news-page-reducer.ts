@@ -59,13 +59,25 @@ const addNewsTC = (keyWord: string = 'top') => async (dispatch: Dispatch, getSta
 }
 
 const nextPageNewsTC = (keyWord: string = 'top') => async (dispatch: Dispatch, getState: () => AppStateType) => {
-    let nextPageNumber = getState().news.nextPage.length - 1
-    let nextPage = getState().news.nextPage[nextPageNumber].pageId
+    const currentPage = getState().news.currentPage
+    const currentPagesQuantity = getState().news.nextPage.length
+    let nextPageNumber: number;
+    let nextPageId: string;
+
+    if (currentPage === currentPagesQuantity) {
+        nextPageNumber = currentPage - 1
+        nextPageId = getState().news.nextPage.find(p => p.pageNumber === nextPageNumber)!.pageId
+    } else {
+        nextPageNumber = getState().news.nextPage[currentPagesQuantity-1].pageNumber
+        nextPageId = getState().news.nextPage[currentPagesQuantity-1].pageId
+    }
+
+
     try {
-        let res = await pageApi.nextPageNews(keyWord, nextPage)
+        let res = await pageApi.nextPageNews(keyWord, nextPageId)
         let news = res.data.results
-        let nextPageId = res.data.nextPage
-        dispatch(nextPageNewsAC(news, nextPageId))
+        let nextPageCode = res.data.nextPage
+        dispatch(nextPageNewsAC(news, nextPageCode))
     } catch (e) {
 
     }
