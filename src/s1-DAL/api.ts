@@ -62,7 +62,41 @@ export const securityApi = {
     getCaptchaUrl: () => {
         return instance.get<{ url: string }>(`security/get-captcha-url`)
     },
+}
 
+export const pageApi = {
+    getNews: (keyWord: string) => {
+        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}`)
+    },
+    nextPageNews: (keyWord: string, nextPageId: string) => {
+        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${nextPageId}`)
+    },
+    prevPageNews: (keyWord: string, prevPageId: string) => {
+        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${prevPageId}`)
+    },
+}
+
+export type pageResponseType = {
+    status: '',
+    totalResults: number,
+    results: newsType[],
+    nextPage: string,
+}
+
+export type newsType = {
+    'title': string | null,
+    'link': string | null,
+    'keywords': Array<string>,
+    'creator': Array<string>,
+    'video_url': null | string,
+    'description': string | null,
+    'content': string | null,
+    pubDate: string | null,
+    image_url: string | null,
+    source_id: '',
+    category: Array<string>,
+    country: Array<string>,
+    language: ''
 }
 
 export type profileType = {
