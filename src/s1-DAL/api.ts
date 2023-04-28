@@ -66,13 +66,15 @@ export const securityApi = {
 
 export const pageApi = {
     getNews: (keyWord: string) => {
-        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}`)
+        return axios.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&language=en`, {
+            withCredentials: false,
+        })
     },
     nextPageNews: (keyWord: string, nextPageId: string) => {
-        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${nextPageId}`)
+        return axios.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${nextPageId}&language=en`)
     },
     prevPageNews: (keyWord: string, prevPageId: string) => {
-        return instance.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${prevPageId}`)
+        return axios.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&page=${prevPageId}&language=en`)
     },
 }
 

@@ -10,6 +10,7 @@ import {compose} from 'redux';
 import {AppStateType} from "../../../../s2-BLL/redux-store";
 import Preloader from "../../c2-commonComponents/preloader/Preloader";
 import {initializeApp} from "../../../../s2-BLL/app-reducer";
+import {News} from "./news/News";
 
 const ProfileContainer = React.lazy(() => import("./profile/ProfileContainer"))
 const Messages = React.lazy(() => import("./Messages/messages"))
@@ -46,9 +47,9 @@ class Main extends React.Component<MainContainerType, any> {
                                 <Messages/>
                             </Suspense>)
                     }}/>
-                    {/* Route exact path="/f3-main/news" render={() => <News/>} */}
+                     <Route exact path="/f3-main/news" render={() => <News/>} />
                     {/* <Music/> */}
-                    {/* <Messages/> */}
+
 
                     <Route path="/f3-main/users" render={() => <UsersContainerAdditional/>}/>
 

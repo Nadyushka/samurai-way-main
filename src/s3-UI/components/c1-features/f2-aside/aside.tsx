@@ -13,7 +13,7 @@ const Aside = () => {
         <div className={s.aside}>
             <div><NavLink to='/f3-main/profile' activeClassName={s.activeLink} className={splitLocation[1] === "f3-main/profile" ? "s.activeLink" : ""}> Profile </NavLink></div>
             <div><NavLink to='/f3-main/messages' activeClassName={s.activeLink} className={splitLocation[1] === "f3-main/messages" ? "s.activeLink" : ""}> Messages </NavLink></div>
-            <div><NavLink to={''}>News</NavLink></div>
+            <div><NavLink to='/f3-main/news' activeClassName={s.activeLink} className={splitLocation[1] === "f3-main/news" ? "s.activeLink" : ""}>News</NavLink></div>
             <div><NavLink to={''}>Music</NavLink></div>
             <br/>
             <br/>
