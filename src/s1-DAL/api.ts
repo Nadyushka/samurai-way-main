@@ -65,8 +65,8 @@ export const securityApi = {
 }
 
 export const pageApi = {
-    getNews: (keyWord: string) => {
-        return axios.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&language=en`, {
+    getNews: (keyWord: string, category: string) => {
+        return axios.get<pageResponseType>(`https://newsdata.io/api/1/news?apikey=pub_20826af33ee2e650c66e1981af460f4cb42db&q=${keyWord}&category=${category}&language=en`, {
             withCredentials: false,
         })
     },
