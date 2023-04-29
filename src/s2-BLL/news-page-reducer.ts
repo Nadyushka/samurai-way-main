@@ -59,9 +59,9 @@ const nextPageNewsAC = (results: newsType[], nextPageId: string, currentPage: nu
 } as const)
 const prevPageNewsAC = (results: newsType[]) => ({type: PREV_PAGE_NEWS, results} as const)
 
-export const addNewsTC = (keyWord: string = 'top') => async (dispatch: Dispatch, getState: () => AppStateType) => {
+export const addNewsTC = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
     try {
-        let res = await pageApi.getNews(keyWord)
+        let res = await pageApi.getNews()
         let news = res.data.results
         let nextPageId = res.data.nextPage
         dispatch(addNewsAC(news, nextPageId))
