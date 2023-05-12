@@ -54,6 +54,8 @@ class Main extends React.Component<MainContainerType, any> {
                     <Route path="/f3-main/users" render={() => <UsersContainerAdditional/>}/>
 
                     <Route exact={true} path="/c3-login" render={() => <LoginContainer/>}/>
+                    <Route exact={true} path="/samurai-way-main" render={() => <LoginContainer/>}/>
+
 
                     {/* <Settings/> */}
                 </Switch>
