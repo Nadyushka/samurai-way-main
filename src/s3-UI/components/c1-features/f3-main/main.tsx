@@ -34,7 +34,7 @@ class Main extends React.Component<MainContainerType, any> {
         return (
             <div className={s.main}>
                 <Switch>
-                    <Route path="/" render={() => <LoginContainer/>}/>
+                    <Route exact={true} path="/" render={() => <LoginContainer/>}/>
                     <Route path="/f3-main/profile/:userId?" render={() => {
                         return (
                             <Suspense fallback={<div><Preloader/></div>}>
