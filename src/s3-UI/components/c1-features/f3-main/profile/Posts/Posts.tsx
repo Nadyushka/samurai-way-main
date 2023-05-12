@@ -30,7 +30,6 @@ export const Posts = (props: PostsPropsType) => {
 
     useEffect(() => {
         if (localStorage.getItem('firstOpen') === 'no') {
-            debugger
             dispatch(getPosts(JSON.parse(localStorage.getItem('postsLocalStorage')!)))
         } else {
             localStorage.setItem('firstOpen', 'no')
