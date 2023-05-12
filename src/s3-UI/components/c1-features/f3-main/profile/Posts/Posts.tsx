@@ -8,6 +8,8 @@ import {CommentsContainer} from "./CommentsContainer/CommentsContainer";
 
 export const Posts = (props: PostsPropsType) => {
 
+
+
     const [inputValue, setInputValue] = useState<string>('')
     const [error, setError] = useState<string>('')
 
@@ -28,6 +30,7 @@ export const Posts = (props: PostsPropsType) => {
 
     useEffect(() => {
         if (localStorage.getItem('firstOpen') === 'no') {
+            debugger
             dispatch(getPosts(JSON.parse(localStorage.getItem('postsLocalStorage')!)))
         } else {
             localStorage.setItem('firstOpen', 'no')

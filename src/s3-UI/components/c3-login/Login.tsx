@@ -59,10 +59,9 @@ const Login = (props: mapDispatchToPropsType & mapStateToPropsType) => {
         setAuthorised(props.isAuth)
     },[props.isAuth])
 
-    if (props.isAuth) {
+    if (authorised) {
         return <Redirect to={'/f3-main/profile'}/>
     }
-
 
     return (
         <div className={s.loginMain}>

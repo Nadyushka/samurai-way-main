@@ -35,7 +35,7 @@ class Main extends React.Component<MainContainerType, any> {
             <div className={s.main}>
                 <Switch>
                     <Route exact={true} path="/" render={() => <LoginContainer/>}/>
-                    <Route path="/samurai-way-main/" render={() => <LoginContainer/>}/>
+
                     <Route path="/f3-main/profile/:userId?" render={() => {
                         return (
                             <Suspense fallback={<div><Preloader/></div>}>
@@ -51,12 +51,11 @@ class Main extends React.Component<MainContainerType, any> {
                      <Route exact path="/f3-main/news" render={() => <News/>} />
                     {/* <Music/> */}
 
-
                     <Route path="/f3-main/users" render={() => <UsersContainerAdditional/>}/>
 
-                    <Route path="/c3-login" render={() => <LoginContainer/>}/>
-                    {/* <Settings/> */}
+                    <Route exact={true} path="/c3-login" render={() => <LoginContainer/>}/>
 
+                    {/* <Settings/> */}
                 </Switch>
             </div>
 
