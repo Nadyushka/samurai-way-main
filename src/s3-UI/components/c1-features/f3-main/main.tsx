@@ -29,7 +29,7 @@ class Main extends React.Component<MainContainerType, any> {
 
     render() {
 
-       if (!this.props.initialized) {return <Preloader/>}
+       // if (!this.props.initialized) {return <Preloader/>}
 
         return (
             <div className={s.main}>
