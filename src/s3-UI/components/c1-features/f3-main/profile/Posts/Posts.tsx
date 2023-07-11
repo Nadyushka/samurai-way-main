@@ -94,7 +94,6 @@ export const Posts = (props: PostsPropsType) => {
     }
 }
 
-
 export default Posts;
 
 
