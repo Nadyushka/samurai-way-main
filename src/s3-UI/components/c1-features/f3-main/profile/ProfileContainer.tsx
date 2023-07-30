@@ -19,9 +19,9 @@ class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userId: any;
+
         this.props.match.params.userId ? userId = this.props.match.params.userId :
             userId = this.props.autorizedId?.toString() || this.props.history.push('/c3-login')
-
         this.props.getUsersProfile(userId)
         this.props.getStatus(userId)
     }
