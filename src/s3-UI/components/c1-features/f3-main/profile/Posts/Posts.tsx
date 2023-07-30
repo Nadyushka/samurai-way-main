@@ -7,9 +7,7 @@ import {CommentsContainer} from "./CommentsContainer/CommentsContainer";
 
 
 export const Posts = (props: PostsPropsType) => {
-
-
-
+    
     const [inputValue, setInputValue] = useState<string>('')
     const [error, setError] = useState<string>('')
 
